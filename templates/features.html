@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CampusFind Features</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body class="about-page-body">
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+
+        <div class="nav-logo">
+            <i class="fa-solid fa-location-dot"></i>
+            <span>CampusFind</span>
+        </div>
+
+        <div class="nav-links">
+
+            <a href="{{ url_for('home') }}" id="nav-home">
+                <i class="fa-solid fa-house"></i>
+                Home
+            </a>
+
+            <a href="{{ url_for('about') }}" id="nav-about">
+                <i class="fa-solid fa-circle-info"></i>
+                About
+            </a>
+
+            <a href="{{ url_for('features') }}" id="nav-features">
+                <i class="fa-solid fa-star"></i>
+                Features
+            </a>
+
+            <a href="{{ url_for('contact') }}" id="nav-contact">
+                <i class="fa-solid fa-envelope"></i>
+                Contact
+            </a>
+
+            <!-- LANGUAGE -->
+            <div class="language-selector">
+
+                <i class="fa-solid fa-globe"></i>
+
+                <select id="language"
+                        onchange="changeFeaturesLanguage()">
+
+                    <option value="en">English</option>
+                    <option value="ta">தமிழ்</option>
+                    <option value="hi">हिन्दी</option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- FEATURES PAGE -->
+    <main class="about-page">
+
+        <div class="about-container">
+
+            <!-- TITLE -->
+            <div class="about-header">
+
+                <div class="about-icon">
+                    <i class="fa-solid fa-star"></i>
+                </div>
+
+                <h1 id="features-title">
+                    CampusFind Features
+                </h1>
+
+                <p id="features-description">
+                    Explore the features that make campus lost and found
+                    management simple, fast and secure.
+                </p>
+
+            </div>
+
+
+            <!-- FEATURE CARDS -->
+            <div class="about-cards">
+
+                <!-- FEATURE 1 -->
+                <div class="about-card">
+
+                    <div class="about-card-icon">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+
+                    <h2 id="feature-search-title">
+                        Search Items
+                    </h2>
+
+                    <p id="feature-search-description">
+                        Search for lost and found items using item name,
+                        category, location and status.
+                    </p>
+
+                </div>
+
+
+                <!-- FEATURE 2 -->
+                <div class="about-card">
+
+                    <div class="about-card-icon">
+                        <i class="fa-solid fa-box-open"></i>
+                    </div>
+
+                    <h2 id="feature-lost-title">
+                        Report Lost Items
+                    </h2>
+
+                    <p id="feature-lost-description">
+                        Students can quickly report their lost belongings
+                        with important item details.
+                    </p>
+
+                </div>
+
+
+                <!-- FEATURE 3 -->
+                <div class="about-card">
+
+                    <div class="about-card-icon">
+                        <i class="fa-solid fa-hand-holding-heart"></i>
+                    </div>
+
+                    <h2 id="feature-found-title">
+                        Report Found Items
+                    </h2>
+
+                    <p id="feature-found-description">
+                        Found items can be reported with an item image
+                        and location details.
+                    </p>
+
+                </div>
+
+
+                <!-- FEATURE 4 -->
+                <div class="about-card">
+
+                    <div class="about-card-icon">
+                        <i class="fa-solid fa-bell"></i>
+                    </div>
+
+                    <h2 id="feature-notification-title">
+                        Match Notifications
+                    </h2>
+
+                    <p id="feature-notification-description">
+                        Users can receive notifications when a possible
+                        match is detected between lost and found items.
+                    </p>
+
+                </div>
+
+
+                <!-- FEATURE 5 -->
+                <div class="about-card">
+
+                    <div class="about-card-icon">
+                        <i class="fa-solid fa-language"></i>
+                    </div>
+
+                    <h2 id="feature-language-title">
+                        Multilingual Support
+                    </h2>
+
+                    <p id="feature-language-description">
+                        CampusFind supports English, Tamil and Hindi
+                        for a better user experience.
+                    </p>
+
+                </div>
+
+
+                <!-- FEATURE 6 -->
+                <div class="about-card">
+
+                    <div class="about-card-icon">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+
+                    <h2 id="feature-security-title">
+                        Secure User Accounts
+                    </h2>
+
+                    <p id="feature-security-description">
+                        User accounts are protected with secure password
+                        hashing and login authentication.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- HOW IT WORKS -->
+            <section class="about-how">
+
+                <h2 id="features-how-title">
+                    How the Features Work
+                </h2>
+
+                <div class="how-steps">
+
+                    <div class="how-step">
+
+                        <div class="how-number">1</div>
+
+                        <div>
+                            <h3 id="features-step1-title">
+                                Report
+                            </h3>
+
+                            <p id="features-step1-description">
+                                Report a lost or found item.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="how-step">
+
+                        <div class="how-number">2</div>
+
+                        <div>
+                            <h3 id="features-step2-title">
+                                Search
+                            </h3>
+
+                            <p id="features-step2-description">
+                                Search the campus database.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="how-step">
+
+                        <div class="how-number">3</div>
+
+                        <div>
+                            <h3 id="features-step3-title">
+                                Match
+                            </h3>
+
+                            <p id="features-step3-description">
+                                Possible matches are detected.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="how-step">
+
+                        <div class="how-number">4</div>
+
+                        <div>
+                            <h3 id="features-step4-title">
+                                Recover
+                            </h3>
+
+                            <p id="features-step4-description">
+                                Connect with the relevant user
+                                and recover the item.
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <!-- SHARED LANGUAGE FILE -->
+    <script src="{{ url_for('static', filename='js/language.js') }}"></script>
+
+
+    <!-- FEATURES LANGUAGE -->
+    <script>
+
+        const featuresTranslations = {
+
+            en: {
+
+                featuresTitle: "CampusFind Features",
+
+                featuresDescription:
+                    "Explore the features that make campus lost and found management simple, fast and secure.",
+
+                searchTitle: "Search Items",
+                searchDescription:
+                    "Search for lost and found items using item name, category, location and status.",
+
+                lostTitle: "Report Lost Items",
+                lostDescription:
+                    "Students can quickly report their lost belongings with important item details.",
+
+                foundTitle: "Report Found Items",
+                foundDescription:
+                    "Found items can be reported with an item image and location details.",
+
+                notificationTitle: "Match Notifications",
+                notificationDescription:
+                    "Users can receive notifications when a possible match is detected between lost and found items.",
+
+                languageTitle: "Multilingual Support",
+                languageDescription:
+                    "CampusFind supports English, Tamil and Hindi for a better user experience.",
+
+                securityTitle: "Secure User Accounts",
+                securityDescription:
+                    "User accounts are protected with secure password hashing and login authentication.",
+
+                howTitle: "How the Features Work",
+
+                step1Title: "Report",
+                step1Description: "Report a lost or found item.",
+
+                step2Title: "Search",
+                step2Description: "Search the campus database.",
+
+                step3Title: "Match",
+                step3Description: "Possible matches are detected.",
+
+                step4Title: "Recover",
+                step4Description:
+                    "Connect with the relevant user and recover the item."
+            },
+
+
+            ta: {
+
+                featuresTitle: "CampusFind வசதிகள்",
+
+                featuresDescription:
+                    "வளாகத்தில் இழந்த மற்றும் கண்டெடுத்த பொருட்களை எளிதாகவும் வேகமாகவும் பாதுகாப்பாகவும் நிர்வகிக்க உதவும் வசதிகளை அறிந்து கொள்ளுங்கள்.",
+
+                searchTitle: "பொருட்களை தேடுதல்",
+                searchDescription:
+                    "பொருளின் பெயர், வகை, இடம் மற்றும் நிலை ஆகியவற்றைப் பயன்படுத்தி இழந்த மற்றும் கண்டெடுத்த பொருட்களை தேடலாம்.",
+
+                lostTitle: "இழந்த பொருட்களை பதிவு செய்தல்",
+                lostDescription:
+                    "மாணவர்கள் தங்களின் இழந்த பொருட்களை முக்கியமான விவரங்களுடன் விரைவாக பதிவு செய்யலாம்.",
+
+                foundTitle: "கண்டெடுத்த பொருட்களை பதிவு செய்தல்",
+                foundDescription:
+                    "கண்டெடுத்த பொருட்களை படத்துடன் மற்றும் இட விவரங்களுடன் பதிவு செய்யலாம்.",
+
+                notificationTitle: "பொருத்த அறிவிப்புகள்",
+                notificationDescription:
+                    "இழந்த மற்றும் கண்டெடுத்த பொருட்களுக்கு சாத்தியமான பொருத்தம் கண்டறியப்பட்டால் பயனர்களுக்கு அறிவிப்பு கிடைக்கும்.",
+
+                languageTitle: "பல மொழி ஆதரவு",
+                languageDescription:
+                    "சிறந்த பயனர் அனுபவத்திற்காக CampusFind ஆங்கிலம், தமிழ் மற்றும் இந்தி மொழிகளை ஆதரிக்கிறது.",
+
+                securityTitle: "பாதுகாப்பான பயனர் கணக்குகள்",
+                securityDescription:
+                    "பயனர் கணக்குகள் பாதுகாப்பான கடவுச்சொல் hashing மற்றும் உள்நுழைவு authentication மூலம் பாதுகாக்கப்படுகின்றன.",
+
+                howTitle: "வசதிகள் எவ்வாறு செயல்படுகின்றன",
+
+                step1Title: "பதிவு",
+                step1Description:
+                    "இழந்த அல்லது கண்டெடுத்த பொருளை பதிவு செய்யுங்கள்.",
+
+                step2Title: "தேடல்",
+                step2Description:
+                    "வளாக தரவுத்தளத்தில் தேடுங்கள்.",
+
+                step3Title: "பொருத்தம்",
+                step3Description:
+                    "சாத்தியமான பொருத்தங்கள் கண்டறியப்படும்.",
+
+                step4Title: "மீட்டெடுத்தல்",
+                step4Description:
+                    "சம்பந்தப்பட்ட பயனருடன் தொடர்பு கொண்டு பொருளை மீட்டெடுக்கவும்."
+            },
+
+
+            hi: {
+
+                featuresTitle: "CampusFind सुविधाएँ",
+
+                featuresDescription:
+                    "कैंपस में खोई और मिली वस्तुओं को सरल, तेज और सुरक्षित तरीके से प्रबंधित करने वाली सुविधाओं को देखें।",
+
+                searchTitle: "वस्तुएँ खोजें",
+                searchDescription:
+                    "वस्तु का नाम, श्रेणी, स्थान और स्थिति का उपयोग करके खोई और मिली वस्तुओं को खोजें।",
+
+                lostTitle: "खोई हुई वस्तु की रिपोर्ट",
+                lostDescription:
+                    "छात्र अपनी खोई हुई वस्तुओं की महत्वपूर्ण जानकारी के साथ जल्दी रिपोर्ट कर सकते हैं।",
+
+                foundTitle: "मिली हुई वस्तु की रिपोर्ट",
+                foundDescription:
+                    "मिली हुई वस्तुओं को फोटो और स्थान की जानकारी के साथ रिपोर्ट किया जा सकता है।",
+
+                notificationTitle: "मैच सूचनाएँ",
+                notificationDescription:
+                    "जब खोई और मिली वस्तुओं के बीच संभावित मैच मिलता है, तो उपयोगकर्ताओं को सूचना प्राप्त हो सकती है।",
+
+                languageTitle: "बहुभाषी समर्थन",
+                languageDescription:
+                    "बेहतर उपयोगकर्ता अनुभव के लिए CampusFind अंग्रेजी, तमिल और हिंदी का समर्थन करता है।",
+
+                securityTitle: "सुरक्षित उपयोगकर्ता खाते",
+                securityDescription:
+                    "उपयोगकर्ता खातों को सुरक्षित पासवर्ड hashing और login authentication द्वारा सुरक्षित किया जाता है।",
+
+                howTitle: "सुविधाएँ कैसे काम करती हैं",
+
+                step1Title: "रिपोर्ट",
+                step1Description:
+                    "खोई या मिली वस्तु की रिपोर्ट करें।",
+
+                step2Title: "खोजें",
+                step2Description:
+                    "कैंपस डेटाबेस में खोजें।",
+
+                step3Title: "मैच",
+                step3Description:
+                    "संभावित मैच खोजे जाते हैं।",
+
+                step4Title: "वापस प्राप्त करें",
+                step4Description:
+                    "संबंधित उपयोगकर्ता से संपर्क करके वस्तु वापस प्राप्त करें।"
+            }
+
+        };
+
+
+        function changeFeaturesLanguage() {
+
+            const language =
+                document.getElementById("language").value;
+
+            saveCampusFindLanguage(language);
+
+            const t =
+                featuresTranslations[language];
+
+
+            document.getElementById("features-title").textContent =
+                t.featuresTitle;
+
+            document.getElementById("features-description").textContent =
+                t.featuresDescription;
+
+
+            document.getElementById("feature-search-title").textContent =
+                t.searchTitle;
+
+            document.getElementById("feature-search-description").textContent =
+                t.searchDescription;
+
+
+            document.getElementById("feature-lost-title").textContent =
+                t.lostTitle;
+
+            document.getElementById("feature-lost-description").textContent =
+                t.lostDescription;
+
+
+            document.getElementById("feature-found-title").textContent =
+                t.foundTitle;
+
+            document.getElementById("feature-found-description").textContent =
+                t.foundDescription;
+
+
+            document.getElementById("feature-notification-title").textContent =
+                t.notificationTitle;
+
+            document.getElementById("feature-notification-description").textContent =
+                t.notificationDescription;
+
+
+            document.getElementById("feature-language-title").textContent =
+                t.languageTitle;
+
+            document.getElementById("feature-language-description").textContent =
+                t.languageDescription;
+
+
+            document.getElementById("feature-security-title").textContent =
+                t.securityTitle;
+
+            document.getElementById("feature-security-description").textContent =
+                t.securityDescription;
+
+
+            document.getElementById("features-how-title").textContent =
+                t.howTitle;
+
+
+            document.getElementById("features-step1-title").textContent =
+                t.step1Title;
+
+            document.getElementById("features-step1-description").textContent =
+                t.step1Description;
+
+
+            document.getElementById("features-step2-title").textContent =
+                t.step2Title;
+
+            document.getElementById("features-step2-description").textContent =
+                t.step2Description;
+
+
+            document.getElementById("features-step3-title").textContent =
+                t.step3Title;
+
+            document.getElementById("features-step3-description").textContent =
+                t.step3Description;
+
+
+            document.getElementById("features-step4-title").textContent =
+                t.step4Title;
+
+            document.getElementById("features-step4-description").textContent =
+                t.step4Description;
+
+        }
+
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                const savedLanguage =
+                    getCampusFindLanguage();
+
+                document.getElementById("language").value =
+                    savedLanguage;
+
+                changeFeaturesLanguage();
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>

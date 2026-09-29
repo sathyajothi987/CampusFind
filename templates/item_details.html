@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>CampusFind - Item Details</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f4f3ff, #eef3ff);
+            min-height: 100vh;
+            color: #172033;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            min-height: 78px;
+            background: linear-gradient(90deg, #5146e5, #8438ed);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 55px;
+            color: white;
+        }
+
+        .logo {
+            font-size: 21px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 9px;
+        }
+
+        .navbar-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .language-area {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .language-area i {
+            font-size: 17px;
+        }
+
+        #language {
+            border: none;
+            outline: none;
+            padding: 9px 13px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .back-link {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        /* PAGE */
+
+        .page {
+            width: 90%;
+            max-width: 1100px;
+            margin: 45px auto 70px;
+        }
+
+        .page-heading {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .page-heading .icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #5146e5, #8438ed);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 29px;
+        }
+
+        .page-heading h1 {
+            font-size: 34px;
+            margin-bottom: 8px;
+        }
+
+        .page-heading p {
+            color: #697386;
+            font-size: 16px;
+        }
+
+        /* CARD */
+
+        .details-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 12px 35px rgba(43, 49, 93, 0.12);
+            display: grid;
+            grid-template-columns: minmax(300px, 0.9fr) minmax(350px, 1.1fr);
+            gap: 35px;
+        }
+
+        /* IMAGE */
+
+        .image-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .item-image {
+            width: 100%;
+            max-width: 430px;
+            height: 360px;
+            object-fit: cover;
+            border-radius: 16px;
+            background: #f1f2f7;
+            border: 1px solid #e2e4ec;
+        }
+
+        .no-image {
+            width: 100%;
+            max-width: 430px;
+            height: 360px;
+            border-radius: 16px;
+            background: #f3f4f8;
+            border: 1px dashed #c7cad5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #8a8f9f;
+            gap: 12px;
+            font-size: 16px;
+        }
+
+        .no-image i {
+            font-size: 45px;
+        }
+
+        /* INFORMATION */
+
+        .info-section {
+            padding: 5px 0;
+        }
+
+        .top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 22px;
+        }
+
+        .item-name {
+            font-size: 30px;
+            color: #172033;
+            line-height: 1.2;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 13px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .status-lost {
+            background: #ffe3e5;
+            color: #d62839;
+        }
+
+        .status-found {
+            background: #ddf8e7;
+            color: #178344;
+        }
+
+        .detail-list {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            margin-top: 10px;
+        }
+
+        .detail-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding-bottom: 17px;
+            border-bottom: 1px solid #eceef4;
+        }
+
+        .detail-icon {
+            width: 38px;
+            height: 38px;
+            min-width: 38px;
+            border-radius: 10px;
+            background: #efedff;
+            color: #5a49e6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .detail-content {
+            flex: 1;
+        }
+
+        .detail-label {
+            display: block;
+            color: #858b9a;
+            font-size: 13px;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+
+        .detail-value {
+            font-size: 16px;
+            color: #252b3a;
+            line-height: 1.5;
+        }
+
+        /* DESCRIPTION */
+
+        .description-box {
+            margin-top: 20px;
+            padding: 18px;
+            background: #f7f7fc;
+            border-radius: 12px;
+        }
+
+        .description-box h3 {
+            font-size: 15px;
+            margin-bottom: 8px;
+            color: #4e46b8;
+        }
+
+        .description-box p {
+            color: #555d70;
+            line-height: 1.6;
+            font-size: 15px;
+        }
+
+        /* BUTTONS */
+
+        .actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            border: none;
+            text-decoration: none;
+            padding: 12px 19px;
+            border-radius: 9px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .claim-btn {
+            background: linear-gradient(90deg, #5146e5, #8438ed);
+            color: white;
+        }
+
+        .search-btn {
+            background: #eef0f7;
+            color: #343b4c;
+        }
+
+        .claim-btn:hover {
+            opacity: 0.9;
+        }
+
+        .search-btn:hover {
+            background: #e2e5ef;
+        }
+
+        /* LOADING */
+
+        .loading {
+            text-align: center;
+            padding: 60px;
+            color: #697386;
+            font-size: 17px;
+        }
+
+        .loading i {
+            font-size: 28px;
+            margin-bottom: 12px;
+        }
+
+        /* ERROR */
+
+        .error-message {
+            display: none;
+            text-align: center;
+            background: white;
+            padding: 40px;
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .error-message i {
+            font-size: 45px;
+            color: #d62839;
+            margin-bottom: 15px;
+        }
+
+        .error-message h2 {
+            margin-bottom: 10px;
+        }
+
+        .error-message p {
+            color: #697386;
+            margin-bottom: 20px;
+        }
+
+        /* HIDE CARD UNTIL DATA LOADS */
+
+        #details-card {
+            display: none;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 800px) {
+
+            .navbar {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .navbar-right {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .details-card {
+                grid-template-columns: 1fr;
+            }
+
+            .item-image,
+            .no-image {
+                max-width: 100%;
+                height: 300px;
+            }
+
+            .top-row {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .page {
+                width: 94%;
+                margin-top: 25px;
+            }
+
+            .details-card {
+                padding: 20px;
+            }
+
+            .page-heading h1 {
+                font-size: 28px;
+            }
+
+            .item-name {
+                font-size: 25px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+    <div class="logo">
+
+        <i class="fa-solid fa-location-dot"></i>
+
+        <span>
+            CampusFind
+        </span>
+
+    </div>
+
+
+    <div class="navbar-right">
+
+        <div class="language-area">
+
+            <i class="fa-solid fa-globe"></i>
+
+            <select id="language">
+
+                <option value="en">
+                    English
+                </option>
+
+                <option value="ta">
+                    தமிழ்
+                </option>
+
+                <option value="hi">
+                    हिन्दी
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <a
+            href="/search"
+            class="back-link"
+        >
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+            <span id="back-text">
+                Back to Search
+            </span>
+
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+<!-- MAIN -->
+
+<main class="page">
+
+
+    <div class="page-heading">
+
+        <div class="icon">
+
+            <i class="fa-solid fa-circle-info"></i>
+
+        </div>
+
+        <h1 id="page-title">
+            Item Details
+        </h1>
+
+        <p id="page-description">
+            View complete information about this item.
+        </p>
+
+    </div>
+
+
+
+    <!-- LOADING -->
+
+    <div
+        class="loading"
+        id="loading"
+    >
+
+        <i class="fa-solid fa-spinner fa-spin"></i>
+
+        <div id="loading-text">
+            Loading item details...
+        </div>
+
+    </div>
+
+
+
+    <!-- ERROR -->
+
+    <div
+        class="error-message"
+        id="error-message"
+    >
+
+        <i class="fa-solid fa-circle-exclamation"></i>
+
+        <h2 id="error-title">
+            Item Not Found
+        </h2>
+
+        <p id="error-text">
+            The requested item could not be found.
+        </p>
+
+        <a
+            href="/search"
+            class="action-btn search-btn"
+        >
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+            <span id="error-button">
+                Back to Search
+            </span>
+
+        </a>
+
+    </div>
+
+
+
+    <!-- DETAILS CARD -->
+
+    <section
+        class="details-card"
+        id="details-card"
+    >
+
+
+        <!-- IMAGE -->
+
+        <div class="image-section">
+
+            <div
+                class="no-image"
+                id="no-image"
+            >
+
+                <i class="fa-regular fa-image"></i>
+
+                <span id="no-image-text">
+                    No image available
+                </span>
+
+            </div>
+
+
+            <img
+                id="item-image"
+                class="item-image"
+                alt="Item image"
+                style="display: none;"
+            >
+
+        </div>
+
+
+
+        <!-- INFORMATION -->
+
+        <div class="info-section">
+
+
+            <div class="top-row">
+
+                <h2
+                    class="item-name"
+                    id="item-name"
+                >
+                    Item
+                </h2>
+
+
+                <span
+                    class="status-badge"
+                    id="status-badge"
+                >
+
+                    <i id="status-icon"
+                       class="fa-solid fa-circle-check">
+                    </i>
+
+                    <span id="status-text">
+                        Found
+                    </span>
+
+                </span>
+
+            </div>
+
+
+
+            <div class="detail-list">
+
+
+                <!-- CATEGORY -->
+
+                <div class="detail-row">
+
+                    <div class="detail-icon">
+
+                        <i class="fa-solid fa-tag"></i>
+
+                    </div>
+
+                    <div class="detail-content">
+
+                        <span
+                            class="detail-label"
+                            id="category-label"
+                        >
+                            Category
+                        </span>
+
+                        <div
+                            class="detail-value"
+                            id="category-value"
+                        >
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- LOCATION -->
+
+                <div class="detail-row">
+
+                    <div class="detail-icon">
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                    </div>
+
+                    <div class="detail-content">
+
+                        <span
+                            class="detail-label"
+                            id="location-label"
+                        >
+                            Location
+                        </span>
+
+                        <div
+                            class="detail-value"
+                            id="location-value"
+                        >
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- DESCRIPTION -->
+
+                <div class="detail-row">
+
+                    <div class="detail-icon">
+
+                        <i class="fa-solid fa-align-left"></i>
+
+                    </div>
+
+                    <div class="detail-content">
+
+                        <span
+                            class="detail-label"
+                            id="description-label"
+                        >
+                            Description
+                        </span>
+
+                        <div
+                            class="detail-value"
+                            id="description-value"
+                        >
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- REPORTED DATE -->
+
+                <div class="detail-row">
+
+                    <div class="detail-icon">
+
+                        <i class="fa-solid fa-calendar"></i>
+
+                    </div>
+
+                    <div class="detail-content">
+
+                        <span
+                            class="detail-label"
+                            id="reported-label"
+                        >
+                            Reported
+                        </span>
+
+                        <div
+                            class="detail-value"
+                            id="reported-value"
+                        >
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- DESCRIPTION BOX -->
+
+            <div
+                class="description-box"
+                id="description-box"
+                style="display: none;"
+            >
+
+                <h3 id="additional-description-title">
+                    Item Description
+                </h3>
+
+                <p id="additional-description">
+                </p>
+
+            </div>
+
+
+
+            <!-- ACTIONS -->
+
+            <div class="actions">
+
+                <a
+                    href="#"
+                    class="action-btn claim-btn"
+                    id="claim-button"
+                    style="display: none;"
+                >
+
+                    <i class="fa-solid fa-hand-holding-heart"></i>
+
+                    <span id="claim-text">
+                        Claim Item
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="/search"
+                    class="action-btn search-btn"
+                >
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <span id="search-again-text">
+                        Search Again
+                    </span>
+
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+</main>
+
+
+
+<script>
+
+    /* ======================================================
+       TRANSLATIONS
+    ====================================================== */
+
+    const translations = {
+
+        en: {
+            back: "Back to Search",
+            title: "Item Details",
+            description: "View complete information about this item.",
+            loading: "Loading item details...",
+            errorTitle: "Item Not Found",
+            errorText: "The requested item could not be found.",
+            errorButton: "Back to Search",
+            noImage: "No image available",
+            category: "Category",
+            location: "Location",
+            itemDescription: "Description",
+            reported: "Reported",
+            additionalDescription: "Item Description",
+            claim: "Claim Item",
+            searchAgain: "Search Again",
+            lost: "Lost",
+            found: "Found"
+        },
+
+        ta: {
+            back: "தேடலுக்குத் திரும்பு",
+            title: "பொருள் விவரங்கள்",
+            description: "இந்த பொருளைப் பற்றிய முழுமையான தகவலைப் பார்க்கவும்.",
+            loading: "பொருள் விவரங்கள் ஏற்றப்படுகின்றன...",
+            errorTitle: "பொருள் கிடைக்கவில்லை",
+            errorText: "கோரப்பட்ட பொருளைக் கண்டுபிடிக்க முடியவில்லை.",
+            errorButton: "தேடலுக்குத் திரும்பு",
+            noImage: "படம் இல்லை",
+            category: "வகை",
+            location: "இடம்",
+            itemDescription: "விளக்கம்",
+            reported: "பதிவு செய்யப்பட்டது",
+            additionalDescription: "பொருள் விளக்கம்",
+            claim: "பொருளை கோருங்கள்",
+            searchAgain: "மீண்டும் தேடு",
+            lost: "இழந்தது",
+            found: "கண்டெடுக்கப்பட்டது"
+        },
+
+        hi: {
+            back: "खोज पर वापस जाएँ",
+            title: "वस्तु विवरण",
+            description: "इस वस्तु की पूरी जानकारी देखें.",
+            loading: "वस्तु विवरण लोड हो रहा है...",
+            errorTitle: "वस्तु नहीं मिली",
+            errorText: "मांगी गई वस्तु नहीं मिली.",
+            errorButton: "खोज पर वापस जाएँ",
+            noImage: "कोई चित्र उपलब्ध नहीं है",
+            category: "श्रेणी",
+            location: "स्थान",
+            itemDescription: "विवरण",
+            reported: "रिपोर्ट किया गया",
+            additionalDescription: "वस्तु का विवरण",
+            claim: "वस्तु पर दावा करें",
+            searchAgain: "फिर से खोजें",
+            lost: "खोया हुआ",
+            found: "मिला हुआ"
+        }
+
+    };
+
+
+    /* ======================================================
+       LANGUAGE
+    ====================================================== */
+
+    function applyLanguage(language) {
+
+        const t = translations[language] || translations.en;
+
+        document.getElementById("back-text").textContent = t.back;
+
+        document.getElementById("page-title").textContent = t.title;
+
+        document.getElementById("page-description").textContent =
+            t.description;
+
+        document.getElementById("loading-text").textContent =
+            t.loading;
+
+        document.getElementById("error-title").textContent =
+            t.errorTitle;
+
+        document.getElementById("error-text").textContent =
+            t.errorText;
+
+        document.getElementById("error-button").textContent =
+            t.errorButton;
+
+        document.getElementById("no-image-text").textContent =
+            t.noImage;
+
+        document.getElementById("category-label").textContent =
+            t.category;
+
+        document.getElementById("location-label").textContent =
+            t.location;
+
+        document.getElementById("description-label").textContent =
+            t.itemDescription;
+
+        document.getElementById("reported-label").textContent =
+            t.reported;
+
+        document.getElementById(
+            "additional-description-title"
+        ).textContent = t.additionalDescription;
+
+        document.getElementById("claim-text").textContent =
+            t.claim;
+
+        document.getElementById("search-again-text").textContent =
+            t.searchAgain;
+
+        const status =
+            document.getElementById("status-text").dataset.status;
+
+        if (status === "Lost") {
+
+            document.getElementById("status-text").textContent =
+                t.lost;
+
+        } else {
+
+            document.getElementById("status-text").textContent =
+                t.found;
+
+        }
+
+        document.getElementById("language").value = language;
+    }
+
+
+    /* ======================================================
+       GET ITEM ID FROM URL
+    ====================================================== */
+
+    function getItemId() {
+
+        const path =
+            window.location.pathname;
+
+        const parts =
+            path.split("/");
+
+        return parts[parts.length - 1];
+
+    }
+
+
+    /* ======================================================
+       LOAD ITEM
+    ====================================================== */
+
+    async function loadItem() {
+
+        const itemId = getItemId();
+
+        try {
+
+            const response =
+                await fetch(
+                    "/api/item/" + itemId
+                );
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Item not found"
+                );
+
+            }
+
+            const data =
+                await response.json();
+
+            if (!data.success || !data.item) {
+
+                throw new Error(
+                    "Item not found"
+                );
+
+            }
+
+            displayItem(
+                data.item
+            );
+
+        } catch (error) {
+
+            console.error(
+                "Item details error:",
+                error
+            );
+
+            document.getElementById(
+                "loading"
+            ).style.display = "none";
+
+            document.getElementById(
+                "error-message"
+            ).style.display = "block";
+
+        }
+
+    }
+
+
+    /* ======================================================
+       DISPLAY ITEM
+    ====================================================== */
+
+    function displayItem(item) {
+
+        document.getElementById(
+            "loading"
+        ).style.display = "none";
+
+        document.getElementById(
+            "details-card"
+        ).style.display = "grid";
+
+
+        document.getElementById(
+            "item-name"
+        ).textContent =
+            item.item_name;
+
+
+        document.getElementById(
+            "category-value"
+        ).textContent =
+            item.category || "—";
+
+
+        document.getElementById(
+            "location-value"
+        ).textContent =
+            item.location || "—";
+
+
+        document.getElementById(
+            "description-value"
+        ).textContent =
+            item.description || "No description provided.";
+
+
+        document.getElementById(
+            "reported-value"
+        ).textContent =
+            item.created_at || "—";
+
+
+        /* STATUS */
+
+        const statusText =
+            document.getElementById(
+                "status-text"
+            );
+
+        statusText.dataset.status =
+            item.status;
+
+
+        const statusBadge =
+            document.getElementById(
+                "status-badge"
+            );
+
+        const statusIcon =
+            document.getElementById(
+                "status-icon"
+            );
+
+
+        if (item.status === "Lost") {
+
+            statusBadge.className =
+                "status-badge status-lost";
+
+            statusIcon.className =
+                "fa-solid fa-circle-exclamation";
+
+        } else {
+
+            statusBadge.className =
+                "status-badge status-found";
+
+            statusIcon.className =
+                "fa-solid fa-circle-check";
+
+        }
+
+
+        const savedLanguage =
+            localStorage.getItem(
+                "campusFindLanguage"
+            ) || "en";
+
+        applyLanguage(
+            savedLanguage
+        );
+
+
+        /* IMAGE */
+
+        const image =
+            document.getElementById(
+                "item-image"
+            );
+
+        const noImage =
+            document.getElementById(
+                "no-image"
+            );
+
+
+        if (item.image) {
+
+            let imageFolder =
+                "lost";
+
+            if (item.status === "Found") {
+
+                imageFolder =
+                    "found";
+
+            }
+
+            image.src =
+                "/uploads/" +
+                imageFolder +
+                "/" +
+                encodeURIComponent(
+                    item.image
+                );
+
+            image.style.display =
+                "block";
+
+            noImage.style.display =
+                "none";
+
+        } else {
+
+            image.style.display =
+                "none";
+
+            noImage.style.display =
+                "flex";
+
+        }
+
+
+        /* DESCRIPTION BOX */
+
+        if (item.description) {
+
+            document.getElementById(
+                "description-box"
+            ).style.display =
+                "block";
+
+            document.getElementById(
+                "additional-description"
+            ).textContent =
+                item.description;
+
+        }
+
+
+        /* CLAIM BUTTON */
+
+        const claimButton =
+            document.getElementById(
+                "claim-button"
+            );
+
+
+        if (item.status === "Found") {
+
+            claimButton.style.display =
+                "inline-flex";
+
+            claimButton.href =
+                "/claim/" +
+                item.id;
+
+        } else {
+
+            claimButton.style.display =
+                "none";
+
+        }
+
+    }
+
+
+    /* ======================================================
+       LANGUAGE CHANGE
+    ====================================================== */
+
+    document.getElementById(
+        "language"
+    ).addEventListener(
+        "change",
+        function() {
+
+            const language =
+                this.value;
+
+            localStorage.setItem(
+                "campusFindLanguage",
+                language
+            );
+
+            applyLanguage(
+                language
+            );
+
+        }
+    );
+
+
+    /* ======================================================
+       PAGE LOAD
+    ====================================================== */
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        function() {
+
+            const savedLanguage =
+                localStorage.getItem(
+                    "campusFindLanguage"
+                ) || "en";
+
+            applyLanguage(
+                savedLanguage
+            );
+
+            loadItem();
+
+        }
+    );
+
+</script>
+
+
+</body>
+
+</html>

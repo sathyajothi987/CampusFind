@@ -1,0 +1,1485 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title id="page-title">
+        CampusFind - Report Lost
+    </title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+
+        /* ==========================================
+           RESET
+        ========================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        /* ==========================================
+           BODY
+        ========================================== */
+
+        body {
+
+            font-family: Arial, sans-serif;
+
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #eef2ff,
+                    #f8f7ff
+                );
+
+            color: #222;
+        }
+
+
+        /* ==========================================
+           NAVBAR
+        ========================================== */
+
+        .navbar {
+
+            width: 100%;
+
+            padding: 18px 60px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #4f46e5,
+                    #7c3aed
+                );
+
+            color: white;
+        }
+
+
+        .logo {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            font-size: 23px;
+
+            font-weight: bold;
+        }
+
+
+        .logo i {
+
+            font-size: 24px;
+        }
+
+
+        .navbar-right {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 25px;
+        }
+
+
+        /* ==========================================
+           LANGUAGE
+        ========================================== */
+
+        .language-selector {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+        }
+
+
+        .language-selector select {
+
+            border: none;
+
+            outline: none;
+
+            padding: 8px 12px;
+
+            border-radius: 8px;
+
+            background: white;
+
+            color: #333;
+
+            cursor: pointer;
+        }
+
+
+        /* ==========================================
+           BACK HOME
+        ========================================== */
+
+        .home-link {
+
+            color: white;
+
+            text-decoration: none;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            font-weight: 600;
+        }
+
+
+        .home-link:hover {
+
+            opacity: 0.8;
+        }
+
+
+        /* ==========================================
+           PAGE
+        ========================================== */
+
+        .page-container {
+
+            width: 92%;
+
+            max-width: 900px;
+
+            margin: 45px auto;
+        }
+
+
+        /* ==========================================
+           PAGE HEADER
+        ========================================== */
+
+        .page-header {
+
+            text-align: center;
+
+            margin-bottom: 30px;
+        }
+
+
+        .page-icon {
+
+            width: 70px;
+
+            height: 70px;
+
+            margin: 0 auto 15px;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            border-radius: 50%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #4f46e5,
+                    #7c3aed
+                );
+
+            color: white;
+
+            font-size: 28px;
+        }
+
+
+        .page-header h1 {
+
+            font-size: 36px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .page-header p {
+
+            color: #666;
+
+            font-size: 16px;
+        }
+
+
+        /* ==========================================
+           FORM CARD
+        ========================================== */
+
+        .form-card {
+
+            background: white;
+
+            padding: 35px;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 12px 35px
+                rgba(79, 70, 229, 0.12);
+        }
+
+
+        /* ==========================================
+           FORM GROUP
+        ========================================== */
+
+        .form-group {
+
+            margin-bottom: 22px;
+        }
+
+
+        .form-group label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-weight: bold;
+
+            color: #444;
+        }
+
+
+        .required {
+
+            color: #dc2626;
+        }
+
+
+        /* ==========================================
+           INPUTS
+        ========================================== */
+
+        .input-wrapper {
+
+            position: relative;
+        }
+
+
+        .input-wrapper i {
+
+            position: absolute;
+
+            left: 15px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: #7c3aed;
+        }
+
+
+        .input-wrapper input,
+        .input-wrapper textarea {
+
+            width: 100%;
+
+            padding: 13px 15px 13px 44px;
+
+            border: 1px solid #ddd;
+
+            border-radius: 10px;
+
+            outline: none;
+
+            font-size: 14px;
+
+            font-family: inherit;
+        }
+
+
+        .input-wrapper textarea {
+
+            min-height: 120px;
+
+            resize: vertical;
+
+            padding-top: 14px;
+        }
+
+
+        .input-wrapper textarea + i {
+
+            top: 22px;
+
+            transform: none;
+        }
+
+
+        .input-wrapper input:focus,
+        .input-wrapper textarea:focus,
+        select:focus {
+
+            border-color: #7c3aed;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(124, 58, 237, 0.08);
+        }
+
+
+        /* ==========================================
+           SELECT
+        ========================================== */
+
+        .form-select {
+
+            width: 100%;
+
+            padding: 13px 14px;
+
+            border: 1px solid #ddd;
+
+            border-radius: 10px;
+
+            outline: none;
+
+            background: white;
+
+            font-size: 14px;
+
+            cursor: pointer;
+        }
+
+
+        /* ==========================================
+           TWO COLUMN ROW
+        ========================================== */
+
+        .form-row {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 20px;
+        }
+
+
+        /* ==========================================
+           OTHER LOCATION
+        ========================================== */
+
+        #other-location-group {
+
+            display: none;
+        }
+
+
+        /* ==========================================
+           IMAGE UPLOAD
+        ========================================== */
+
+        .image-box {
+
+            border: 2px dashed #c7c7e8;
+
+            border-radius: 12px;
+
+            padding: 22px;
+
+            text-align: center;
+
+            background: #fafaff;
+        }
+
+
+        .image-box i {
+
+            font-size: 30px;
+
+            color: #7c3aed;
+
+            margin-bottom: 10px;
+        }
+
+
+        .image-box p {
+
+            color: #666;
+
+            font-size: 13px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .image-box input {
+
+            width: 100%;
+
+            font-size: 14px;
+
+            cursor: pointer;
+        }
+
+
+        /* ==========================================
+           OPTIONAL TEXT
+        ========================================== */
+
+        .optional {
+
+            color: #777;
+
+            font-size: 12px;
+
+            font-weight: normal;
+        }
+
+
+        /* ==========================================
+           BUTTONS
+        ========================================== */
+
+        .form-buttons {
+
+            display: flex;
+
+            justify-content: flex-end;
+
+            gap: 12px;
+
+            margin-top: 30px;
+        }
+
+
+        .cancel-btn,
+        .submit-btn {
+
+            border: none;
+
+            padding: 13px 22px;
+
+            border-radius: 10px;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+        }
+
+
+        .cancel-btn {
+
+            background: #eee;
+
+            color: #444;
+        }
+
+
+        .cancel-btn:hover {
+
+            background: #ddd;
+        }
+
+
+        .submit-btn {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #4f46e5,
+                    #7c3aed
+                );
+
+            color: white;
+        }
+
+
+        .submit-btn:hover {
+
+            transform: translateY(-2px);
+        }
+
+
+        /* ==========================================
+           MOBILE
+        ========================================== */
+
+        @media (max-width: 700px) {
+
+            .navbar {
+
+                padding: 15px 20px;
+            }
+
+
+            .navbar-right {
+
+                gap: 12px;
+            }
+
+
+            .home-link span {
+
+                display: none;
+            }
+
+
+            .page-container {
+
+                width: 94%;
+
+                margin: 30px auto;
+            }
+
+
+            .form-card {
+
+                padding: 22px;
+            }
+
+
+            .form-row {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .page-header h1 {
+
+                font-size: 29px;
+            }
+
+
+            .form-buttons {
+
+                flex-direction: column;
+            }
+
+
+            .cancel-btn,
+            .submit-btn {
+
+                width: 100%;
+
+                justify-content: center;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==================================================
+     NAVBAR
+================================================== -->
+
+<header class="navbar">
+
+
+    <!-- LOGO -->
+
+    <div class="logo">
+
+        <i class="fa-solid fa-location-dot"></i>
+
+        <span id="logo-text">
+            CampusFind
+        </span>
+
+    </div>
+
+
+    <!-- RIGHT -->
+
+    <div class="navbar-right">
+
+
+        <!-- LANGUAGE -->
+
+        <div class="language-selector">
+
+            <i class="fa-solid fa-globe"></i>
+
+            <select
+                id="language"
+                onchange="changeReportLostLanguage()">
+
+                <option value="en">
+                    English
+                </option>
+
+                <option value="ta">
+                    தமிழ்
+                </option>
+
+                <option value="hi">
+                    हिन्दी
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- HOME -->
+
+        <a
+            href="{{ url_for('home') }}"
+            class="home-link">
+
+            <i class="fa-solid fa-house"></i>
+
+            <span id="back-home-text">
+                Back to Home
+            </span>
+
+        </a>
+
+    </div>
+
+</header>
+
+
+
+<!-- ==================================================
+     MAIN
+================================================== -->
+
+<main class="page-container">
+
+
+    <!-- PAGE HEADER -->
+
+    <section class="page-header">
+
+
+        <div class="page-icon">
+
+            <i class="fa-solid fa-box-open"></i>
+
+        </div>
+
+
+        <h1 id="report-title">
+            Report Lost Item
+        </h1>
+
+
+        <p id="report-description">
+            Tell us about the item you lost on campus.
+        </p>
+
+
+    </section>
+
+
+
+    <!-- ==================================================
+         FORM
+    ================================================== -->
+
+    <div class="form-card">
+
+
+        <form
+            method="POST"
+            action="{{ url_for('report_lost') }}"
+            enctype="multipart/form-data">
+
+
+            <!-- ITEM NAME -->
+
+            <div class="form-group">
+
+
+                <label
+                    for="item_name"
+                    id="item-name-label">
+
+                    Item Name
+                    <span class="required">*</span>
+
+                </label>
+
+
+                <div class="input-wrapper">
+
+                    <i class="fa-solid fa-box"></i>
+
+                    <input
+                        type="text"
+                        id="item_name"
+                        name="item_name"
+                        placeholder="Enter item name"
+                        required>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- DESCRIPTION -->
+
+            <div class="form-group">
+
+
+                <label
+                    for="description"
+                    id="description-label">
+
+                    Description
+
+                    <span class="optional">
+                        (Optional)
+                    </span>
+
+                </label>
+
+
+                <div class="input-wrapper">
+
+                    <i class="fa-solid fa-align-left"></i>
+
+                    <textarea
+                        id="description"
+                        name="description"
+                        placeholder="Describe the item..."></textarea>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- CATEGORY + DATE -->
+
+            <div class="form-row">
+
+
+                <!-- CATEGORY -->
+
+                <div class="form-group">
+
+
+                    <label
+                        for="category"
+                        id="category-label">
+
+                        Category
+                        <span class="required">*</span>
+
+                    </label>
+
+
+                    <select
+                        class="form-select"
+                        id="category"
+                        name="category"
+                        required>
+
+
+                        <option value="">
+                            Select Category
+                        </option>
+
+
+                        <option value="Electronics">
+                            Electronics
+                        </option>
+
+
+                        <option value="Books">
+                            Books
+                        </option>
+
+
+                        <option value="Bags">
+                            Bags
+                        </option>
+
+
+                        <option value="Clothing">
+                            Clothing
+                        </option>
+
+
+                        <option value="Documents">
+                            Documents
+                        </option>
+
+
+                        <option value="Others">
+                            Others
+                        </option>
+
+
+                    </select>
+
+
+                </div>
+
+
+
+                <!-- DATE -->
+
+                <div class="form-group">
+
+
+                    <label
+                        for="date_lost"
+                        id="date-label">
+
+                        Date Lost
+                        <span class="required">*</span>
+
+                    </label>
+
+
+                    <input
+                        class="form-select"
+                        type="date"
+                        id="date_lost"
+                        name="date_lost"
+                        required>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- LOCATION -->
+
+            <div class="form-group">
+
+
+                <label
+                    for="location"
+                    id="location-label">
+
+                    Location
+                    <span class="required">*</span>
+
+                </label>
+
+
+                <select
+                    class="form-select"
+                    id="location"
+                    name="location"
+                    required
+                    onchange="toggleOtherLocation()">
+
+
+                    <option value="">
+                        Select Location
+                    </option>
+
+
+                    <option value="Library">
+                        Library
+                    </option>
+
+
+                    <option value="CSE Block">
+                        CSE Block
+                    </option>
+
+
+                    <option value="ECE Block">
+                        ECE Block
+                    </option>
+
+
+                    <option value="Canteen">
+                        Canteen
+                    </option>
+
+
+                    <option value="Auditorium">
+                        Auditorium
+                    </option>
+
+
+                    <option value="Bus Stand">
+                        Bus Stand
+                    </option>
+
+
+                    <option value="Hostel">
+                        Hostel
+                    </option>
+
+
+                    <option value="Other">
+                        Other
+                    </option>
+
+
+                </select>
+
+
+            </div>
+
+
+
+            <!-- OTHER LOCATION -->
+
+            <div
+                class="form-group"
+                id="other-location-group">
+
+
+                <label
+                    for="other_location"
+                    id="other-location-label">
+
+                    Other Location
+
+                    <span class="required">
+                        *
+                    </span>
+
+                </label>
+
+
+                <div class="input-wrapper">
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                    <input
+                        type="text"
+                        id="other_location"
+                        name="other_location"
+                        placeholder="Enter location">
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- IMAGE -->
+
+            <div class="form-group">
+
+
+                <label
+                    for="image"
+                    id="image-label">
+
+                    Item Image
+
+                    <span class="optional">
+                        (Optional)
+                    </span>
+
+                </label>
+
+
+                <div class="image-box">
+
+
+                    <i class="fa-solid fa-image"></i>
+
+
+                    <p id="image-description">
+
+                        You may upload an image of the lost item.
+
+                    </p>
+
+
+                    <input
+                        type="file"
+                        id="image"
+                        name="image"
+                        accept="image/*">
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- BUTTONS -->
+
+            <div class="form-buttons">
+
+
+                <a
+                    href="{{ url_for('home') }}"
+                    style="text-decoration: none;">
+
+                    <button
+                        type="button"
+                        class="cancel-btn">
+
+                        <i class="fa-solid fa-xmark"></i>
+
+                        <span id="cancel-text">
+                            Cancel
+                        </span>
+
+                    </button>
+
+                </a>
+
+
+                <button
+                    type="submit"
+                    class="submit-btn">
+
+                    <i class="fa-solid fa-paper-plane"></i>
+
+                    <span id="submit-text">
+                        Submit Lost Report
+                    </span>
+
+                </button>
+
+
+            </div>
+
+
+        </form>
+
+
+    </div>
+
+</main>
+
+
+
+<!-- ==================================================
+     JAVASCRIPT
+================================================== -->
+
+<script
+    src="{{ url_for('static', filename='js/language.js') }}">
+</script>
+
+
+<script>
+
+    // ==========================================
+    // TRANSLATIONS
+    // ==========================================
+
+    const reportLostTranslations = {
+
+        en: {
+
+            pageTitle: "CampusFind - Report Lost",
+
+            logo: "CampusFind",
+
+            backHome: "Back to Home",
+
+            title: "Report Lost Item",
+
+            description:
+                "Tell us about the item you lost on campus.",
+
+            itemName: "Item Name",
+
+            descriptionLabel:
+                "Description",
+
+            category:
+                "Category",
+
+            date:
+                "Date Lost",
+
+            location:
+                "Location",
+
+            otherLocation:
+                "Other Location",
+
+            image:
+                "Item Image",
+
+            imageDescription:
+                "You may upload an image of the lost item.",
+
+            cancel:
+                "Cancel",
+
+            submit:
+                "Submit Lost Report"
+
+        },
+
+
+        ta: {
+
+            pageTitle:
+                "CampusFind - தொலைந்த பொருளைப் பதிவு செய்க",
+
+            logo:
+                "CampusFind",
+
+            backHome:
+                "முகப்புக்குத் திரும்பு",
+
+            title:
+                "தொலைந்த பொருளைப் பதிவு செய்க",
+
+            description:
+                "வளாகத்தில் நீங்கள் தொலைத்த பொருளைப் பற்றிய தகவலை உள்ளிடுங்கள்.",
+
+            itemName:
+                "பொருளின் பெயர்",
+
+            descriptionLabel:
+                "விளக்கம்",
+
+            category:
+                "வகை",
+
+            date:
+                "தொலைந்த தேதி",
+
+            location:
+                "இடம்",
+
+            otherLocation:
+                "மற்ற இடம்",
+
+            image:
+                "பொருளின் படம்",
+
+            imageDescription:
+                "தொலைந்த பொருளின் படத்தை பதிவேற்றலாம்.",
+
+            cancel:
+                "ரத்து செய்க",
+
+            submit:
+                "தொலைந்த புகாரை சமர்ப்பிக்கவும்"
+
+        },
+
+
+        hi: {
+
+            pageTitle:
+                "CampusFind - खोई वस्तु रिपोर्ट करें",
+
+            logo:
+                "CampusFind",
+
+            backHome:
+                "होम पर वापस जाएँ",
+
+            title:
+                "खोई हुई वस्तु की रिपोर्ट करें",
+
+            description:
+                "कैंपस में खोई हुई वस्तु के बारे में जानकारी दें।",
+
+            itemName:
+                "वस्तु का नाम",
+
+            descriptionLabel:
+                "विवरण",
+
+            category:
+                "श्रेणी",
+
+            date:
+                "खोने की तारीख",
+
+            location:
+                "स्थान",
+
+            otherLocation:
+                "अन्य स्थान",
+
+            image:
+                "वस्तु की तस्वीर",
+
+            imageDescription:
+                "आप खोई हुई वस्तु की तस्वीर अपलोड कर सकते हैं।",
+
+            cancel:
+                "रद्द करें",
+
+            submit:
+                "खोई हुई वस्तु की रिपोर्ट जमा करें"
+
+        }
+
+    };
+
+
+    // ==========================================
+    // CHANGE LANGUAGE
+    // ==========================================
+
+    function changeReportLostLanguage() {
+
+        const language =
+            document.getElementById("language").value;
+
+
+        const t =
+            reportLostTranslations[language];
+
+
+        if (!t) {
+            return;
+        }
+
+
+        saveCampusFindLanguage(language);
+
+
+        document.title =
+            t.pageTitle;
+
+
+        document.getElementById(
+            "logo-text"
+        ).textContent =
+            t.logo;
+
+
+        document.getElementById(
+            "back-home-text"
+        ).textContent =
+            t.backHome;
+
+
+        document.getElementById(
+            "report-title"
+        ).textContent =
+            t.title;
+
+
+        document.getElementById(
+            "report-description"
+        ).textContent =
+            t.description;
+
+
+        document.getElementById(
+            "item-name-label"
+        ).childNodes[0].textContent =
+            t.itemName + " ";
+
+
+        document.getElementById(
+            "description-label"
+        ).childNodes[0].textContent =
+            t.descriptionLabel + " ";
+
+
+        document.getElementById(
+            "category-label"
+        ).childNodes[0].textContent =
+            t.category + " ";
+
+
+        document.getElementById(
+            "date-label"
+        ).childNodes[0].textContent =
+            t.date + " ";
+
+
+        document.getElementById(
+            "location-label"
+        ).childNodes[0].textContent =
+            t.location + " ";
+
+
+        document.getElementById(
+            "other-location-label"
+        ).childNodes[0].textContent =
+            t.otherLocation + " ";
+
+
+        document.getElementById(
+            "image-label"
+        ).childNodes[0].textContent =
+            t.image + " ";
+
+
+        document.getElementById(
+            "image-description"
+        ).textContent =
+            t.imageDescription;
+
+
+        document.getElementById(
+            "cancel-text"
+        ).textContent =
+            t.cancel;
+
+
+        document.getElementById(
+            "submit-text"
+        ).textContent =
+            t.submit;
+
+
+        document.getElementById(
+            "item_name"
+        ).placeholder =
+            t.itemName;
+
+
+        document.getElementById(
+            "description"
+        ).placeholder =
+            t.descriptionLabel;
+
+
+        document.getElementById(
+            "other_location"
+        ).placeholder =
+            t.otherLocation;
+
+
+        document.documentElement.lang =
+            language;
+
+    }
+
+
+    // ==========================================
+    // OTHER LOCATION
+    // ==========================================
+
+    function toggleOtherLocation() {
+
+        const location =
+            document.getElementById(
+                "location"
+            ).value;
+
+
+        const otherGroup =
+            document.getElementById(
+                "other-location-group"
+            );
+
+
+        const otherInput =
+            document.getElementById(
+                "other_location"
+            );
+
+
+        if (location === "Other") {
+
+            otherGroup.style.display =
+                "block";
+
+            otherInput.required =
+                true;
+
+        } else {
+
+            otherGroup.style.display =
+                "none";
+
+            otherInput.required =
+                false;
+
+            otherInput.value =
+                "";
+
+        }
+
+    }
+
+
+    // ==========================================
+    // PAGE LOAD
+    // ==========================================
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        function () {
+
+            const savedLanguage =
+                getCampusFindLanguage();
+
+
+            const languageSelect =
+                document.getElementById(
+                    "language"
+                );
+
+
+            if (languageSelect) {
+
+                languageSelect.value =
+                    savedLanguage;
+
+                changeReportLostLanguage();
+
+            }
+
+        }
+    );
+
+</script>
+
+
+</body>
+
+</html>

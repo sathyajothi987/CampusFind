@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>CampusFind - Search Items</title>
+
+    <!-- Search CSS -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/search.css') }}">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+
+<body>
+
+
+<!-- ==================================================
+     NAVBAR
+================================================== -->
+
+<header class="search-navbar">
+
+
+    <!-- ================= LOGO ================= -->
+
+    <div class="logo">
+
+        <i class="fa-solid fa-location-dot"></i>
+
+        <span id="logo-text">
+            CampusFind
+        </span>
+
+    </div>
+
+
+    <!-- ================= RIGHT SIDE ================= -->
+
+    <div class="navbar-right">
+
+
+        <!-- ================= LANGUAGE ================= -->
+
+        <div class="language-selector">
+
+            <i class="fa-solid fa-globe"></i>
+
+            <select
+                id="language"
+                onchange="changeSearchLanguage()">
+
+                <option value="en">
+                    English
+                </option>
+
+                <option value="ta">
+                    தமிழ்
+                </option>
+
+                <option value="hi">
+                    हिन्दी
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- ================= BACK HOME ================= -->
+
+        <a
+            href="{{ url_for('home') }}"
+            class="home-link">
+
+            <i class="fa-solid fa-house"></i>
+
+            <span id="back-home-text">
+                Back to Home
+            </span>
+
+        </a>
+
+
+    </div>
+
+
+</header>
+
+
+
+<!-- ==================================================
+     MAIN SEARCH PAGE
+================================================== -->
+
+<main class="search-page">
+
+
+    <!-- ==================================================
+         SEARCH HEADER
+    ================================================== -->
+
+    <section class="search-header">
+
+
+        <div class="search-icon">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+        </div>
+
+
+        <h1 id="search-title">
+            Search Items
+        </h1>
+
+
+        <p id="search-description">
+            Find lost and found items across your campus.
+        </p>
+
+
+    </section>
+
+
+
+    <!-- ==================================================
+         SEARCH FILTER CARD
+    ================================================== -->
+
+    <section class="search-card">
+
+
+        <!-- ================= SEARCH ITEM ================= -->
+
+        <div class="input-group">
+
+            <label
+                for="search-input"
+                id="search-label">
+
+                Search Item
+
+            </label>
+
+
+            <div class="input-wrapper">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    id="search-input"
+                    placeholder="Enter item name..."
+                    autocomplete="off">
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================= CATEGORY ================= -->
+
+        <div class="input-group">
+
+            <label
+                for="category"
+                id="category-label">
+
+                Category
+
+            </label>
+
+
+            <select id="category">
+
+                <option value="">
+                    All Categories
+                </option>
+
+                <option value="Electronics">
+                    Electronics
+                </option>
+
+                <option value="Books">
+                    Books
+                </option>
+
+                <option value="Bags">
+                    Bags
+                </option>
+
+                <option value="Clothing">
+                    Clothing
+                </option>
+
+                <option value="Documents">
+                    Documents
+                </option>
+
+                <option value="Others">
+                    Others
+                </option>
+
+            </select>
+
+        </div>
+
+
+
+        <!-- ================= LOCATION ================= -->
+
+        <div class="input-group">
+
+            <label
+                for="location"
+                id="location-label">
+
+                Location
+
+            </label>
+
+
+            <select id="location">
+
+                <option value="">
+                    All Locations
+                </option>
+
+                <option value="Library">
+                    Library
+                </option>
+
+                <option value="CSE Block">
+                    CSE Block
+                </option>
+
+                <option value="ECE Block">
+                    ECE Block
+                </option>
+
+                <option value="Canteen">
+                    Canteen
+                </option>
+
+                <option value="Auditorium">
+                    Auditorium
+                </option>
+
+                <option value="Bus Stand">
+                    Bus Stand
+                </option>
+
+                <option value="Hostel">
+                    Hostel
+                </option>
+
+                <option value="Other">
+                    Other
+                </option>
+
+            </select>
+
+        </div>
+
+
+
+        <!-- ================= STATUS ================= -->
+
+        <div class="input-group">
+
+            <label
+                for="status"
+                id="status-label">
+
+                Status
+
+            </label>
+
+
+            <select id="status">
+
+                <option value="">
+                    Lost & Found
+                </option>
+
+                <option value="Lost">
+                    Lost Items
+                </option>
+
+                <option value="Found">
+                    Found Items
+                </option>
+
+            </select>
+
+        </div>
+
+
+
+        <!-- ================= SEARCH BUTTON ================= -->
+
+        <button
+            type="button"
+            class="search-button"
+            onclick="searchItems()">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <span id="search-button-text">
+                Search
+            </span>
+
+        </button>
+
+
+    </section>
+
+
+
+    <!-- ==================================================
+         SEARCH RESULTS
+    ================================================== -->
+
+    <section class="results-section">
+
+
+        <!-- ================= RESULTS HEADER ================= -->
+
+        <div class="results-header">
+
+            <div>
+
+                <h2 id="results-title">
+                    Search Results
+                </h2>
+
+                <p id="results-subtitle">
+                    Browse reported lost and found items.
+                </p>
+
+            </div>
+
+
+            <span
+                id="results-count"
+                class="results-count">
+
+                0 items
+
+            </span>
+
+        </div>
+
+
+
+        <!-- ==================================================
+             RESULTS CONTAINER
+        ================================================== -->
+
+        <div
+            id="results-container"
+            class="results-container">
+
+
+            <!-- ================= EMPTY STATE ================= -->
+
+            <div class="empty-results">
+
+                <div class="empty-icon">
+
+                    <i class="fa-solid fa-box-open"></i>
+
+                </div>
+
+
+                <h3 id="empty-results-title">
+                    No items to display
+                </h3>
+
+
+                <p id="empty-results-text">
+                    Search for an item to see available results.
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+
+<!-- ==================================================
+     JAVASCRIPT
+================================================== -->
+
+
+<!-- Common Language System -->
+
+<script
+    src="{{ url_for('static', filename='js/language.js') }}">
+</script>
+
+
+<!-- Search JavaScript -->
+
+<script
+    src="{{ url_for('static', filename='js/search.js') }}">
+</script>
+
+
+</body>
+
+</html>

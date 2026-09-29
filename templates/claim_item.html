@@ -1,0 +1,1863 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>CampusFind - Claim Item</title>
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <!-- Shared Search CSS -->
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/search.css') }}"
+    >
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #111827;
+        }
+
+        /* ==============================
+           PAGE
+        ============================== */
+
+        .claim-page {
+            min-height: calc(100vh - 60px);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 45px 20px 60px;
+        }
+
+        .claim-container {
+            width: 100%;
+            max-width: 850px;
+            background: white;
+            border-radius: 18px;
+            padding: 35px;
+            box-shadow: 0 10px 35px rgba(0,0,0,0.10);
+        }
+
+        /* ==============================
+           HEADER
+        ============================== */
+
+        .claim-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .claim-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: linear-gradient(
+                135deg,
+                #4f46e5,
+                #9333ea
+            );
+
+            color: white;
+            font-size: 24px;
+        }
+
+        .claim-header h1 {
+            margin: 0 0 8px;
+            font-size: 28px;
+            color: #111827;
+        }
+
+        .claim-header p {
+            margin: 0;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        /* ==============================
+           INFORMATION
+        ============================== */
+
+        .claim-info {
+            display: flex;
+            gap: 14px;
+            padding: 18px;
+            border-radius: 12px;
+
+            background: #f5f3ff;
+            border: 1px solid #ddd6fe;
+
+            margin-bottom: 25px;
+        }
+
+        .claim-info-icon {
+            color: #6366f1;
+            font-size: 20px;
+        }
+
+        .claim-info-content h3 {
+            margin: 0 0 6px;
+            font-size: 15px;
+            color: #312e81;
+        }
+
+        .claim-info-content p {
+            margin: 0;
+            font-size: 13px;
+            line-height: 1.6;
+            color: #4b5563;
+        }
+
+        /* ==============================
+           MESSAGE
+        ============================== */
+
+        .claim-message {
+            display: none;
+            padding: 14px 16px;
+            border-radius: 10px;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .claim-message.success {
+            display: block;
+            background: #ecfdf5;
+            border: 1px solid #a7f3d0;
+            color: #065f46;
+        }
+
+        .claim-message.error {
+            display: block;
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #991b1b;
+        }
+
+        /* ==============================
+           CLAIM STATUS
+        ============================== */
+
+        .claim-status-card {
+            display: none;
+            margin-bottom: 25px;
+            padding: 22px;
+            border-radius: 14px;
+
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+        }
+
+        .claim-status-card.show {
+            display: block;
+        }
+
+        .claim-status-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .claim-status-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #eef2ff;
+            color: #4f46e5;
+            font-size: 19px;
+        }
+
+        .claim-status-header h3 {
+            margin: 0;
+            color: #111827;
+            font-size: 17px;
+        }
+
+        .claim-status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+
+            padding: 7px 12px;
+            border-radius: 999px;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            background: #fef3c7;
+            color: #92400e;
+
+            margin-bottom: 15px;
+        }
+
+        .claim-status-badge.approved {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .claim-status-badge.rejected {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .claim-status-text {
+            margin: 0 0 16px;
+            color: #4b5563;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        /* ==============================
+           QR CODE
+        ============================== */
+
+        .qr-section {
+            display: none;
+            text-align: center;
+            padding-top: 10px;
+        }
+
+        .qr-section.show {
+            display: block;
+        }
+
+        .qr-image {
+            width: 240px;
+            height: 240px;
+            max-width: 100%;
+
+            padding: 10px;
+
+            background: white;
+            border: 1px solid #d1d5db;
+            border-radius: 14px;
+
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .qr-instruction {
+            max-width: 560px;
+            margin: 15px auto 0;
+
+            color: #4b5563;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .handover-complete {
+            display: none;
+
+            margin-top: 15px;
+            padding: 13px 15px;
+
+            border-radius: 10px;
+
+            background: #ecfdf5;
+            border: 1px solid #a7f3d0;
+
+            color: #065f46;
+
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .handover-complete.show {
+            display: block;
+        }
+
+        /* ==============================
+           FORM
+        ============================== */
+
+        .claim-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .form-group label i {
+            color: #6366f1;
+            margin-right: 6px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 13px 15px;
+
+            border: 1px solid #d1d5db;
+            border-radius: 10px;
+
+            font-family: inherit;
+            font-size: 14px;
+
+            outline: none;
+            transition: 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #6366f1;
+
+            box-shadow:
+                0 0 0 3px rgba(
+                    99,
+                    102,
+                    241,
+                    0.12
+                );
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-help {
+            font-size: 12px;
+            color: #6b7280;
+        }
+
+        /* ==============================
+           BUTTONS
+        ============================== */
+
+        .claim-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 5px;
+        }
+
+        .claim-submit-btn,
+        .claim-back-btn {
+            border: none;
+            border-radius: 10px;
+
+            padding: 13px 20px;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            cursor: pointer;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 8px;
+
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .claim-submit-btn {
+            flex: 1;
+
+            background: linear-gradient(
+                135deg,
+                #4f46e5,
+                #9333ea
+            );
+
+            color: white;
+        }
+
+        .claim-submit-btn:hover {
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 6px 18px rgba(
+                    99,
+                    102,
+                    241,
+                    0.25
+                );
+        }
+
+        .claim-submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .claim-back-btn {
+            background: #f3f4f6;
+            color: #374151;
+        }
+
+        .claim-back-btn:hover {
+            background: #e5e7eb;
+        }
+
+        /* ==============================
+           MOBILE
+        ============================== */
+
+        @media (max-width: 650px) {
+
+            .claim-page {
+                padding: 25px 12px 40px;
+            }
+
+            .claim-container {
+                padding: 25px 20px;
+            }
+
+            .claim-header h1 {
+                font-size: 24px;
+            }
+
+            .claim-actions {
+                flex-direction: column;
+            }
+
+            .claim-submit-btn,
+            .claim-back-btn {
+                width: 100%;
+            }
+
+            .qr-image {
+                width: 200px;
+                height: 200px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <!-- ==============================
+         NAVBAR
+    ============================== -->
+
+    <nav class="search-navbar">
+
+        <div class="search-logo">
+
+            <i class="fa-solid fa-location-dot"></i>
+
+            <span id="logo-text">
+                CampusFind
+            </span>
+
+        </div>
+
+
+        <div class="search-nav-right">
+
+            <div class="language-box">
+
+                <i class="fa-solid fa-globe"></i>
+
+                <select
+                    id="language"
+                    onchange="changeClaimLanguage()"
+                >
+
+                    <option value="en">
+                        English
+                    </option>
+
+                    <option value="ta">
+                        தமிழ்
+                    </option>
+
+                    <option value="hi">
+                        हिन्दी
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <a
+                href="{{ url_for('search') }}"
+                class="back-home"
+            >
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                <span id="back-search-text">
+                    Back to Search
+                </span>
+
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ==============================
+         MAIN
+    ============================== -->
+
+    <main class="claim-page">
+
+        <div class="claim-container">
+
+
+            <!-- HEADER -->
+
+            <div class="claim-header">
+
+                <div class="claim-icon">
+
+                    <i class="fa-solid fa-hand-holding-heart"></i>
+
+                </div>
+
+
+                <h1 id="claim-title">
+                    Claim This Item
+                </h1>
+
+
+                <p id="claim-description">
+                    Submit your details and proof to claim this found item.
+                </p>
+
+            </div>
+
+
+            <!-- INFORMATION -->
+
+            <div class="claim-info">
+
+                <div class="claim-info-icon">
+
+                    <i class="fa-solid fa-circle-info"></i>
+
+                </div>
+
+
+                <div class="claim-info-content">
+
+                    <h3 id="claim-info-title">
+                        Claim Verification
+                    </h3>
+
+
+                    <p id="claim-info-text">
+                        Please provide accurate information about why
+                        this item belongs to you. Your claim will be
+                        reviewed before the item is handed over.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- MESSAGE -->
+
+            <div
+                id="claim-message"
+                class="claim-message"
+            ></div>
+
+
+            <!-- ==============================
+                 CLAIM STATUS
+            ============================== -->
+
+            <section
+                id="claim-status-card"
+                class="claim-status-card"
+            >
+
+                <div class="claim-status-header">
+
+                    <div class="claim-status-icon">
+
+                        <i
+                            id="claim-status-icon"
+                            class="fa-solid fa-clock"
+                        ></i>
+
+                    </div>
+
+
+                    <h3 id="claim-status-title">
+                        Claim Status
+                    </h3>
+
+                </div>
+
+
+                <div
+                    id="claim-status-badge"
+                    class="claim-status-badge"
+                >
+
+                    <i class="fa-solid fa-clock"></i>
+
+                    <span id="claim-status-badge-text">
+                        Pending
+                    </span>
+
+                </div>
+
+
+                <p
+                    id="claim-status-text"
+                    class="claim-status-text"
+                >
+                    Your claim is waiting for admin verification.
+                </p>
+
+
+                <!-- QR -->
+
+                <div
+                    id="qr-section"
+                    class="qr-section"
+                >
+
+                    <img
+                        id="claim-qr-image"
+                        class="qr-image"
+                        alt="Claim verification QR code"
+                    >
+
+
+                    <p
+                        id="qr-instruction"
+                        class="qr-instruction"
+                    >
+                        Show this QR code to the admin during item handover.
+                    </p>
+
+                </div>
+
+
+                <!-- HANDOVER COMPLETED -->
+
+                <div
+                    id="handover-complete"
+                    class="handover-complete"
+                >
+
+                    <i class="fa-solid fa-circle-check"></i>
+
+                    <span id="handover-complete-text">
+                        Handover completed successfully.
+                    </span>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==============================
+                 CLAIM FORM
+            ============================== -->
+
+            <form
+                id="claim-form"
+                class="claim-form"
+            >
+
+                <input
+                    type="hidden"
+                    id="item-id"
+                    name="item_id"
+                >
+
+
+                <!-- NAME -->
+
+                <div class="form-group">
+
+                    <label for="claim-name">
+
+                        <i class="fa-solid fa-user"></i>
+
+                        <span id="claim-name-label">
+                            Your Name
+                        </span>
+
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="claim-name"
+                        name="claimant_name"
+                        required
+                        autocomplete="name"
+                    >
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label for="claim-email">
+
+                        <i class="fa-solid fa-envelope"></i>
+
+                        <span id="claim-email-label">
+                            Email Address
+                        </span>
+
+                    </label>
+
+
+                    <input
+                        type="email"
+                        id="claim-email"
+                        name="claimant_email"
+                        required
+                        autocomplete="email"
+                    >
+
+                </div>
+
+
+                <!-- PROOF -->
+
+                <div class="form-group">
+
+                    <label for="claim-proof">
+
+                        <i class="fa-solid fa-key"></i>
+
+                        <span id="claim-proof-label">
+                            Proof of Ownership
+                        </span>
+
+                    </label>
+
+
+                    <textarea
+                        id="claim-proof"
+                        name="proof"
+                        required
+                        placeholder="Describe a unique detail, serial number, mark, sticker, or other proof that identifies the item."
+                    ></textarea>
+
+
+                    <span
+                        class="form-help"
+                        id="claim-proof-help"
+                    >
+                        Do not share unnecessary private information.
+                    </span>
+
+                </div>
+
+
+                <!-- REASON -->
+
+                <div class="form-group">
+
+                    <label for="claim-reason">
+
+                        <i class="fa-solid fa-comment-dots"></i>
+
+                        <span id="claim-reason-label">
+                            Why do you believe this item is yours?
+                        </span>
+
+                    </label>
+
+
+                    <textarea
+                        id="claim-reason"
+                        name="reason"
+                        required
+                        placeholder="Explain when and where you lost the item and any other useful details."
+                    ></textarea>
+
+                </div>
+
+
+                <!-- BUTTONS -->
+
+                <div class="claim-actions">
+
+                    <a
+                        href="{{ url_for('search') }}"
+                        class="claim-back-btn"
+                    >
+
+                        <i class="fa-solid fa-arrow-left"></i>
+
+                        <span id="claim-back-text">
+                            Cancel
+                        </span>
+
+                    </a>
+
+
+                    <button
+                        type="submit"
+                        class="claim-submit-btn"
+                        id="claim-submit-button"
+                    >
+
+                        <i class="fa-solid fa-paper-plane"></i>
+
+                        <span id="claim-submit-text">
+                            Submit Claim
+                        </span>
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </main>
+
+
+    <!-- Shared Language JS -->
+
+    <script
+        src="{{ url_for('static', filename='js/language.js') }}"
+    ></script>
+
+
+    <script>
+
+        /* ============================================
+           TRANSLATIONS
+        ============================================ */
+
+        const claimTranslations = {
+
+            en: {
+
+                logo: "CampusFind",
+
+                backSearch: "Back to Search",
+
+                title: "Claim This Item",
+
+                description:
+                    "Submit your details and proof to claim this found item.",
+
+                infoTitle:
+                    "Claim Verification",
+
+                infoText:
+                    "Please provide accurate information about why this item belongs to you. Your claim will be reviewed before the item is handed over.",
+
+                name:
+                    "Your Name",
+
+                email:
+                    "Email Address",
+
+                proof:
+                    "Proof of Ownership",
+
+                proofPlaceholder:
+                    "Describe a unique detail, serial number, mark, sticker, or other proof that identifies the item.",
+
+                proofHelp:
+                    "Do not share unnecessary private information.",
+
+                reason:
+                    "Why do you believe this item is yours?",
+
+                reasonPlaceholder:
+                    "Explain when and where you lost the item and any other useful details.",
+
+                cancel:
+                    "Cancel",
+
+                submit:
+                    "Submit Claim",
+
+                submitting:
+                    "Submitting...",
+
+                success:
+                    "Claim submitted successfully. Your claim is now pending verification.",
+
+                loginRequired:
+                    "Please login before submitting a claim.",
+
+                error:
+                    "Unable to submit the claim. Please try again."
+
+            },
+
+
+            ta: {
+
+                logo: "CampusFind",
+
+                backSearch:
+                    "தேடலுக்கு திரும்பு",
+
+                title:
+                    "இந்த பொருளை கோருங்கள்",
+
+                description:
+                    "இந்த கண்டெடுக்கப்பட்ட பொருளை கோர உங்கள் விவரங்களையும் உரிமை ஆதாரத்தையும் சமர்ப்பிக்கவும்.",
+
+                infoTitle:
+                    "கோரிக்கை சரிபார்ப்பு",
+
+                infoText:
+                    "இந்த பொருள் உங்களுடையது என்பதற்கான சரியான தகவல்களை வழங்கவும். பொருள் ஒப்படைக்கப்படுவதற்கு முன் உங்கள் கோரிக்கை சரிபார்க்கப்படும்.",
+
+                name:
+                    "உங்கள் பெயர்",
+
+                email:
+                    "மின்னஞ்சல் முகவரி",
+
+                proof:
+                    "உரிமை ஆதாரம்",
+
+                proofPlaceholder:
+                    "பொருளை அடையாளம் காண உதவும் தனிப்பட்ட விவரம், வரிசை எண், குறி, ஸ்டிக்கர் அல்லது பிற ஆதாரத்தை குறிப்பிடவும்.",
+
+                proofHelp:
+                    "தேவையற்ற தனிப்பட்ட தகவல்களை பகிர வேண்டாம்.",
+
+                reason:
+                    "இந்த பொருள் உங்களுடையது என்று ஏன் நினைக்கிறீர்கள்?",
+
+                reasonPlaceholder:
+                    "நீங்கள் பொருளை எப்போது, எங்கு தொலைத்தீர்கள் மற்றும் தேவையான பிற விவரங்களை குறிப்பிடவும்.",
+
+                cancel:
+                    "ரத்து செய்",
+
+                submit:
+                    "கோரிக்கையை சமர்ப்பி",
+
+                submitting:
+                    "சமர்ப்பிக்கப்படுகிறது...",
+
+                success:
+                    "கோரிக்கை வெற்றிகரமாக சமர்ப்பிக்கப்பட்டது. உங்கள் கோரிக்கை சரிபார்ப்புக்காக காத்திருக்கிறது.",
+
+                loginRequired:
+                    "கோரிக்கையை சமர்ப்பிக்கும் முன் உள்நுழையவும்.",
+
+                error:
+                    "கோரிக்கையை சமர்ப்பிக்க முடியவில்லை. மீண்டும் முயற்சிக்கவும்."
+
+            },
+
+
+            hi: {
+
+                logo: "CampusFind",
+
+                backSearch:
+                    "खोज पर वापस जाएं",
+
+                title:
+                    "इस वस्तु का दावा करें",
+
+                description:
+                    "इस मिली हुई वस्तु का दावा करने के लिए अपना विवरण और स्वामित्व प्रमाण जमा करें।",
+
+                infoTitle:
+                    "दावा सत्यापन",
+
+                infoText:
+                    "कृपया सही जानकारी दें कि यह वस्तु आपकी क्यों है। वस्तु सौंपने से पहले आपके दावे की जांच की जाएगी।",
+
+                name:
+                    "आपका नाम",
+
+                email:
+                    "ईमेल पता",
+
+                proof:
+                    "स्वामित्व का प्रमाण",
+
+                proofPlaceholder:
+                    "वस्तु की पहचान करने वाले किसी विशेष विवरण, सीरियल नंबर, निशान, स्टिकर या अन्य प्रमाण का वर्णन करें।",
+
+                proofHelp:
+                    "अनावश्यक निजी जानकारी साझा न करें।",
+
+                reason:
+                    "आपको क्यों लगता है कि यह वस्तु आपकी है?",
+
+                reasonPlaceholder:
+                    "बताएं कि आपने वस्तु कब और कहां खोई थी तथा कोई अन्य उपयोगी जानकारी दें।",
+
+                cancel:
+                    "रद्द करें",
+
+                submit:
+                    "दावा जमा करें",
+
+                submitting:
+                    "जमा किया जा रहा है...",
+
+                success:
+                    "दावा सफलतापूर्वक जमा किया गया। आपका दावा सत्यापन के लिए लंबित है।",
+
+                loginRequired:
+                    "दावा जमा करने से पहले लॉगिन करें।",
+
+                error:
+                    "दावा जमा नहीं किया जा सका। कृपया पुनः प्रयास करें।"
+
+            }
+
+        };
+
+
+        /* ============================================
+           QR TRANSLATIONS
+        ============================================ */
+
+        const qrTranslations = {
+
+            en: {
+
+                title:
+                    "Claim Status",
+
+                pending:
+                    "Pending",
+
+                approved:
+                    "Approved",
+
+                rejected:
+                    "Rejected",
+
+                pendingText:
+                    "Your claim is waiting for admin verification.",
+
+                approvedText:
+                    "Your claim has been approved. You can now show this QR code to the admin during item handover.",
+
+                rejectedText:
+                    "Your claim was rejected by the admin.",
+
+                qrInstruction:
+                    "Show this QR code to the admin during item handover.",
+
+                handoverComplete:
+                    "Handover completed successfully. This QR code can no longer be used."
+
+            },
+
+
+            ta: {
+
+                title:
+                    "கோரிக்கை நிலை",
+
+                pending:
+                    "நிலுவையில்",
+
+                approved:
+                    "அங்கீகரிக்கப்பட்டது",
+
+                rejected:
+                    "நிராகரிக்கப்பட்டது",
+
+                pendingText:
+                    "உங்கள் கோரிக்கை நிர்வாகியின் சரிபார்ப்புக்காக காத்திருக்கிறது.",
+
+                approvedText:
+                    "உங்கள் கோரிக்கை அங்கீகரிக்கப்பட்டது. பொருளை ஒப்படைக்கும் போது இந்த QR குறியீட்டை நிர்வாகியிடம் காட்டவும்.",
+
+                rejectedText:
+                    "உங்கள் கோரிக்கை நிர்வாகியால் நிராகரிக்கப்பட்டது.",
+
+                qrInstruction:
+                    "பொருளை ஒப்படைக்கும் போது இந்த QR குறியீட்டை நிர்வாகியிடம் காட்டவும்.",
+
+                handoverComplete:
+                    "பொருள் ஒப்படைப்பு வெற்றிகரமாக முடிந்தது. இந்த QR குறியீட்டை இனி பயன்படுத்த முடியாது."
+
+            },
+
+
+            hi: {
+
+                title:
+                    "दावे की स्थिति",
+
+                pending:
+                    "लंबित",
+
+                approved:
+                    "स्वीकृत",
+
+                rejected:
+                    "अस्वीकृत",
+
+                pendingText:
+                    "आपका दावा एडमिन सत्यापन की प्रतीक्षा कर रहा है।",
+
+                approvedText:
+                    "आपका दावा स्वीकृत हो गया है। वस्तु सौंपते समय यह QR कोड एडमिन को दिखाएं।",
+
+                rejectedText:
+                    "आपका दावा एडमिन द्वारा अस्वीकार कर दिया गया है।",
+
+                qrInstruction:
+                    "वस्तु सौंपते समय यह QR कोड एडमिन को दिखाएं।",
+
+                handoverComplete:
+                    "वस्तु सौंपने की प्रक्रिया सफलतापूर्वक पूरी हो गई है। यह QR कोड अब उपयोग नहीं किया जा सकता।"
+
+            }
+
+        };
+
+
+        /* ============================================
+           GET ITEM ID
+        ============================================ */
+
+        function getItemIdFromUrl() {
+
+            const pathParts =
+                window.location.pathname
+                    .split("/")
+                    .filter(Boolean);
+
+            const claimIndex =
+                pathParts.indexOf("claim");
+
+            if (
+                claimIndex !== -1 &&
+                pathParts[claimIndex + 1]
+            ) {
+
+                return pathParts[
+                    claimIndex + 1
+                ];
+
+            }
+
+            return "";
+
+        }
+
+
+        /* ============================================
+           LANGUAGE
+        ============================================ */
+
+        function changeClaimLanguage() {
+
+            const languageSelect =
+                document.getElementById("language");
+
+            const selectedLanguage =
+                languageSelect.value;
+
+            const translations =
+                claimTranslations[selectedLanguage];
+
+            if (!translations) {
+                return;
+            }
+
+            document.getElementById(
+                "logo-text"
+            ).textContent =
+                translations.logo;
+
+            document.getElementById(
+                "back-search-text"
+            ).textContent =
+                translations.backSearch;
+
+            document.getElementById(
+                "claim-title"
+            ).textContent =
+                translations.title;
+
+            document.getElementById(
+                "claim-description"
+            ).textContent =
+                translations.description;
+
+            document.getElementById(
+                "claim-info-title"
+            ).textContent =
+                translations.infoTitle;
+
+            document.getElementById(
+                "claim-info-text"
+            ).textContent =
+                translations.infoText;
+
+            document.getElementById(
+                "claim-name-label"
+            ).textContent =
+                translations.name;
+
+            document.getElementById(
+                "claim-email-label"
+            ).textContent =
+                translations.email;
+
+            document.getElementById(
+                "claim-proof-label"
+            ).textContent =
+                translations.proof;
+
+            document.getElementById(
+                "claim-proof"
+            ).placeholder =
+                translations.proofPlaceholder;
+
+            document.getElementById(
+                "claim-proof-help"
+            ).textContent =
+                translations.proofHelp;
+
+            document.getElementById(
+                "claim-reason-label"
+            ).textContent =
+                translations.reason;
+
+            document.getElementById(
+                "claim-reason"
+            ).placeholder =
+                translations.reasonPlaceholder;
+
+            document.getElementById(
+                "claim-back-text"
+            ).textContent =
+                translations.cancel;
+
+            document.getElementById(
+                "claim-submit-text"
+            ).textContent =
+                translations.submit;
+
+            document.documentElement.lang =
+                selectedLanguage;
+
+            localStorage.setItem(
+                "campusFindLanguage",
+                selectedLanguage
+            );
+
+            loadClaimStatus();
+
+        }
+
+
+        /* ============================================
+           LOAD CLAIM STATUS
+        ============================================ */
+
+        async function loadClaimStatus() {
+
+            const itemId =
+                getItemIdFromUrl();
+
+            if (!itemId) {
+                return;
+            }
+
+            try {
+
+                const response =
+                    await fetch(
+                        "/api/my-claims"
+                    );
+
+                const data =
+                    await response.json();
+
+                if (
+                    !response.ok ||
+                    !data.success
+                ) {
+                    return;
+                }
+
+                const claims =
+                    data.claims || [];
+
+                const claim =
+                    claims.find(
+                        function(currentClaim) {
+
+                            return String(
+                                currentClaim.item_id
+                            ) === String(itemId);
+
+                        }
+                    );
+
+                if (!claim) {
+                    return;
+                }
+
+                showClaimStatus(claim);
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Unable to load claim status:",
+                    error
+                );
+
+            }
+
+        }
+
+
+        /* ============================================
+           SHOW CLAIM STATUS
+        ============================================ */
+
+        function showClaimStatus(claim) {
+
+            const language =
+                document.getElementById(
+                    "language"
+                ).value || "en";
+
+            const translations =
+                qrTranslations[language]
+                || qrTranslations.en;
+
+            const card =
+                document.getElementById(
+                    "claim-status-card"
+                );
+
+            const badge =
+                document.getElementById(
+                    "claim-status-badge"
+                );
+
+            const badgeText =
+                document.getElementById(
+                    "claim-status-badge-text"
+                );
+
+            const statusText =
+                document.getElementById(
+                    "claim-status-text"
+                );
+
+            const icon =
+                document.getElementById(
+                    "claim-status-icon"
+                );
+
+            const qrSection =
+                document.getElementById(
+                    "qr-section"
+                );
+
+            const qrImage =
+                document.getElementById(
+                    "claim-qr-image"
+                );
+
+            const qrInstruction =
+                document.getElementById(
+                    "qr-instruction"
+                );
+
+            const handoverComplete =
+                document.getElementById(
+                    "handover-complete"
+                );
+
+            const handoverText =
+                document.getElementById(
+                    "handover-complete-text"
+                );
+
+
+            document.getElementById(
+                "claim-status-title"
+            ).textContent =
+                translations.title;
+
+
+            badge.className =
+                "claim-status-badge";
+
+            qrSection.classList.remove(
+                "show"
+            );
+
+            handoverComplete.classList.remove(
+                "show"
+            );
+
+
+            /* HANDOVER COMPLETED */
+
+            if (
+                claim.handover_status ===
+                "Handed Over"
+            ) {
+
+                badge.classList.add(
+                    "approved"
+                );
+
+                badgeText.textContent =
+                    translations.approved;
+
+                icon.className =
+                    "fa-solid fa-circle-check";
+
+                statusText.textContent =
+                    translations.handoverComplete;
+
+                handoverComplete.classList.add(
+                    "show"
+                );
+
+                handoverText.textContent =
+                    translations.handoverComplete;
+
+            }
+
+
+            /* APPROVED */
+
+            else if (
+                claim.claim_status ===
+                "Approved"
+            ) {
+
+                badge.classList.add(
+                    "approved"
+                );
+
+                badgeText.textContent =
+                    translations.approved;
+
+                icon.className =
+                    "fa-solid fa-circle-check";
+
+                statusText.textContent =
+                    translations.approvedText;
+
+                qrInstruction.textContent =
+                    translations.qrInstruction;
+
+
+                if (claim.qr_url) {
+
+                    qrImage.src =
+                        claim.qr_url;
+
+                    qrSection.classList.add(
+                        "show"
+                    );
+
+                }
+
+            }
+
+
+            /* REJECTED */
+
+            else if (
+                claim.claim_status ===
+                "Rejected"
+            ) {
+
+                badge.classList.add(
+                    "rejected"
+                );
+
+                badgeText.textContent =
+                    translations.rejected;
+
+                icon.className =
+                    "fa-solid fa-circle-xmark";
+
+                statusText.textContent =
+                    translations.rejectedText;
+
+            }
+
+
+            /* PENDING */
+
+            else {
+
+                badgeText.textContent =
+                    translations.pending;
+
+                icon.className =
+                    "fa-solid fa-clock";
+
+                statusText.textContent =
+                    translations.pendingText;
+
+            }
+
+
+            card.classList.add(
+                "show"
+            );
+
+        }
+
+
+        /* ============================================
+           MESSAGE
+        ============================================ */
+
+        function showClaimMessage(
+            message,
+            type
+        ) {
+
+            const messageBox =
+                document.getElementById(
+                    "claim-message"
+                );
+
+            messageBox.textContent =
+                message;
+
+            messageBox.className =
+                "claim-message " + type;
+
+        }
+
+
+        /* ============================================
+           SUBMIT CLAIM
+        ============================================ */
+
+        document
+            .getElementById("claim-form")
+            .addEventListener(
+                "submit",
+                async function(event) {
+
+                    event.preventDefault();
+
+
+                    const itemId =
+                        document.getElementById(
+                            "item-id"
+                        ).value;
+
+
+                    const name =
+                        document.getElementById(
+                            "claim-name"
+                        ).value.trim();
+
+
+                    const email =
+                        document.getElementById(
+                            "claim-email"
+                        ).value.trim();
+
+
+                    const proof =
+                        document.getElementById(
+                            "claim-proof"
+                        ).value.trim();
+
+
+                    const reason =
+                        document.getElementById(
+                            "claim-reason"
+                        ).value.trim();
+
+
+                    const language =
+                        document.getElementById(
+                            "language"
+                        ).value;
+
+
+                    const translations =
+                        claimTranslations[
+                            language
+                        ];
+
+
+                    /* VALIDATION */
+
+                    if (
+                        !itemId ||
+                        !name ||
+                        !email ||
+                        !proof ||
+                        !reason
+                    ) {
+
+                        showClaimMessage(
+                            translations.error,
+                            "error"
+                        );
+
+                        return;
+
+                    }
+
+
+                    /* BUTTON */
+
+                    const submitButton =
+                        document.getElementById(
+                            "claim-submit-button"
+                        );
+
+
+                    const submitText =
+                        document.getElementById(
+                            "claim-submit-text"
+                        );
+
+
+                    submitButton.disabled =
+                        true;
+
+
+                    submitText.textContent =
+                        translations.submitting;
+
+
+                    /* FORM DATA */
+
+                    const formData =
+                        new FormData();
+
+
+                    formData.append(
+                        "item_id",
+                        itemId
+                    );
+
+                    formData.append(
+                        "claimant_name",
+                        name
+                    );
+
+                    formData.append(
+                        "claimant_email",
+                        email
+                    );
+
+                    formData.append(
+                        "proof",
+                        proof
+                    );
+
+                    formData.append(
+                        "reason",
+                        reason
+                    );
+
+
+                    /* SEND TO FLASK */
+
+                    try {
+
+                        const response =
+                            await fetch(
+                                "/api/claim",
+                                {
+                                    method: "POST",
+                                    body: formData
+                                }
+                            );
+
+
+                        const data =
+                            await response.json();
+
+
+                        if (
+                            response.ok &&
+                            data.success
+                        ) {
+
+                            showClaimMessage(
+                                translations.success,
+                                "success"
+                            );
+
+
+                            document
+                                .getElementById(
+                                    "claim-form"
+                                )
+                                .reset();
+
+
+                            document
+                                .getElementById(
+                                    "item-id"
+                                )
+                                .value =
+                                itemId;
+
+
+                            await loadClaimStatus();
+
+                        }
+
+
+                        else {
+
+                            showClaimMessage(
+                                data.message ||
+                                translations.error,
+                                "error"
+                            );
+
+                        }
+
+                    }
+
+
+                    catch (error) {
+
+                        console.error(
+                            "Claim submission error:",
+                            error
+                        );
+
+
+                        showClaimMessage(
+                            translations.error,
+                            "error"
+                        );
+
+                    }
+
+
+                    submitButton.disabled =
+                        false;
+
+
+                    submitText.textContent =
+                        translations.submit;
+
+                }
+            );
+
+
+        /* ============================================
+           PAGE LOAD
+        ============================================ */
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function() {
+
+                const itemId =
+                    getItemIdFromUrl();
+
+
+                document.getElementById(
+                    "item-id"
+                ).value =
+                    itemId;
+
+
+                let savedLanguage =
+                    localStorage.getItem(
+                        "campusFindLanguage"
+                    );
+
+
+                if (
+                    !savedLanguage ||
+                    !claimTranslations[
+                        savedLanguage
+                    ]
+                ) {
+
+                    savedLanguage =
+                        "en";
+
+                }
+
+
+                document.getElementById(
+                    "language"
+                ).value =
+                    savedLanguage;
+
+
+                changeClaimLanguage();
+
+
+                loadClaimStatus();
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>

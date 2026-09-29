@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CampusFind - About</title>
+
+    <!-- Main CSS -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body class="about-page-body">
+
+    <!-- ============================= -->
+    <!-- NAVBAR -->
+    <!-- ============================= -->
+
+    <nav class="navbar">
+
+        <div class="nav-logo">
+            <i class="fa-solid fa-location-dot"></i>
+            <span id="logo-text">CampusFind</span>
+        </div>
+
+        <div class="nav-links">
+
+            <a href="{{ url_for('home') }}" id="nav-home">
+                <i class="fa-solid fa-house"></i>
+                Home
+            </a>
+
+            <a href="{{ url_for('about') }}" id="nav-about">
+                <i class="fa-solid fa-circle-info"></i>
+                About
+            </a>
+
+            <a href="{{ url_for('features') }}" id="nav-features">
+                <i class="fa-solid fa-star"></i>
+                Features
+            </a>
+
+            <a href="{{ url_for('contact') }}" id="nav-contact">
+                <i class="fa-solid fa-envelope"></i>
+                Contact
+            </a>
+
+        </div>
+
+        <!-- LANGUAGE SELECTOR -->
+
+        <div class="language-selector">
+
+            <i class="fa-solid fa-globe"></i>
+
+            <select id="language" onchange="changeAboutLanguage()">
+                <option value="en">English</option>
+                <option value="ta">தமிழ்</option>
+                <option value="hi">हिन्दी</option>
+            </select>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ============================= -->
+    <!-- ABOUT PAGE -->
+    <!-- ============================= -->
+
+    <section class="about-page">
+
+        <div class="about-container">
+
+            <!-- ABOUT ICON -->
+
+            <div class="about-icon">
+                <i class="fa-solid fa-circle-info"></i>
+            </div>
+
+
+            <!-- TITLE -->
+
+            <h1 id="about-title">
+                About CampusFind
+            </h1>
+
+
+            <!-- INTRODUCTION -->
+
+            <p id="about-intro">
+                CampusFind is a campus-based Lost and Found platform
+                designed to help students report, search and recover
+                lost items quickly and securely.
+            </p>
+
+
+            <!-- ============================= -->
+            <!-- ABOUT CARDS -->
+            <!-- ============================= -->
+
+            <div class="about-cards">
+
+                <!-- MISSION -->
+
+                <div class="about-card">
+
+                    <div class="about-card-icon">
+                        <i class="fa-solid fa-bullseye"></i>
+                    </div>
+
+                    <h2 id="mission-title">
+                        Our Mission
+                    </h2>
+
+                    <p id="mission-text">
+                        Our mission is to make the process of finding
+                        lost items on campus simple, organized and
+                        accessible to every student.
+                    </p>
+
+                </div>
+
+
+                <!-- STUDENTS -->
+
+                <div class="about-card">
+
+                    <div class="about-card-icon">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+
+                    <h2 id="community-title">
+                        For Students
+                    </h2>
+
+                    <p id="community-text">
+                        CampusFind provides students with a centralized
+                        place to report lost items and share information
+                        about items they have found.
+                    </p>
+
+                </div>
+
+
+                <!-- SECURITY -->
+
+                <div class="about-card">
+
+                    <div class="about-card-icon">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+
+                    <h2 id="secure-title">
+                        Simple and Secure
+                    </h2>
+
+                    <p id="secure-text">
+                        User accounts and organized reports help keep
+                        the campus Lost and Found process structured
+                        and secure.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- ============================= -->
+            <!-- HOW IT WORKS -->
+            <!-- ============================= -->
+
+            <div class="about-how">
+
+                <h2 id="how-title">
+                    How CampusFind Works
+                </h2>
+
+                <div class="how-steps">
+
+                    <!-- STEP 1 -->
+
+                    <div class="how-step">
+
+                        <div class="step-number">
+                            1
+                        </div>
+
+                        <h3 id="step1-title">
+                            Report
+                        </h3>
+
+                        <p id="step1-text">
+                            Report an item you have lost or found
+                            on campus.
+                        </p>
+
+                    </div>
+
+
+                    <!-- STEP 2 -->
+
+                    <div class="how-step">
+
+                        <div class="step-number">
+                            2
+                        </div>
+
+                        <h3 id="step2-title">
+                            Search
+                        </h3>
+
+                        <p id="step2-text">
+                            Search the available Lost and Found
+                            reports using useful filters.
+                        </p>
+
+                    </div>
+
+
+                    <!-- STEP 3 -->
+
+                    <div class="how-step">
+
+                        <div class="step-number">
+                            3
+                        </div>
+
+                        <h3 id="step3-title">
+                            Match
+                        </h3>
+
+                        <p id="step3-text">
+                            CampusFind identifies possible matches
+                            between lost and found reports.
+                        </p>
+
+                    </div>
+
+
+                    <!-- STEP 4 -->
+
+                    <div class="how-step">
+
+                        <div class="step-number">
+                            4
+                        </div>
+
+                        <h3 id="step4-title">
+                            Recover
+                        </h3>
+
+                        <p id="step4-text">
+                            Students can use the available information
+                            to recover their lost belongings.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ============================= -->
+    <!-- SHARED LANGUAGE JS -->
+    <!-- ============================= -->
+
+    <script src="{{ url_for('static', filename='js/language.js') }}"></script>
+
+
+    <!-- ============================= -->
+    <!-- ABOUT PAGE LANGUAGE SCRIPT -->
+    <!-- ============================= -->
+
+    <script>
+
+        const aboutTranslations = {
+
+            /* ============================= */
+            /* ENGLISH */
+            /* ============================= */
+
+            en: {
+
+                home: "Home",
+                about: "About",
+                features: "Features",
+                contact: "Contact",
+
+                aboutTitle: "About CampusFind",
+
+                aboutIntro:
+                    "CampusFind is a campus-based Lost and Found platform designed to help students report, search and recover lost items quickly and securely.",
+
+                missionTitle: "Our Mission",
+
+                missionText:
+                    "Our mission is to make the process of finding lost items on campus simple, organized and accessible to every student.",
+
+                communityTitle: "For Students",
+
+                communityText:
+                    "CampusFind provides students with a centralized place to report lost items and share information about items they have found.",
+
+                secureTitle: "Simple and Secure",
+
+                secureText:
+                    "User accounts and organized reports help keep the campus Lost and Found process structured and secure.",
+
+                howTitle: "How CampusFind Works",
+
+                step1Title: "Report",
+
+                step1Text:
+                    "Report an item you have lost or found on campus.",
+
+                step2Title: "Search",
+
+                step2Text:
+                    "Search the available Lost and Found reports using useful filters.",
+
+                step3Title: "Match",
+
+                step3Text:
+                    "CampusFind identifies possible matches between lost and found reports.",
+
+                step4Title: "Recover",
+
+                step4Text:
+                    "Students can use the available information to recover their lost belongings."
+
+            },
+
+
+            /* ============================= */
+            /* TAMIL */
+            /* ============================= */
+
+            ta: {
+
+                home: "முகப்பு",
+                about: "எங்களை பற்றி",
+                features: "வசதிகள்",
+                contact: "தொடர்பு",
+
+                aboutTitle: "CampusFind பற்றி",
+
+                aboutIntro:
+                    "CampusFind என்பது கல்லூரி வளாகத்தில் தொலைந்த மற்றும் கண்டெடுக்கப்பட்ட பொருட்களை பதிவு செய்து, தேடி, விரைவாகவும் பாதுகாப்பாகவும் மீட்டெடுக்க உதவும் தளமாகும்.",
+
+                missionTitle: "எங்கள் நோக்கம்",
+
+                missionText:
+                    "வளாகத்தில் தொலைந்த பொருட்களை கண்டுபிடிக்கும் செயல்முறையை எளிமையாகவும், ஒழுங்காகவும், அனைத்து மாணவர்களுக்கும் எளிதாகவும் மாற்றுவதே எங்கள் நோக்கம்.",
+
+                communityTitle: "மாணவர்களுக்காக",
+
+                communityText:
+                    "மாணவர்கள் தொலைந்த பொருட்களை பதிவு செய்யவும், தாங்கள் கண்டெடுத்த பொருட்களின் தகவல்களை பகிரவும் CampusFind ஒரு மையமான தளத்தை வழங்குகிறது.",
+
+                secureTitle: "எளிமையான மற்றும் பாதுகாப்பானது",
+
+                secureText:
+                    "பயனர் கணக்குகள் மற்றும் ஒழுங்கமைக்கப்பட்ட பதிவுகள் மூலம் வளாகத்தின் Lost and Found செயல்முறை பாதுகாப்பாகவும் முறையாகவும் பராமரிக்கப்படுகிறது.",
+
+                howTitle: "CampusFind எப்படி செயல்படுகிறது",
+
+                step1Title: "பதிவு செய்யுங்கள்",
+
+                step1Text:
+                    "வளாகத்தில் நீங்கள் தொலைத்த அல்லது கண்டெடுத்த பொருளை பதிவு செய்யுங்கள்.",
+
+                step2Title: "தேடுங்கள்",
+
+                step2Text:
+                    "பயனுள்ள வடிகட்டிகளைப் பயன்படுத்தி கிடைக்கும் Lost and Found பதிவுகளை தேடுங்கள்.",
+
+                step3Title: "பொருத்தம்",
+
+                step3Text:
+                    "தொலைந்த மற்றும் கண்டெடுக்கப்பட்ட பொருட்களுக்கு இடையே சாத்தியமான பொருத்தங்களை CampusFind கண்டறியும்.",
+
+                step4Title: "மீட்டெடுக்கவும்",
+
+                step4Text:
+                    "கிடைக்கும் தகவல்களைப் பயன்படுத்தி மாணவர்கள் தங்களுடைய பொருட்களை மீட்டெடுக்கலாம்."
+
+            },
+
+
+            /* ============================= */
+            /* HINDI */
+            /* ============================= */
+
+            hi: {
+
+                home: "होम",
+                about: "हमारे बारे में",
+                features: "विशेषताएँ",
+                contact: "संपर्क",
+
+                aboutTitle: "CampusFind के बारे में",
+
+                aboutIntro:
+                    "CampusFind एक कैंपस आधारित Lost and Found प्लेटफ़ॉर्म है, जो छात्रों को खोई हुई वस्तुओं की रिपोर्ट करने, खोजने और उन्हें जल्दी और सुरक्षित रूप से वापस पाने में मदद करता है।",
+
+                missionTitle: "हमारा उद्देश्य",
+
+                missionText:
+                    "हमारा उद्देश्य कैंपस में खोई हुई वस्तुओं को खोजने की प्रक्रिया को सरल, व्यवस्थित और सभी छात्रों के लिए आसान बनाना है।",
+
+                communityTitle: "छात्रों के लिए",
+
+                communityText:
+                    "CampusFind छात्रों को खोई हुई वस्तुओं की रिपोर्ट करने और मिली हुई वस्तुओं की जानकारी साझा करने के लिए एक केंद्रीकृत स्थान प्रदान करता है।",
+
+                secureTitle: "सरल और सुरक्षित",
+
+                secureText:
+                    "यूज़र अकाउंट और व्यवस्थित रिपोर्ट कैंपस के Lost and Found सिस्टम को सुरक्षित और व्यवस्थित रखने में मदद करते हैं।",
+
+                howTitle: "CampusFind कैसे काम करता है",
+
+                step1Title: "रिपोर्ट करें",
+
+                step1Text:
+                    "कैंपस में खोई या मिली हुई वस्तु की रिपोर्ट करें।",
+
+                step2Title: "खोजें",
+
+                step2Text:
+                    "उपयोगी फ़िल्टर का उपयोग करके उपलब्ध Lost and Found रिपोर्ट खोजें।",
+
+                step3Title: "मिलान",
+
+                step3Text:
+                    "CampusFind खोई और मिली हुई वस्तुओं के बीच संभावित मिलान खोजता है।",
+
+                step4Title: "वापस प्राप्त करें",
+
+                step4Text:
+                    "उपलब्ध जानकारी का उपयोग करके छात्र अपनी खोई हुई वस्तुएँ वापस प्राप्त कर सकते हैं।"
+
+            }
+
+        };
+
+
+        /* ============================= */
+        /* CHANGE LANGUAGE */
+        /* ============================= */
+
+        function changeAboutLanguage() {
+
+            const language =
+                document.getElementById("language").value;
+
+            saveCampusFindLanguage(language);
+
+            const t =
+                aboutTranslations[language];
+
+
+            /* NAVBAR */
+
+            document.getElementById("nav-home").lastChild.textContent =
+                " " + t.home;
+
+            document.getElementById("nav-about").lastChild.textContent =
+                " " + t.about;
+
+            document.getElementById("nav-features").lastChild.textContent =
+                " " + t.features;
+
+            document.getElementById("nav-contact").lastChild.textContent =
+                " " + t.contact;
+
+
+            /* ABOUT */
+
+            document.getElementById("about-title").textContent =
+                t.aboutTitle;
+
+            document.getElementById("about-intro").textContent =
+                t.aboutIntro;
+
+
+            /* CARDS */
+
+            document.getElementById("mission-title").textContent =
+                t.missionTitle;
+
+            document.getElementById("mission-text").textContent =
+                t.missionText;
+
+            document.getElementById("community-title").textContent =
+                t.communityTitle;
+
+            document.getElementById("community-text").textContent =
+                t.communityText;
+
+            document.getElementById("secure-title").textContent =
+                t.secureTitle;
+
+            document.getElementById("secure-text").textContent =
+                t.secureText;
+
+
+            /* HOW IT WORKS */
+
+            document.getElementById("how-title").textContent =
+                t.howTitle;
+
+
+            /* STEP 1 */
+
+            document.getElementById("step1-title").textContent =
+                t.step1Title;
+
+            document.getElementById("step1-text").textContent =
+                t.step1Text;
+
+
+            /* STEP 2 */
+
+            document.getElementById("step2-title").textContent =
+                t.step2Title;
+
+            document.getElementById("step2-text").textContent =
+                t.step2Text;
+
+
+            /* STEP 3 */
+
+            document.getElementById("step3-title").textContent =
+                t.step3Title;
+
+            document.getElementById("step3-text").textContent =
+                t.step3Text;
+
+
+            /* STEP 4 */
+
+            document.getElementById("step4-title").textContent =
+                t.step4Title;
+
+            document.getElementById("step4-text").textContent =
+                t.step4Text;
+
+        }
+
+
+        /* ============================= */
+        /* LOAD SAVED LANGUAGE */
+        /* ============================= */
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                const savedLanguage =
+                    getCampusFindLanguage();
+
+                document.getElementById("language").value =
+                    savedLanguage;
+
+                changeAboutLanguage();
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>

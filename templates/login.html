@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>CampusFind Login</title>
+
+
+    <!-- ================= FONT AWESOME ================= -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+    <!-- ================= LOGIN CSS ================= -->
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/login.css') }}">
+
+
+    <!-- ================= FLASH MESSAGE STYLE ================= -->
+
+    <style>
+
+        .flash-message {
+            width: 100%;
+            max-width: 400px;
+
+            margin-bottom: 15px;
+            padding: 10px 15px;
+
+            border-radius: 10px;
+
+            font-size: 14px;
+            text-align: center;
+
+            box-sizing: border-box;
+        }
+
+
+        /* SUCCESS MESSAGE */
+
+        .flash-message.success {
+            background: #e8f8ee;
+            color: #16803c;
+            border: 1px solid #b7e4c7;
+        }
+
+
+        /* ERROR MESSAGE */
+
+        .flash-message.error {
+            background: #fdecec;
+            color: #c62828;
+            border: 1px solid #f5b5b5;
+        }
+
+
+        /* ================= PASSWORD EYE ICON ================= */
+
+        .password-box {
+            position: relative;
+        }
+
+
+        .password-box input {
+            padding-right: 45px;
+        }
+
+
+        .password-toggle {
+            position: absolute;
+
+            right: 15px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            border: none;
+            background: transparent;
+
+            cursor: pointer;
+
+            color: #777;
+
+            font-size: 16px;
+
+            padding: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            z-index: 2;
+        }
+
+
+        .password-toggle:hover {
+            color: #4f46e5;
+        }
+
+
+        .password-toggle:focus {
+            outline: none;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= LOGIN CONTAINER ================= -->
+
+    <div class="login-container">
+
+
+        <!-- ================= LEFT SECTION ================= -->
+
+        <div class="left-section">
+
+
+            <!-- ================= LOGO ================= -->
+
+            <div class="logo">
+
+                <i class="fa-solid fa-location-dot"></i>
+
+                <span id="logo-text">
+                    CampusFind
+                </span>
+
+            </div>
+
+
+            <!-- ================= WELCOME TEXT ================= -->
+
+            <h1 id="login-title">
+                Welcome Back!
+            </h1>
+
+
+            <p id="login-description">
+                Login to report, search and recover lost items securely.
+            </p>
+
+
+            <!-- ================= HERO IMAGE ================= -->
+
+            <img
+                src="{{ url_for('static', filename='images/hero.png') }}"
+                alt="CampusFind"
+                class="login-image">
+
+        </div>
+
+
+
+        <!-- ================= RIGHT SECTION ================= -->
+
+        <div class="right-section">
+
+
+            <!-- ================= LANGUAGE SELECTOR ================= -->
+
+            <div class="language-box">
+
+                <i class="fa-solid fa-globe"></i>
+
+                <select
+                    id="language"
+                    onchange="changeLoginLanguage()">
+
+                    <option value="en">
+                        English
+                    </option>
+
+                    <option value="ta">
+                        தமிழ்
+                    </option>
+
+                    <option value="hi">
+                        हिन्दी
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- ================= FLASH MESSAGE ================= -->
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+
+                {% if messages %}
+
+                    {% for category, message in messages %}
+
+                        <div class="flash-message {{ category }}">
+
+                            {% if category == "success" %}
+
+                                <i class="fa-solid fa-circle-check"></i>
+
+                            {% else %}
+
+                                <i class="fa-solid fa-circle-exclamation"></i>
+
+                            {% endif %}
+
+                            {{ message }}
+
+                        </div>
+
+                    {% endfor %}
+
+                {% endif %}
+
+            {% endwith %}
+
+
+
+            <!-- ================= LOGIN HEADING ================= -->
+
+            <h2 id="login-heading">
+                Login
+            </h2>
+
+
+
+            <!-- ================= LOGIN FORM ================= -->
+
+            <form
+                method="POST"
+                action="{{ url_for('login') }}">
+
+
+                <!-- ================= EMAIL ================= -->
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-envelope"></i>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Email"
+                        required>
+
+                </div>
+
+
+
+                <!-- ================= PASSWORD ================= -->
+
+                <div class="input-box password-box">
+
+                    <i class="fa-solid fa-lock"></i>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Password"
+                        required>
+
+                    <!-- PASSWORD SHOW/HIDE BUTTON -->
+
+                    <button
+                        type="button"
+                        class="password-toggle"
+                        id="password-toggle"
+                        onclick="togglePassword()"
+                        aria-label="Show password">
+
+                        <i
+                            class="fa-solid fa-eye"
+                            id="password-eye">
+                        </i>
+
+                    </button>
+
+                </div>
+
+
+
+                <!-- ================= LOGIN BUTTON ================= -->
+
+                <button
+                    type="submit"
+                    class="login-btn">
+
+                    <i class="fa-solid fa-right-to-bracket"></i>
+
+                    <span id="login-button-text">
+                        Login
+                    </span>
+
+                </button>
+
+            </form>
+
+
+
+            <!-- ================= REGISTER ================= -->
+
+            <p class="register-link">
+
+                <span id="no-account">
+                    Don't have an account?
+                </span>
+
+                <a
+                    href="{{ url_for('register') }}"
+                    id="register-link">
+
+                    Register
+
+                </a>
+
+            </p>
+
+
+
+            <!-- ================= BACK TO HOME ================= -->
+
+            <a
+                href="{{ url_for('home') }}"
+                class="back-home">
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                <span id="back-home-text">
+                    Back to Home
+                </span>
+
+            </a>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+
+    <!-- COMMON LANGUAGE SYSTEM -->
+
+    <script src="{{ url_for('static', filename='js/language.js') }}"></script>
+
+
+    <!-- LOGIN LANGUAGE SYSTEM -->
+
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+
+
+    <!-- ================= PASSWORD TOGGLE ================= -->
+
+    <script>
+
+        function togglePassword() {
+
+            const passwordInput =
+                document.getElementById("password");
+
+            const passwordEye =
+                document.getElementById("password-eye");
+
+            const passwordToggle =
+                document.getElementById("password-toggle");
+
+
+            if (passwordInput.type === "password") {
+
+                passwordInput.type = "text";
+
+                passwordEye.classList.remove("fa-eye");
+
+                passwordEye.classList.add("fa-eye-slash");
+
+                passwordToggle.setAttribute(
+                    "aria-label",
+                    "Hide password"
+                );
+
+            } else {
+
+                passwordInput.type = "password";
+
+                passwordEye.classList.remove("fa-eye-slash");
+
+                passwordEye.classList.add("fa-eye");
+
+                passwordToggle.setAttribute(
+                    "aria-label",
+                    "Show password"
+                );
+
+            }
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>CampusFind</title>
+
+
+    <!-- ==================================================
+         MAIN CSS
+    ================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}">
+
+
+    <!-- ==================================================
+         FONT AWESOME
+    ================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+
+<body>
+
+
+<!-- ==================================================
+     FLASH MESSAGES
+================================================== -->
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+
+    {% if messages %}
+
+        <div class="flash-container">
+
+            {% for category, message in messages %}
+
+                <div class="flash-message {{ category }}">
+
+                    {% if category == "success" %}
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                    {% else %}
+
+                        <i class="fa-solid fa-circle-exclamation"></i>
+
+                    {% endif %}
+
+
+                    <span>
+                        {{ message }}
+                    </span>
+
+
+                    <button
+                        type="button"
+                        onclick="this.parentElement.remove()"
+                        aria-label="Close message">
+
+                        <i class="fa-solid fa-xmark"></i>
+
+                    </button>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% endif %}
+
+{% endwith %}
+
+
+
+<!-- ==================================================
+     NAVBAR
+================================================== -->
+
+<header class="navbar">
+
+
+    <!-- ================= LOGO ================= -->
+
+    <div class="logo">
+
+        <i class="fa-solid fa-location-dot"></i>
+
+        <span>
+            CampusFind
+        </span>
+
+    </div>
+
+
+
+    <!-- ================= NAVIGATION ================= -->
+
+    <nav>
+
+
+        <!-- HOME -->
+
+        <a
+            href="{{ url_for('home') }}"
+            id="nav-home">
+
+            <i class="fa-solid fa-house"></i>
+
+            <span>
+                Home
+            </span>
+
+        </a>
+
+
+
+        <!-- ABOUT -->
+
+        <a
+            href="{{ url_for('about') }}"
+            id="nav-about">
+
+            <i class="fa-solid fa-circle-info"></i>
+
+            <span>
+                About
+            </span>
+
+        </a>
+
+
+
+        <!-- FEATURES -->
+
+        <a
+            href="{{ url_for('features') }}"
+            id="nav-features">
+
+            <i class="fa-solid fa-layer-group"></i>
+
+            <span>
+                Features
+            </span>
+
+        </a>
+
+
+
+        <!-- CONTACT -->
+
+        <a
+            href="{{ url_for('contact') }}"
+            id="nav-contact">
+
+            <i class="fa-solid fa-envelope"></i>
+
+            <span>
+                Contact
+            </span>
+
+        </a>
+
+
+    </nav>
+
+
+
+    <!-- ================= LANGUAGE ================= -->
+
+    <div class="language-selector">
+
+        <i class="fa-solid fa-globe"></i>
+
+
+        <select
+            id="language"
+            onchange="changeLanguage()">
+
+            <option value="en">
+                English
+            </option>
+
+            <option value="ta">
+                தமிழ்
+            </option>
+
+            <option value="hi">
+                हिन्दी
+            </option>
+
+        </select>
+
+    </div>
+
+
+
+    <!-- ==================================================
+         LOGIN / REGISTER / NOTIFICATIONS / LOGOUT
+    ================================================== -->
+
+    <div class="auth-buttons">
+
+
+        {% if logged_in %}
+
+
+            <!-- ================= WELCOME ================= -->
+
+            <span
+                class="welcome-user"
+                id="welcome-user">
+
+                <i class="fa-solid fa-user"></i>
+
+                <span id="welcome-text">
+                    Welcome, {{ user_name }}
+                </span>
+
+            </span>
+
+
+
+            <!-- ================= NOTIFICATIONS ================= -->
+
+            <button
+                type="button"
+                class="notification-btn"
+                id="notification-btn"
+                onclick="toggleNotifications()"
+                aria-label="Notifications">
+
+                <i class="fa-solid fa-bell"></i>
+
+                <span
+                    class="notification-count"
+                    id="notification-count">
+                    0
+                </span>
+
+            </button>
+
+
+
+            <!-- ================= NOTIFICATION PANEL ================= -->
+
+            <div
+                class="notification-panel"
+                id="notification-panel">
+
+                <div class="notification-header">
+
+                    <h3 id="notification-title">
+                        Notifications
+                    </h3>
+
+                    <button
+                        type="button"
+                        onclick="toggleNotifications()"
+                        aria-label="Close notifications">
+
+                        <i class="fa-solid fa-xmark"></i>
+
+                    </button>
+
+                </div>
+
+
+                <div
+                    class="notification-list"
+                    id="notification-list">
+
+                    <div class="notification-empty">
+
+                        <i class="fa-solid fa-bell-slash"></i>
+
+                        <p id="notification-empty-text">
+                            No notifications
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ================= LOGOUT ================= -->
+
+            <a href="{{ url_for('logout') }}">
+
+                <button
+                    class="logout-btn"
+                    id="logout-btn"
+                    type="button">
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+
+                    <span id="logout-text">
+                        Logout
+                    </span>
+
+                </button>
+
+            </a>
+
+
+        {% else %}
+
+
+            <!-- ================= LOGIN ================= -->
+
+            <a href="{{ url_for('login') }}">
+
+                <button
+                    class="login-btn"
+                    id="login-btn"
+                    type="button">
+
+                    <i class="fa-solid fa-right-to-bracket"></i>
+
+                    <span id="login-btn-text">
+                        Login
+                    </span>
+
+                </button>
+
+            </a>
+
+
+
+            <!-- ================= REGISTER ================= -->
+
+            <a href="{{ url_for('register') }}">
+
+                <button
+                    class="register-btn"
+                    id="register-btn"
+                    type="button">
+
+                    <i class="fa-solid fa-user-plus"></i>
+
+                    <span id="register-btn-text">
+                        Register
+                    </span>
+
+                </button>
+
+            </a>
+
+
+        {% endif %}
+
+
+    </div>
+
+
+</header>
+
+
+
+<!-- ==================================================
+     HERO SECTION
+================================================== -->
+
+<section class="hero">
+
+
+    <!-- ================= HERO LEFT ================= -->
+
+    <div class="hero-left">
+
+
+        <h1 id="hero-title">
+
+            Find What's Lost.<br>
+
+            Reconnect What Matters.
+
+        </h1>
+
+
+        <p id="hero-description">
+
+            CampusFind helps students report, search and recover
+            lost items quickly and securely across campus.
+
+        </p>
+
+
+
+        <!-- ================= HERO BUTTONS ================= -->
+
+        <div class="hero-buttons">
+
+
+            <!-- SEARCH ITEMS -->
+
+            <a
+                href="{{ url_for('search') }}"
+                class="hero-action">
+
+                <button
+                    id="search-btn"
+                    type="button">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <span id="search-text">
+                        Search Items
+                    </span>
+
+                </button>
+
+            </a>
+
+
+
+            <!-- REPORT LOST -->
+
+            <a
+                href="{{ url_for('report_lost') }}"
+                class="hero-action">
+
+                <button
+                    id="lost-btn"
+                    type="button">
+
+                    <i class="fa-solid fa-box-open"></i>
+
+                    <span id="lost-text">
+                        Report Lost
+                    </span>
+
+                </button>
+
+            </a>
+
+
+
+            <!-- REPORT FOUND -->
+
+            <a
+                href="{{ url_for('report_found') }}"
+                class="hero-action">
+
+                <button
+                    id="found-btn"
+                    type="button">
+
+                    <i class="fa-solid fa-circle-check"></i>
+
+                    <span id="found-text">
+                        Report Found
+                    </span>
+
+                </button>
+
+            </a>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ================= HERO RIGHT ================= -->
+
+    <div class="hero-right">
+
+        <img
+            src="{{ url_for('static', filename='images/hero.png') }}"
+            alt="Campus Illustration">
+
+    </div>
+
+
+</section>
+
+
+
+<!-- ==================================================
+     COMMON LANGUAGE JAVASCRIPT
+================================================== -->
+
+<script
+    src="{{ url_for('static', filename='js/language.js') }}">
+</script>
+
+
+
+<!-- ==================================================
+     HOME PAGE LANGUAGE JAVASCRIPT
+================================================== -->
+
+<script
+    src="{{ url_for('static', filename='js/script.js') }}">
+</script>
+
+
+
+<!-- ==================================================
+     NOTIFICATION JAVASCRIPT
+================================================== -->
+
+<script>
+
+    let notificationsLoaded = false;
+
+
+
+    function toggleNotifications() {
+
+        const panel =
+            document.getElementById(
+                "notification-panel"
+            );
+
+
+        if (!panel) {
+
+            return;
+
+        }
+
+
+        panel.classList.toggle("show");
+
+
+        if (
+            panel.classList.contains("show") &&
+            !notificationsLoaded
+        ) {
+
+            loadNotifications();
+
+        }
+
+    }
+
+
+
+    async function loadNotifications() {
+
+        try {
+
+            const response =
+                await fetch("/api/notifications");
+
+
+            if (!response.ok) {
+
+                console.log(
+                    "Unable to load notifications."
+                );
+
+                return;
+
+            }
+
+
+            const data =
+                await response.json();
+
+
+            if (!data.success) {
+
+                return;
+
+            }
+
+
+            notificationsLoaded = true;
+
+
+            updateNotificationCount(
+                data.unread_count
+            );
+
+
+            displayNotifications(
+                data.notifications
+            );
+
+
+        } catch (error) {
+
+            console.error(
+                "Notification error:",
+                error
+            );
+
+        }
+
+    }
+
+
+
+    function updateNotificationCount(count) {
+
+        const countElement =
+            document.getElementById(
+                "notification-count"
+            );
+
+
+        if (!countElement) {
+
+            return;
+
+        }
+
+
+        countElement.textContent =
+            count;
+
+
+        if (count > 0) {
+
+            countElement.style.display =
+                "flex";
+
+        } else {
+
+            countElement.style.display =
+                "none";
+
+        }
+
+    }
+
+
+
+    function displayNotifications(
+        notifications
+    ) {
+
+        const list =
+            document.getElementById(
+                "notification-list"
+            );
+
+
+        if (!list) {
+
+            return;
+
+        }
+
+
+        list.innerHTML = "";
+
+
+        if (
+            !notifications ||
+            notifications.length === 0
+        ) {
+
+            list.innerHTML = `
+
+                <div class="notification-empty">
+
+                    <i class="fa-solid fa-bell-slash"></i>
+
+                    <p id="notification-empty-text">
+                        No notifications
+                    </p>
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+
+        notifications.forEach(
+            function(notification) {
+
+                const item =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                item.className =
+                    "notification-item";
+
+
+                if (
+                    notification.is_read === 0
+                ) {
+
+                    item.classList.add(
+                        "unread"
+                    );
+
+                }
+
+
+
+                const safeMessage =
+                    escapeNotificationText(
+                        notification.message
+                    );
+
+
+                const safeDate =
+                    escapeNotificationText(
+                        notification.created_at
+                    );
+
+
+
+                let actionButton = "";
+
+
+
+                /*
+                    Claim notification
+
+                    IMPORTANT:
+                    Use claim_id here,
+                    NOT item_id.
+                */
+
+                if (
+                    notification.notification_type === "claim" &&
+                    notification.claim_id
+                ) {
+
+                    actionButton = `
+
+                        <button
+                            type="button"
+                            class="notification-qr-btn"
+                            onclick="event.stopPropagation(); openClaimQr(${notification.claim_id}, ${notification.id})">
+
+                            <i class="fa-solid fa-qrcode"></i>
+
+                            View QR Code
+
+                        </button>
+
+                    `;
+
+                }
+
+
+
+                item.innerHTML = `
+
+                    <div class="notification-icon">
+
+                        <i class="fa-solid ${
+                            notification.notification_type === "claim"
+                            ? "fa-qrcode"
+                            : "fa-bell"
+                        }"></i>
+
+                    </div>
+
+
+                    <div class="notification-content">
+
+                        <p>
+                            ${safeMessage}
+                        </p>
+
+
+                        <small>
+                            ${safeDate}
+                        </small>
+
+
+                        ${actionButton}
+
+                    </div>
+
+                `;
+
+
+
+                item.addEventListener(
+                    "click",
+                    function() {
+
+                        markNotificationAsRead(
+                            notification.id,
+                            notification.notification_type
+                        );
+
+                    }
+                );
+
+
+
+                list.appendChild(item);
+
+            }
+        );
+
+    }
+
+
+
+    /*
+        ==================================================
+        OPEN QR CODE
+        ==================================================
+
+        We use CLAIM ID here.
+
+        Example:
+
+        /api/claim/5/qr
+
+        NOT:
+
+        /claim/12
+    */
+
+    async function openClaimQr(
+        claimId,
+        notificationId
+    ) {
+
+        await markNotificationAsRead(
+            notificationId,
+            "claim"
+        );
+
+
+        window.location.href =
+            `/api/claim/${claimId}/qr`;
+
+    }
+
+
+
+    async function markNotificationAsRead(
+
+        notificationId,
+
+        notificationType = "normal"
+
+    ) {
+
+        try {
+
+            const response =
+                await fetch(
+
+                    `/api/notifications/${notificationId}/read`,
+
+                    {
+
+                        method: "POST",
+
+                        headers: {
+
+                            "Content-Type":
+                                "application/json"
+
+                        },
+
+                        body: JSON.stringify({
+
+                            notification_type:
+                                notificationType
+
+                        })
+
+                    }
+
+                );
+
+
+
+            const data =
+                await response.json();
+
+
+
+            if (data.success) {
+
+                notificationsLoaded =
+                    false;
+
+
+                loadNotifications();
+
+            }
+
+
+
+        } catch (error) {
+
+            console.error(
+
+                "Mark notification error:",
+
+                error
+
+            );
+
+        }
+
+    }
+
+
+
+    function escapeNotificationText(text) {
+
+        const div =
+            document.createElement(
+                "div"
+            );
+
+
+        div.textContent =
+            text || "";
+
+
+        return div.innerHTML;
+
+    }
+
+
+
+    /*
+        ==================================================
+        LOAD NOTIFICATION COUNT
+        WHEN HOME PAGE OPENS
+        ==================================================
+    */
+
+    document.addEventListener(
+
+        "DOMContentLoaded",
+
+        function() {
+
+            const notificationButton =
+                document.getElementById(
+                    "notification-btn"
+                );
+
+
+            if (notificationButton) {
+
+                loadNotifications();
+
+            }
+
+        }
+
+    );
+
+
+
+    /*
+        ==================================================
+        CLOSE NOTIFICATION PANEL
+        WHEN CLICKING OUTSIDE
+        ==================================================
+    */
+
+    document.addEventListener(
+
+        "click",
+
+        function(event) {
+
+            const panel =
+                document.getElementById(
+                    "notification-panel"
+                );
+
+
+            const button =
+                document.getElementById(
+                    "notification-btn"
+                );
+
+
+            if (
+                !panel ||
+                !button
+            ) {
+
+                return;
+
+            }
+
+
+
+            if (
+
+                panel.classList.contains(
+                    "show"
+                )
+
+                &&
+
+                !panel.contains(
+                    event.target
+                )
+
+                &&
+
+                !button.contains(
+                    event.target
+                )
+
+            ) {
+
+                panel.classList.remove(
+                    "show"
+                );
+
+            }
+
+        }
+
+    );
+
+</script>
+
+
+</body>
+
+</html>

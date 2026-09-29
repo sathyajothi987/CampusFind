@@ -1,0 +1,1760 @@
+/* ==================================================
+   CampusFind - Main Style
+================================================== */
+
+
+/* ==================================================
+   RESET
+================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+
+/* ==================================================
+   HTML
+================================================== */
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+/* ==================================================
+   BODY
+================================================== */
+
+body {
+    background: linear-gradient(
+        135deg,
+        #2563EB,
+        #7C3AED
+    );
+
+    min-height: 100vh;
+
+    color: white;
+}
+
+
+/* ==================================================
+   NAVBAR
+================================================== */
+
+.navbar {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 25px 80px;
+
+    width: 100%;
+
+    position: relative;
+
+    z-index: 1000;
+}
+
+
+/* ==================================================
+   OLD LOGO SUPPORT
+================================================== */
+
+.logo {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    font-size: 30px;
+
+    font-weight: bold;
+
+    white-space: nowrap;
+}
+
+
+/* ==================================================
+   NEW NAV LOGO SUPPORT
+================================================== */
+
+.nav-logo {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    font-size: 30px;
+
+    font-weight: bold;
+
+    white-space: nowrap;
+}
+
+
+.nav-logo i {
+    font-size: 28px;
+}
+
+
+/* ==================================================
+   OLD NAVIGATION SUPPORT
+================================================== */
+
+nav {
+    display: flex;
+
+    align-items: center;
+
+    gap: 35px;
+}
+
+
+nav a {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 18px;
+
+    transition: 0.3s;
+}
+
+
+nav a:hover {
+    color: #FFD54F;
+
+    transform: translateY(-2px);
+}
+
+
+/* ==================================================
+   NEW NAVIGATION SUPPORT
+================================================== */
+
+.nav-links {
+    display: flex;
+
+    align-items: center;
+
+    gap: 35px;
+}
+
+
+.nav-links a {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 18px;
+
+    transition: 0.3s;
+}
+
+
+.nav-links a:hover {
+    color: #FFD54F;
+
+    transform: translateY(-2px);
+}
+
+
+/* ==================================================
+   AUTH BUTTONS
+================================================== */
+
+.auth-buttons {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    position: relative;
+}
+
+
+.login-btn,
+.register-btn {
+    padding: 12px 25px;
+
+    border: none;
+
+    border-radius: 30px;
+
+    cursor: pointer;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    transition: 0.3s;
+}
+
+
+.login-btn {
+    background: white;
+
+    color: #2563EB;
+}
+
+
+.register-btn {
+    background: #FFD54F;
+
+    color: #222;
+}
+
+
+.login-btn:hover,
+.register-btn:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+
+/* ==================================================
+   WELCOME USER
+================================================== */
+
+.welcome-user {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    color: white;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+
+/* ==================================================
+   LOGOUT BUTTON
+================================================== */
+
+.logout-btn {
+    border: none;
+
+    padding: 10px 20px;
+
+    border-radius: 25px;
+
+    background: #ff5c5c;
+
+    color: white;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+
+.logout-btn:hover {
+    background: #e64545;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 18px rgba(0, 0, 0, 0.15);
+}
+
+
+/* ==================================================
+   LANGUAGE SELECTOR
+================================================== */
+
+.language-selector {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: white;
+
+    font-weight: 600;
+}
+
+
+.language-selector select {
+    padding: 8px 12px;
+
+    border: none;
+
+    border-radius: 20px;
+
+    background: white;
+
+    color: #333;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+    outline: none;
+}
+
+
+.language-selector select:hover {
+    box-shadow:
+        0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+
+/* ==================================================
+   NOTIFICATION SYSTEM
+================================================== */
+
+
+/* ==================================================
+   NOTIFICATION BUTTON
+================================================== */
+
+.notification-btn {
+    position: relative;
+
+    width: 40px;
+
+    height: 40px;
+
+    padding: 0;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: transparent;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    cursor: pointer;
+
+    font-size: 20px;
+
+    margin-left: 2px;
+
+    transition: all 0.25s ease;
+}
+
+
+.notification-btn:hover {
+    background: rgba(255, 255, 255, 0.18);
+
+    transform: translateY(-1px);
+}
+
+
+/* ==================================================
+   NOTIFICATION COUNT
+================================================== */
+
+.notification-count {
+    position: absolute;
+
+    top: -5px;
+
+    right: -5px;
+
+    min-width: 18px;
+
+    height: 18px;
+
+    padding: 0 4px;
+
+    border-radius: 50%;
+
+    background: #ef4444;
+
+    color: white;
+
+    border: 2px solid white;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    line-height: 14px;
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    box-sizing: border-box;
+
+    z-index: 5;
+}
+
+
+/* ==================================================
+   NOTIFICATION PANEL
+================================================== */
+
+.notification-panel {
+    position: absolute;
+
+    top: 58px;
+
+    right: 55px;
+
+    width: 370px;
+
+    max-width: calc(100vw - 30px);
+
+    background: white;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.20);
+
+    overflow: hidden;
+
+    z-index: 9999;
+
+    display: none;
+}
+
+
+/* IMPORTANT:
+   Panel appears ONLY when .show is added
+*/
+
+.notification-panel.show {
+    display: block;
+}
+
+
+/* ==================================================
+   NOTIFICATION HEADER
+================================================== */
+
+.notification-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 16px 18px;
+
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #6366f1
+    );
+
+    color: white;
+}
+
+
+.notification-header h3 {
+    margin: 0;
+
+    font-size: 18px;
+
+    font-weight: 600;
+}
+
+
+.notification-header button {
+    border: none;
+
+    background: transparent;
+
+    color: white;
+
+    font-size: 18px;
+
+    cursor: pointer;
+
+    padding: 4px 6px;
+}
+
+
+.notification-header button:hover {
+    transform: scale(1.1);
+}
+
+
+/* ==================================================
+   NOTIFICATION LIST
+================================================== */
+
+.notification-list {
+    max-height: 360px;
+
+    overflow-y: auto;
+
+    background: white;
+}
+
+
+/* ==================================================
+   INDIVIDUAL NOTIFICATION
+================================================== */
+
+.notification-item {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 12px;
+
+    padding: 15px;
+
+    border-bottom: 1px solid #eeeeee;
+
+    cursor: pointer;
+
+    transition: background 0.2s ease;
+}
+
+
+.notification-item:hover {
+    background: #f5f7ff;
+}
+
+
+/* ==================================================
+   UNREAD NOTIFICATION
+================================================== */
+
+.notification-item.unread {
+    background: #eef2ff;
+}
+
+
+/* ==================================================
+   NOTIFICATION ICON
+================================================== */
+
+.notification-icon {
+    width: 38px;
+
+    height: 38px;
+
+    min-width: 38px;
+
+    border-radius: 50%;
+
+    background: #eef2ff;
+
+    color: #4f46e5;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 15px;
+}
+
+
+/* ==================================================
+   NOTIFICATION CONTENT
+================================================== */
+
+.notification-content {
+    flex: 1;
+
+    min-width: 0;
+}
+
+
+.notification-content p {
+    margin: 0 0 6px 0;
+
+    color: #333;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+
+.notification-content small {
+    color: #888;
+
+    font-size: 11px;
+}
+
+
+/* ==================================================
+   EMPTY NOTIFICATION
+================================================== */
+
+.notification-empty {
+    min-height: 150px;
+
+    padding: 25px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    color: #999;
+}
+
+
+.notification-empty i {
+    font-size: 30px;
+
+    color: #c4c7d0;
+}
+
+
+.notification-empty p {
+    margin: 0;
+
+    font-size: 14px;
+}
+
+
+/* ==================================================
+   HERO
+================================================== */
+
+.hero {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 70px 80px;
+
+    min-height: 650px;
+}
+
+
+/* ==================================================
+   HERO LEFT
+================================================== */
+
+.hero-left {
+    width: 50%;
+}
+
+
+.hero-left h1 {
+    font-size: 68px;
+
+    line-height: 1.2;
+
+    color: white;
+
+    margin-bottom: 25px;
+}
+
+
+.hero-left p {
+    font-size: 22px;
+
+    line-height: 35px;
+
+    margin-bottom: 35px;
+
+    max-width: 700px;
+}
+
+
+/* ==================================================
+   HERO BUTTONS
+================================================== */
+
+.hero-buttons {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+}
+
+
+.hero-buttons button {
+    padding: 16px 30px;
+
+    border: none;
+
+    border-radius: 50px;
+
+    cursor: pointer;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    transition: 0.3s;
+
+    margin-right: 10px;
+
+    margin-top: 15px;
+}
+
+
+.hero-buttons button:hover {
+    transform: translateY(-5px) scale(1.04);
+
+    box-shadow:
+        0 15px 30px rgba(0, 0, 0, 0.25);
+}
+
+
+/* ==================================================
+   HERO ACTION LINK
+================================================== */
+
+.hero-action {
+    text-decoration: none;
+
+    display: inline-block;
+}
+
+
+/* ==================================================
+   HERO RIGHT
+================================================== */
+
+.hero-right {
+    width: 45%;
+
+    text-align: center;
+}
+
+
+.hero-right img {
+    width: 100%;
+
+    max-width: 520px;
+
+    border-radius: 25px;
+
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.25);
+
+    animation:
+        float 4s ease-in-out infinite;
+
+    transition: 0.4s;
+}
+
+
+.hero-right img:hover {
+    transform: scale(1.03);
+}
+
+
+/* ==================================================
+   FLOAT ANIMATION
+================================================== */
+
+@keyframes float {
+
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+
+}
+
+
+/* ==================================================
+   FLASH MESSAGES
+================================================== */
+
+.flash-container {
+    position: fixed;
+
+    top: 95px;
+
+    right: 25px;
+
+    width: 360px;
+
+    z-index: 9999;
+}
+
+
+.flash-message {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    width: 100%;
+
+    padding: 15px 16px;
+
+    margin-bottom: 12px;
+
+    background: white;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.18);
+
+    font-size: 14px;
+
+    animation:
+        slideIn 0.3s ease;
+}
+
+
+.flash-message.success {
+    border-left: 5px solid #16a34a;
+
+    color: #166534;
+}
+
+
+.flash-message.error {
+    border-left: 5px solid #dc2626;
+
+    color: #991b1b;
+}
+
+
+.flash-message > i {
+    font-size: 20px;
+
+    flex-shrink: 0;
+}
+
+
+.flash-message span {
+    flex: 1;
+
+    line-height: 1.4;
+}
+
+
+.flash-message button {
+    border: none;
+
+    background: transparent;
+
+    color: #777;
+
+    cursor: pointer;
+
+    font-size: 16px;
+
+    padding: 3px;
+
+    flex-shrink: 0;
+}
+
+
+.flash-message button:hover {
+    color: #222;
+
+    transform: scale(1.1);
+}
+
+
+/* ==================================================
+   FLASH ANIMATION
+================================================== */
+
+@keyframes slideIn {
+
+    from {
+        opacity: 0;
+
+        transform: translateX(30px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: translateX(0);
+    }
+
+}
+
+
+/* ==================================================
+   INFO SECTIONS
+================================================== */
+
+.info-section {
+    min-height: 500px;
+
+    padding: 90px 8%;
+
+    background: white;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    scroll-margin-top: 80px;
+}
+
+
+/* ==================================================
+   INFO CONTENT
+================================================== */
+
+.info-content {
+    width: 100%;
+
+    max-width: 1100px;
+
+    text-align: center;
+}
+
+
+.info-content h2 {
+    font-size: 38px;
+
+    margin-bottom: 20px;
+
+    color: #2b59ff;
+}
+
+
+.info-content > p {
+    max-width: 750px;
+
+    margin: auto;
+
+    font-size: 17px;
+
+    line-height: 1.8;
+
+    color: #555;
+}
+
+
+/* ==================================================
+   FEATURE CARDS
+================================================== */
+
+.feature-cards {
+    margin-top: 40px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 25px;
+}
+
+
+.feature-card {
+    padding: 30px 20px;
+
+    background: #f7f8fc;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.08);
+
+    transition: 0.3s;
+}
+
+
+.feature-card:hover {
+    transform: translateY(-8px);
+
+    box-shadow:
+        0 15px 30px rgba(0, 0, 0, 0.12);
+}
+
+
+.feature-card i {
+    font-size: 35px;
+
+    color: #2b59ff;
+
+    margin-bottom: 18px;
+}
+
+
+.feature-card h3 {
+    font-size: 20px;
+
+    margin-bottom: 12px;
+
+    color: #222;
+}
+
+
+.feature-card p {
+    font-size: 14px;
+
+    line-height: 1.6;
+
+    color: #666;
+}
+
+
+/* ==================================================
+   CONTACT
+================================================== */
+
+.contact-info {
+    margin-top: 30px;
+}
+
+
+.contact-info p {
+    margin: 15px;
+
+    color: #555;
+
+    font-size: 16px;
+}
+
+
+.contact-info i {
+    color: #2b59ff;
+
+    margin-right: 10px;
+}
+
+
+/* ==================================================
+   ABOUT PAGE
+================================================== */
+
+body.about-page-body {
+    background: #ffffff;
+
+    color: #333;
+
+    min-height: 100vh;
+}
+
+
+/* ==================================================
+   ABOUT PAGE NAVBAR
+================================================== */
+
+body.about-page-body .navbar {
+    background: #ffffff;
+
+    color: #333;
+
+    box-shadow:
+        0 2px 15px rgba(0, 0, 0, 0.06);
+
+    position: relative;
+
+    z-index: 10;
+}
+
+
+body.about-page-body .nav-logo {
+    color: #2563EB;
+}
+
+
+body.about-page-body .nav-logo i {
+    color: #2563EB;
+}
+
+
+body.about-page-body .nav-links a {
+    color: #333;
+}
+
+
+body.about-page-body .nav-links a:hover {
+    color: #2563EB;
+
+    transform: translateY(-2px);
+}
+
+
+body.about-page-body .language-selector {
+    color: #333;
+}
+
+
+body.about-page-body .language-selector select {
+    border: 1px solid #e5e7eb;
+}
+
+
+/* ==================================================
+   ABOUT PAGE CONTENT
+================================================== */
+
+.about-page {
+    background: #ffffff;
+
+    min-height: calc(100vh - 90px);
+
+    padding: 70px 8% 90px;
+
+    color: #333;
+}
+
+
+.about-container {
+    width: 100%;
+
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    text-align: center;
+}
+
+
+/* ==================================================
+   ABOUT ICON
+================================================== */
+
+.about-icon {
+    width: 75px;
+
+    height: 75px;
+
+    margin: 0 auto 20px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: linear-gradient(
+        135deg,
+        #2563EB,
+        #7C3AED
+    );
+
+    color: white;
+
+    font-size: 32px;
+
+    box-shadow:
+        0 10px 25px rgba(37, 99, 235, 0.20);
+}
+
+
+/* ==================================================
+   ABOUT TITLE
+================================================== */
+
+.about-page h1 {
+    font-size: 42px;
+
+    color: #2563EB;
+
+    margin-bottom: 20px;
+
+    line-height: 1.2;
+}
+
+
+.about-intro {
+    color: #555;
+
+    font-size: 18px;
+
+    line-height: 1.8;
+
+    max-width: 800px;
+
+    margin: 0 auto;
+}
+
+
+/* ==================================================
+   ABOUT CARDS
+================================================== */
+
+.about-cards {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 25px;
+
+    margin-top: 55px;
+}
+
+
+.about-card {
+    background: #f8fafc;
+
+    border-radius: 20px;
+
+    padding: 35px 25px;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.08);
+
+    border: 1px solid #eef2f7;
+
+    transition: 0.3s;
+}
+
+
+.about-card:hover {
+    transform: translateY(-8px);
+
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+
+.about-card-icon {
+    width: 60px;
+
+    height: 60px;
+
+    margin: 0 auto 20px;
+
+    border-radius: 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #eef4ff;
+
+    color: #2563EB;
+
+    font-size: 25px;
+}
+
+
+.about-card h2 {
+    color: #222;
+
+    font-size: 22px;
+
+    margin-bottom: 12px;
+}
+
+
+.about-card p {
+    color: #666;
+
+    font-size: 15px;
+
+    line-height: 1.7;
+}
+
+
+/* ==================================================
+   HOW CAMPUSFIND WORKS
+================================================== */
+
+.about-how {
+    margin-top: 75px;
+}
+
+
+.about-how h2 {
+    font-size: 32px;
+
+    color: #2563EB;
+
+    margin-bottom: 40px;
+}
+
+
+.how-steps {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 20px;
+}
+
+
+.how-step {
+    padding: 25px 18px;
+
+    background: white;
+
+    border-radius: 18px;
+
+    border: 1px solid #e5e7eb;
+
+    box-shadow:
+        0 6px 20px rgba(0, 0, 0, 0.06);
+
+    transition: 0.3s;
+}
+
+
+.how-step:hover {
+    transform: translateY(-6px);
+
+    box-shadow:
+        0 12px 28px rgba(0, 0, 0, 0.10);
+}
+
+
+.step-number {
+    width: 48px;
+
+    height: 48px;
+
+    margin: 0 auto 15px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: linear-gradient(
+        135deg,
+        #2563EB,
+        #7C3AED
+    );
+
+    color: white;
+
+    font-size: 20px;
+
+    font-weight: bold;
+}
+
+
+.how-step h3 {
+    color: #222;
+
+    font-size: 19px;
+
+    margin-bottom: 10px;
+}
+
+
+.how-step p {
+    color: #666;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+
+/* ==================================================
+   TABLET
+================================================== */
+
+@media (max-width: 1100px) {
+
+    .navbar {
+        padding: 20px 35px;
+    }
+
+
+    nav {
+        gap: 20px;
+    }
+
+
+    nav a {
+        font-size: 15px;
+    }
+
+
+    .nav-links {
+        gap: 20px;
+    }
+
+
+    .nav-links a {
+        font-size: 15px;
+    }
+
+
+    .hero {
+        padding: 60px 40px;
+    }
+
+
+    .hero-left h1 {
+        font-size: 50px;
+    }
+
+
+    .hero-left p {
+        font-size: 18px;
+
+        line-height: 30px;
+    }
+
+
+    .feature-cards {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+
+    .about-cards {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+
+    .how-steps {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+
+    /* Notification adjustment */
+
+    .notification-panel {
+        right: 20px;
+    }
+
+}
+
+
+/* ==================================================
+   MOBILE
+================================================== */
+
+@media (max-width: 700px) {
+
+    .navbar {
+        flex-wrap: wrap;
+
+        gap: 18px;
+
+        padding: 18px 20px;
+
+        justify-content: center;
+    }
+
+
+    .logo {
+        width: 100%;
+
+        justify-content: center;
+
+        font-size: 24px;
+    }
+
+
+    .nav-logo {
+        width: 100%;
+
+        justify-content: center;
+
+        font-size: 24px;
+    }
+
+
+    nav {
+        width: 100%;
+
+        justify-content: center;
+
+        gap: 15px;
+
+        flex-wrap: wrap;
+    }
+
+
+    nav a {
+        font-size: 14px;
+    }
+
+
+    .nav-links {
+        width: 100%;
+
+        justify-content: center;
+
+        gap: 15px;
+
+        flex-wrap: wrap;
+    }
+
+
+    .nav-links a {
+        font-size: 14px;
+    }
+
+
+    .language-selector {
+        justify-content: center;
+    }
+
+
+    .auth-buttons {
+        width: 100%;
+
+        justify-content: center;
+
+        flex-wrap: wrap;
+    }
+
+
+    /* Notification */
+
+    .notification-panel {
+        top: 58px;
+
+        right: 50%;
+
+        transform: translateX(50%);
+
+        width: 350px;
+    }
+
+
+    .hero {
+        flex-direction: column;
+
+        text-align: center;
+
+        padding: 50px 20px;
+    }
+
+
+    .hero-left {
+        width: 100%;
+    }
+
+
+    .hero-left h1 {
+        font-size: 42px;
+    }
+
+
+    .hero-left p {
+        font-size: 17px;
+
+        line-height: 28px;
+    }
+
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+
+    .hero-buttons button {
+        margin-right: 0;
+    }
+
+
+    .hero-right {
+        width: 100%;
+
+        margin-top: 40px;
+    }
+
+
+    .hero-right img {
+        max-width: 400px;
+    }
+
+
+    .feature-cards {
+        grid-template-columns: 1fr;
+    }
+
+
+    .info-section {
+        padding: 70px 20px;
+    }
+
+
+    .info-content h2 {
+        font-size: 30px;
+    }
+
+
+    .flash-container {
+        top: 75px;
+
+        left: 15px;
+
+        right: 15px;
+
+        width: auto;
+    }
+
+
+    /* ABOUT MOBILE */
+
+    .about-page {
+        padding: 50px 20px 70px;
+    }
+
+
+    .about-page h1 {
+        font-size: 34px;
+    }
+
+
+    .about-intro {
+        font-size: 16px;
+    }
+
+
+    .about-cards {
+        grid-template-columns: 1fr;
+
+        margin-top: 40px;
+    }
+
+
+    .about-how {
+        margin-top: 55px;
+    }
+
+
+    .about-how h2 {
+        font-size: 28px;
+    }
+
+
+    .how-steps {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+/* ==================================================
+   SMALL MOBILE
+================================================== */
+
+@media (max-width: 450px) {
+
+    .hero-left h1 {
+        font-size: 34px;
+    }
+
+
+    .hero-buttons {
+        width: 100%;
+    }
+
+
+    .hero-buttons button {
+        width: 100%;
+    }
+
+
+    .login-btn,
+    .register-btn,
+    .logout-btn {
+        padding: 10px 18px;
+
+        font-size: 14px;
+    }
+
+
+    .about-page h1 {
+        font-size: 30px;
+    }
+
+
+    .about-icon {
+        width: 65px;
+
+        height: 65px;
+
+        font-size: 27px;
+    }
+
+
+    /* Notification */
+
+    .notification-btn {
+        width: 38px;
+
+        height: 38px;
+
+        font-size: 19px;
+    }
+
+
+    .notification-panel {
+        width: calc(100vw - 20px);
+
+        right: 50%;
+
+        max-width: none;
+    }
+
+}

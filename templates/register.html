@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+```
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title id="page-title">CampusFind Register</title>
+
+<!-- ================= FONT AWESOME ================= -->
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+<!-- ================= REGISTER STYLE ================= -->
+
+<style>
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+    }
+
+
+    body {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 30px;
+
+        background:
+            linear-gradient(
+                135deg,
+                #2b59ff,
+                #7b2ff7
+            );
+    }
+
+
+    /* ================= REGISTER CONTAINER ================= */
+
+    .register-container {
+        width: 100%;
+        max-width: 1050px;
+        min-height: 620px;
+
+        display: flex;
+
+        background: white;
+
+        border-radius: 25px;
+
+        overflow: hidden;
+
+        box-shadow:
+            0 20px 50px
+            rgba(0, 0, 0, 0.25);
+    }
+
+
+    /* ================= LEFT SECTION ================= */
+
+    .left-section {
+        width: 50%;
+
+        padding: 45px;
+
+        color: white;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        background:
+            linear-gradient(
+                135deg,
+                #2b59ff,
+                #7b2ff7
+            );
+    }
+
+
+    /* LOGO */
+
+    .logo {
+        display: flex;
+        align-items: center;
+
+        gap: 8px;
+
+        margin-bottom: 25px;
+
+        font-size: 25px;
+        font-weight: 700;
+    }
+
+
+    .logo i {
+        font-size: 25px;
+    }
+
+
+    /* TITLE */
+
+    .left-section h1 {
+        font-size: 40px;
+        margin-bottom: 15px;
+    }
+
+
+    /* DESCRIPTION */
+
+    .left-section p {
+        font-size: 16px;
+
+        line-height: 1.7;
+
+        max-width: 430px;
+
+        margin-bottom: 25px;
+    }
+
+
+    /* IMAGE */
+
+    .left-section img {
+        width: 100%;
+
+        max-width: 430px;
+
+        height: 230px;
+
+        object-fit: cover;
+
+        border-radius: 18px;
+
+        margin-top: 10px;
+    }
+
+
+    /* ================= RIGHT SECTION ================= */
+
+    .right-section {
+        width: 50%;
+
+        padding: 45px;
+
+        display: flex;
+        flex-direction: column;
+
+        justify-content: center;
+        align-items: center;
+
+        background: white;
+    }
+
+
+    /* ================= LANGUAGE ================= */
+
+    .language-box {
+        width: 100%;
+
+        display: flex;
+
+        justify-content: flex-end;
+
+        margin-bottom: 15px;
+    }
+
+
+    .language-box i {
+        color: #2b59ff;
+
+        margin-right: 8px;
+
+        margin-top: 8px;
+    }
+
+
+    .language-box select {
+        padding: 8px 15px;
+
+        border: 1px solid #ddd;
+
+        border-radius: 20px;
+
+        background: white;
+
+        outline: none;
+
+        cursor: pointer;
+    }
+
+
+    /* ================= FORM ================= */
+
+    .form-box {
+        width: 100%;
+
+        max-width: 400px;
+    }
+
+
+    .form-box h2 {
+        text-align: center;
+
+        color: #222;
+
+        font-size: 30px;
+
+        margin-bottom: 20px;
+    }
+
+
+    /* ================= INPUT ================= */
+
+    .input-box {
+        position: relative;
+
+        margin-bottom: 15px;
+    }
+
+
+    .input-box i {
+        position: absolute;
+
+        left: 15px;
+
+        top: 50%;
+
+        transform: translateY(-50%);
+
+        color: #777;
+    }
+
+
+    .input-box input {
+        width: 100%;
+
+        padding:
+            13px
+            15px
+            13px
+            45px;
+
+        border:
+            1px solid #e1e1e1;
+
+        border-radius: 10px;
+
+        background: #f7f8fc;
+
+        font-size: 15px;
+
+        outline: none;
+    }
+
+
+    .input-box input:focus {
+        border-color: #2b59ff;
+
+        background: white;
+
+        box-shadow:
+            0 0 0 3px
+            rgba(43, 89, 255, 0.1);
+    }
+
+
+    /* ================= REGISTER BUTTON ================= */
+
+    .register-btn {
+        width: 100%;
+
+        padding: 14px;
+
+        border: none;
+
+        border-radius: 10px;
+
+        background:
+            linear-gradient(
+                135deg,
+                #2b59ff,
+                #7b2ff7
+            );
+
+        color: white;
+
+        font-size: 16px;
+
+        font-weight: 600;
+
+        cursor: pointer;
+
+        margin-top: 5px;
+
+        transition: 0.3s;
+    }
+
+
+    .register-btn:hover {
+        transform: translateY(-2px);
+
+        box-shadow:
+            0 8px 20px
+            rgba(43, 89, 255, 0.3);
+    }
+
+
+    /* ================= LOGIN LINK ================= */
+
+    .login-link {
+        margin-top: 18px;
+
+        text-align: center;
+
+        color: #666;
+
+        font-size: 14px;
+    }
+
+
+    .login-link a {
+        color: #2b59ff;
+
+        text-decoration: none;
+
+        font-weight: 600;
+    }
+
+
+    .login-link a:hover {
+        text-decoration: underline;
+    }
+
+
+    /* ================= BACK HOME ================= */
+
+    .back-home {
+        display: inline-flex;
+
+        align-items: center;
+
+        gap: 7px;
+
+        margin-top: 15px;
+
+        color: #666;
+
+        text-decoration: none;
+
+        font-size: 14px;
+    }
+
+
+    .back-home:hover {
+        color: #2b59ff;
+    }
+
+
+    /* ================= MOBILE ================= */
+
+    @media (max-width: 850px) {
+
+        .register-container {
+            max-width: 600px;
+
+            flex-direction: column;
+        }
+
+
+        .left-section,
+        .right-section {
+            width: 100%;
+        }
+
+
+        .left-section {
+            padding: 35px;
+
+            text-align: center;
+
+            align-items: center;
+        }
+
+
+        .right-section {
+            padding: 35px;
+        }
+
+
+        .language-box {
+            justify-content: center;
+        }
+
+    }
+
+
+    @media (max-width: 500px) {
+
+        body {
+            padding: 10px;
+        }
+
+
+        .left-section {
+            padding: 25px 20px;
+        }
+
+
+        .left-section h1 {
+            font-size: 28px;
+        }
+
+
+        .right-section {
+            padding: 25px 20px;
+        }
+
+    }
+
+</style>
+```
+
+</head>
+
+<body>
+
+```
+<!-- ================= REGISTER CONTAINER ================= -->
+
+<div class="register-container">
+
+
+    <!-- ================= LEFT SECTION ================= -->
+
+    <div class="left-section">
+
+
+        <!-- LOGO -->
+
+        <div class="logo">
+
+            <i class="fa-solid fa-location-dot"></i>
+
+            <span id="logo-text">
+                CampusFind
+            </span>
+
+        </div>
+
+
+        <!-- TITLE -->
+
+        <h1 id="register-title">
+            Create Your Account
+        </h1>
+
+
+        <!-- DESCRIPTION -->
+
+        <p id="register-description">
+
+            Join CampusFind and help your campus community
+            report, search and recover lost items quickly.
+
+        </p>
+
+
+        <!-- HERO IMAGE -->
+
+        <img
+            src="{{ url_for('static', filename='images/hero.png') }}"
+            alt="CampusFind"
+            id="register-image">
+
+    </div>
+
+
+
+    <!-- ================= RIGHT SECTION ================= -->
+
+    <div class="right-section">
+
+
+        <!-- ================= LANGUAGE SELECTOR ================= -->
+
+        <div class="language-box">
+
+            <i class="fa-solid fa-globe"></i>
+
+            <select
+                id="language"
+                onchange="changeRegisterLanguage()">
+
+                <option value="en">
+                    English
+                </option>
+
+                <option value="ta">
+                    தமிழ்
+                </option>
+
+                <option value="hi">
+                    हिन्दी
+                </option>
+
+            </select>
+
+        </div>
+
+
+
+        <!-- ================= REGISTER FORM ================= -->
+
+        <div class="form-box">
+
+
+            <!-- HEADING -->
+
+            <h2 id="register-heading">
+                Create Account
+            </h2>
+
+
+
+            <!-- ================================================= -->
+            <!-- IMPORTANT: FORM NOW SENDS DATA TO FLASK -->
+            <!-- ================================================= -->
+
+            <form
+                id="register-form"
+                method="POST"
+                action="{{ url_for('register') }}">
+
+
+                <!-- ================= NAME ================= -->
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-user"></i>
+
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Full Name"
+                        required>
+
+                </div>
+
+
+
+                <!-- ================= EMAIL ================= -->
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-envelope"></i>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Email"
+                        required>
+
+                </div>
+
+
+
+                <!-- ================= PASSWORD ================= -->
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-lock"></i>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Password"
+                        required>
+
+                </div>
+
+
+
+                <!-- ================= CONFIRM PASSWORD ================= -->
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-lock"></i>
+
+                    <input
+                        type="password"
+                        id="confirm-password"
+                        name="confirm-password"
+                        placeholder="Confirm Password"
+                        required>
+
+                </div>
+
+
+
+                <!-- ================= REGISTER BUTTON ================= -->
+
+                <button
+                    type="submit"
+                    class="register-btn">
+
+                    <i class="fa-solid fa-user-plus"></i>
+
+                    <span id="register-button-text">
+                        Create Account
+                    </span>
+
+                </button>
+
+
+            </form>
+
+
+
+            <!-- ================= LOGIN LINK ================= -->
+
+            <p class="login-link">
+
+                <span id="already-account">
+                    Already have an account?
+                </span>
+
+                <a
+                    href="{{ url_for('login') }}"
+                    id="login-link-text">
+
+                    Login
+
+                </a>
+
+            </p>
+
+
+
+            <!-- ================= BACK HOME ================= -->
+
+            <a
+                href="{{ url_for('home') }}"
+                class="back-home">
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                <span id="back-home-text">
+                    Back to Home
+                </span>
+
+            </a>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ================================================= -->
+<!-- COMMON LANGUAGE SYSTEM                            -->
+<!-- ================================================= -->
+
+<script src="{{ url_for('static', filename='js/language.js') }}"></script>
+
+
+<!-- ================================================= -->
+<!-- REGISTER LANGUAGE SYSTEM                          -->
+<!-- ================================================= -->
+
+<script src="{{ url_for('static', filename='js/register.js') }}"></script>
+```
+
+</body>
+
+</html>

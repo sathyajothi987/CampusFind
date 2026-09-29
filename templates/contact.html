@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CampusFind Contact</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body class="about-page-body">
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+
+        <div class="nav-logo">
+            <i class="fa-solid fa-location-dot"></i>
+            <span>CampusFind</span>
+        </div>
+
+        <div class="nav-links">
+
+            <a href="{{ url_for('home') }}" id="nav-home">
+                <i class="fa-solid fa-house"></i>
+                Home
+            </a>
+
+            <a href="{{ url_for('about') }}" id="nav-about">
+                <i class="fa-solid fa-circle-info"></i>
+                About
+            </a>
+
+            <a href="{{ url_for('features') }}" id="nav-features">
+                <i class="fa-solid fa-star"></i>
+                Features
+            </a>
+
+            <a href="{{ url_for('contact') }}" id="nav-contact">
+                <i class="fa-solid fa-envelope"></i>
+                Contact
+            </a>
+
+            <!-- LANGUAGE -->
+            <div class="language-selector">
+
+                <i class="fa-solid fa-globe"></i>
+
+                <select id="language"
+                        onchange="changeContactLanguage()">
+
+                    <option value="en">English</option>
+                    <option value="ta">தமிழ்</option>
+                    <option value="hi">हिन्दी</option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- CONTACT PAGE -->
+    <main class="about-page">
+
+        <div class="about-container">
+
+            <!-- HEADER -->
+            <div class="about-header">
+
+                <div class="about-icon">
+                    <i class="fa-solid fa-envelope"></i>
+                </div>
+
+                <h1 id="contact-title">
+                    Contact CampusFind
+                </h1>
+
+                <p id="contact-description">
+                    Have a question, suggestion or need help?
+                    Get in touch with the CampusFind team.
+                </p>
+
+            </div>
+
+
+            <!-- CONTACT CARDS -->
+            <div class="about-cards">
+
+                <!-- CARD 1 -->
+                <div class="about-card">
+
+                    <div class="about-card-icon">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+
+                    <h2 id="contact-email-title">
+                        Email Support
+                    </h2>
+
+                    <p id="contact-email-description">
+                        For questions and technical support,
+                        contact the CampusFind team through email.
+                    </p>
+
+                    <p>
+                        <i class="fa-solid fa-at"></i>
+                        <span>campusfind.support@gmail.com</span>
+                    </p>
+
+                </div>
+
+
+                <!-- CARD 2 -->
+                <div class="about-card">
+
+                    <div class="about-card-icon">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </div>
+
+                    <h2 id="contact-campus-title">
+                        Campus Support
+                    </h2>
+
+                    <p id="contact-campus-description">
+                        For lost and found related assistance,
+                        contact the responsible campus support team.
+                    </p>
+
+                </div>
+
+
+                <!-- CARD 3 -->
+                <div class="about-card">
+
+                    <div class="about-card-icon">
+                        <i class="fa-solid fa-circle-question"></i>
+                    </div>
+
+                    <h2 id="contact-help-title">
+                        Need Help?
+                    </h2>
+
+                    <p id="contact-help-description">
+                        If you face any problem while reporting,
+                        searching or recovering an item, contact us.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- CONTACT INFORMATION -->
+            <section class="about-how">
+
+                <h2 id="contact-connect-title">
+                    Get in Touch
+                </h2>
+
+                <div class="how-steps">
+
+                    <div class="how-step">
+
+                        <div class="how-number">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+
+                        <div>
+
+                            <h3 id="contact-step1-title">
+                                Email Us
+                            </h3>
+
+                            <p id="contact-step1-description">
+                                Send your questions or suggestions
+                                to the CampusFind support team.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="how-step">
+
+                        <div class="how-number">
+                            <i class="fa-solid fa-comment"></i>
+                        </div>
+
+                        <div>
+
+                            <h3 id="contact-step2-title">
+                                Share Feedback
+                            </h3>
+
+                            <p id="contact-step2-description">
+                                Your feedback can help improve
+                                the CampusFind experience.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="how-step">
+
+                        <div class="how-number">
+                            <i class="fa-solid fa-handshake"></i>
+                        </div>
+
+                        <div>
+
+                            <h3 id="contact-step3-title">
+                                Get Assistance
+                            </h3>
+
+                            <p id="contact-step3-description">
+                                Contact the appropriate campus
+                                support team when necessary.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <!-- SHARED LANGUAGE FILE -->
+    <script src="{{ url_for('static', filename='js/language.js') }}"></script>
+
+
+    <!-- CONTACT LANGUAGE -->
+    <script>
+
+        const contactTranslations = {
+
+            en: {
+
+                title: "Contact CampusFind",
+
+                description:
+                    "Have a question, suggestion or need help? Get in touch with the CampusFind team.",
+
+                emailTitle: "Email Support",
+
+                emailDescription:
+                    "For questions and technical support, contact the CampusFind team through email.",
+
+                campusTitle: "Campus Support",
+
+                campusDescription:
+                    "For lost and found related assistance, contact the responsible campus support team.",
+
+                helpTitle: "Need Help?",
+
+                helpDescription:
+                    "If you face any problem while reporting, searching or recovering an item, contact us.",
+
+                connectTitle: "Get in Touch",
+
+                step1Title: "Email Us",
+
+                step1Description:
+                    "Send your questions or suggestions to the CampusFind support team.",
+
+                step2Title: "Share Feedback",
+
+                step2Description:
+                    "Your feedback can help improve the CampusFind experience.",
+
+                step3Title: "Get Assistance",
+
+                step3Description:
+                    "Contact the appropriate campus support team when necessary."
+            },
+
+
+            ta: {
+
+                title: "CampusFind தொடர்பு",
+
+                description:
+                    "கேள்வி, பரிந்துரை அல்லது உதவி தேவையா? CampusFind குழுவை தொடர்பு கொள்ளுங்கள்.",
+
+                emailTitle: "மின்னஞ்சல் ஆதரவு",
+
+                emailDescription:
+                    "கேள்விகள் மற்றும் தொழில்நுட்ப உதவிக்கு CampusFind குழுவை மின்னஞ்சல் மூலம் தொடர்பு கொள்ளுங்கள்.",
+
+                campusTitle: "வளாக ஆதரவு",
+
+                campusDescription:
+                    "இழந்த மற்றும் கண்டெடுத்த பொருட்கள் தொடர்பான உதவிக்கு சம்பந்தப்பட்ட வளாக ஆதரவு குழுவை தொடர்பு கொள்ளுங்கள்.",
+
+                helpTitle: "உதவி தேவையா?",
+
+                helpDescription:
+                    "பொருளை பதிவு செய்யும் போது, தேடும் போது அல்லது மீட்டெடுக்கும் போது ஏதேனும் பிரச்சனை ஏற்பட்டால் எங்களை தொடர்பு கொள்ளுங்கள்.",
+
+                connectTitle: "தொடர்பு கொள்ளுங்கள்",
+
+                step1Title: "எங்களுக்கு மின்னஞ்சல் செய்யுங்கள்",
+
+                step1Description:
+                    "உங்கள் கேள்விகள் அல்லது பரிந்துரைகளை CampusFind ஆதரவு குழுவிற்கு அனுப்புங்கள்.",
+
+                step2Title: "கருத்தைப் பகிருங்கள்",
+
+                step2Description:
+                    "உங்கள் கருத்துகள் CampusFind அனுபவத்தை மேம்படுத்த உதவும்.",
+
+                step3Title: "உதவி பெறுங்கள்",
+
+                step3Description:
+                    "தேவைப்படும் போது சம்பந்தப்பட்ட வளாக ஆதரவு குழுவை தொடர்பு கொள்ளுங்கள்."
+            },
+
+
+            hi: {
+
+                title: "CampusFind से संपर्क करें",
+
+                description:
+                    "कोई प्रश्न, सुझाव या सहायता चाहिए? CampusFind टीम से संपर्क करें।",
+
+                emailTitle: "ईमेल सहायता",
+
+                emailDescription:
+                    "प्रश्नों और तकनीकी सहायता के लिए CampusFind टीम से ईमेल द्वारा संपर्क करें।",
+
+                campusTitle: "कैंपस सहायता",
+
+                campusDescription:
+                    "खोई और मिली वस्तुओं से संबंधित सहायता के लिए संबंधित कैंपस सहायता टीम से संपर्क करें।",
+
+                helpTitle: "मदद चाहिए?",
+
+                helpDescription:
+                    "यदि वस्तु की रिपोर्ट करने, खोजने या वापस प्राप्त करने में कोई समस्या आती है, तो हमसे संपर्क करें।",
+
+                connectTitle: "संपर्क करें",
+
+                step1Title: "हमें ईमेल करें",
+
+                step1Description:
+                    "अपने प्रश्न या सुझाव CampusFind सहायता टीम को भेजें।",
+
+                step2Title: "प्रतिक्रिया साझा करें",
+
+                step2Description:
+                    "आपकी प्रतिक्रिया CampusFind के अनुभव को बेहतर बनाने में मदद कर सकती है।",
+
+                step3Title: "सहायता प्राप्त करें",
+
+                step3Description:
+                    "आवश्यकता होने पर उचित कैंपस सहायता टीम से संपर्क करें।"
+            }
+
+        };
+
+
+        function changeContactLanguage() {
+
+            const language =
+                document.getElementById("language").value;
+
+            saveCampusFindLanguage(language);
+
+            const t =
+                contactTranslations[language];
+
+
+            document.getElementById("contact-title").textContent =
+                t.title;
+
+            document.getElementById("contact-description").textContent =
+                t.description;
+
+
+            document.getElementById("contact-email-title").textContent =
+                t.emailTitle;
+
+            document.getElementById("contact-email-description").textContent =
+                t.emailDescription;
+
+
+            document.getElementById("contact-campus-title").textContent =
+                t.campusTitle;
+
+            document.getElementById("contact-campus-description").textContent =
+                t.campusDescription;
+
+
+            document.getElementById("contact-help-title").textContent =
+                t.helpTitle;
+
+            document.getElementById("contact-help-description").textContent =
+                t.helpDescription;
+
+
+            document.getElementById("contact-connect-title").textContent =
+                t.connectTitle;
+
+
+            document.getElementById("contact-step1-title").textContent =
+                t.step1Title;
+
+            document.getElementById("contact-step1-description").textContent =
+                t.step1Description;
+
+
+            document.getElementById("contact-step2-title").textContent =
+                t.step2Title;
+
+            document.getElementById("contact-step2-description").textContent =
+                t.step2Description;
+
+
+            document.getElementById("contact-step3-title").textContent =
+                t.step3Title;
+
+            document.getElementById("contact-step3-description").textContent =
+                t.step3Description;
+
+        }
+
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                const savedLanguage =
+                    getCampusFindLanguage();
+
+                document.getElementById("language").value =
+                    savedLanguage;
+
+                changeContactLanguage();
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>

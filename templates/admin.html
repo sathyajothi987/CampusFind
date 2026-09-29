@@ -1,0 +1,2585 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CampusFind Admin Dashboard</title>
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f6fb;
+            color: #172033;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+            min-height: 64px;
+            background: linear-gradient(90deg, #2563eb, #7c3aed);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 28px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .brand i {
+            font-size: 21px;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .admin-name {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .logout-btn {
+            border: none;
+            background: #ff5b68;
+            color: white;
+            padding: 9px 16px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .logout-btn:hover {
+            background: #e54855;
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .container {
+            max-width: 1250px;
+            margin: 35px auto;
+            padding: 0 22px;
+        }
+
+        .page-heading {
+            margin-bottom: 25px;
+        }
+
+        .page-heading h1 {
+            font-size: 29px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .page-heading h1 i {
+            color: #2563eb;
+        }
+
+        .page-heading p {
+            margin-top: 7px;
+            color: #687386;
+            font-size: 14px;
+        }
+
+        /* =========================
+           STATISTICS
+        ========================= */
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 13px;
+            padding: 20px;
+            box-shadow: 0 5px 18px rgba(31,41,55,0.08);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border: 1px solid #edf0f6;
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 11px;
+            background: #eef2ff;
+            color: #4f46e5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .stat-info strong {
+            display: block;
+            font-size: 24px;
+            margin-bottom: 3px;
+        }
+
+        .stat-info span {
+            font-size: 12px;
+            color: #6b7280;
+        }
+
+        /* =========================
+           SECTIONS
+        ========================= */
+
+        .section {
+            background: white;
+            border-radius: 14px;
+            padding: 22px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 18px rgba(31,41,55,0.08);
+            border: 1px solid #edf0f6;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .section-title i {
+            color: #4f46e5;
+        }
+
+        /* =========================
+           BUTTONS
+        ========================= */
+
+        .btn {
+            border: none;
+            padding: 9px 14px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .refresh-btn {
+            background: #eef2ff;
+            color: #4338ca;
+        }
+
+        .refresh-btn:hover {
+            background: #e0e7ff;
+        }
+
+        .approve-btn {
+            background: #16a34a;
+            color: white;
+        }
+
+        .approve-btn:hover {
+            background: #15803d;
+        }
+
+        .reject-btn {
+            background: #ef4444;
+            color: white;
+        }
+
+        .reject-btn:hover {
+            background: #dc2626;
+        }
+
+        /* =========================
+           SEARCH
+        ========================= */
+
+        .search-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 11px 13px;
+            border: 1px solid #d9deea;
+            border-radius: 8px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .search-box input:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99,102,241,0.1);
+        }
+
+        /* =========================
+           TABLE
+        ========================= */
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            background: #f7f8fc;
+            padding: 13px;
+            font-size: 12px;
+            color: #596579;
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 14px 13px;
+            border-bottom: 1px solid #edf0f5;
+            font-size: 13px;
+        }
+
+        tr:hover td {
+            background: #fafbff;
+        }
+
+        /* =========================
+           ROLE BADGES
+        ========================= */
+
+        .role-badge {
+            display: inline-block;
+            padding: 5px 9px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .student-badge {
+            background: #eef2ff;
+            color: #4338ca;
+        }
+
+        .admin-badge {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        /* =========================
+           CLAIM CARDS
+        ========================= */
+
+        .claims-container {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .claim-card {
+            border: 1px solid #dfe4ef;
+            border-radius: 14px;
+            padding: 20px;
+            background: #fff;
+            transition: 0.2s ease;
+        }
+
+        .claim-card:hover {
+            box-shadow: 0 7px 22px rgba(31,41,55,0.08);
+        }
+
+        .claim-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 16px;
+        }
+
+        .claim-item-name {
+            font-size: 19px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .claim-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+        }
+
+        .meta {
+            background: #f1f4f9;
+            color: #586174;
+            padding: 5px 9px;
+            border-radius: 5px;
+            font-size: 11px;
+        }
+
+        .status {
+            padding: 6px 11px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .status-pending {
+            background: #fff7df;
+            color: #a16207;
+        }
+
+        .status-approved {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .status-rejected {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .claim-body {
+            display: grid;
+            grid-template-columns: 170px 1fr;
+            gap: 20px;
+        }
+
+        .claim-image {
+            width: 170px;
+            height: 170px;
+            border: 1px solid #dfe4ef;
+            border-radius: 10px;
+            object-fit: cover;
+            background: #f5f6fa;
+        }
+
+        .claim-image-placeholder {
+            width: 170px;
+            height: 170px;
+            border: 1px solid #dfe4ef;
+            border-radius: 10px;
+            background: #f5f6fa;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #94a3b8;
+            gap: 8px;
+        }
+
+        .claim-image-placeholder i {
+            font-size: 30px;
+        }
+
+        .claim-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .info-box {
+            background: #f8f9fc;
+            border-radius: 9px;
+            padding: 12px;
+            border: 1px solid #edf0f5;
+        }
+
+        .info-box.full {
+            grid-column: 1 / -1;
+        }
+
+        .info-label {
+            display: block;
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #718096;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .info-value {
+            font-size: 12px;
+            color: #263247;
+            line-height: 1.5;
+            word-break: break-word;
+        }
+
+        .claim-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+            margin-top: 17px;
+            padding-top: 15px;
+            border-top: 1px solid #edf0f5;
+        }
+
+        /* =========================
+           ITEMS
+        ========================= */
+
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .item-card {
+            border: 1px solid #e1e5ef;
+            border-radius: 11px;
+            overflow: hidden;
+            background: white;
+        }
+
+        .item-card-image {
+            width: 100%;
+            height: 170px;
+            object-fit: cover;
+            background: #f5f6fa;
+        }
+
+        .item-card-content {
+            padding: 14px;
+        }
+
+        .item-card-title {
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .item-card-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 8px;
+        }
+
+        .item-status {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .lost-status {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .found-status {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .claimed-status {
+            background: #e0e7ff;
+            color: #3730a3;
+        }
+
+        .item-date {
+            color: #64748b;
+            font-size: 11px;
+            margin-top: 8px;
+        }
+
+        /* =========================
+           EMPTY / LOADING / ERROR
+        ========================= */
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #6b7280;
+        }
+
+        .empty-state i {
+            font-size: 35px;
+            margin-bottom: 12px;
+            color: #a0aec0;
+        }
+
+        .empty-state h3 {
+            color: #374151;
+            margin-bottom: 5px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #64748b;
+        }
+
+        .loading i {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .error-message {
+            background: #fef2f2;
+            color: #b91c1c;
+            border: 1px solid #fecaca;
+            padding: 18px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 1000px) {
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .items-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 700px) {
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .items-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .claim-body {
+                grid-template-columns: 1fr;
+            }
+
+            .claim-image,
+            .claim-image-placeholder {
+                width: 100%;
+                height: 220px;
+            }
+
+            .claim-info {
+                grid-template-columns: 1fr;
+            }
+
+            .info-box.full {
+                grid-column: auto;
+            }
+
+            .navbar {
+                padding: 0 15px;
+            }
+
+            .admin-name {
+                display: none;
+            }
+
+            .claim-top {
+                flex-direction: column;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     NAVBAR
+========================================================= -->
+
+<nav class="navbar">
+
+    <div class="brand">
+
+        <i class="fa-solid fa-location-dot"></i>
+
+        CampusFind
+
+    </div>
+
+
+    <div class="nav-right">
+
+        <div class="admin-name">
+
+            <i class="fa-solid fa-user-shield"></i>
+
+            Admin
+
+        </div>
+
+
+        <button
+            class="logout-btn"
+            onclick="window.location.href='/logout'"
+        >
+
+            <i class="fa-solid fa-right-from-bracket"></i>
+
+            Logout
+
+        </button>
+
+    </div>
+
+</nav>
+
+
+<!-- =========================================================
+     MAIN
+========================================================= -->
+
+<main class="container">
+
+
+    <div class="page-heading">
+
+        <h1>
+
+            <i class="fa-solid fa-shield-halved"></i>
+
+            Admin Dashboard
+
+        </h1>
+
+        <p>
+            Manage CampusFind users, reports and ownership claims.
+        </p>
+
+    </div>
+
+
+    <!-- =====================================================
+         STATISTICS
+    ===================================================== -->
+
+    <div class="stats-grid">
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                <i class="fa-solid fa-users"></i>
+            </div>
+
+            <div class="stat-info">
+
+                <strong id="totalUsers">0</strong>
+
+                <span>Total Users</span>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                <i class="fa-solid fa-user-graduate"></i>
+            </div>
+
+            <div class="stat-info">
+
+                <strong id="totalStudents">0</strong>
+
+                <span>Students</span>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                <i class="fa-solid fa-box-open"></i>
+            </div>
+
+            <div class="stat-info">
+
+                <strong id="totalLost">0</strong>
+
+                <span>Lost Items</span>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+
+            <div class="stat-info">
+
+                <strong id="totalFound">0</strong>
+
+                <span>Found Items</span>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+
+            <div class="stat-info">
+
+                <strong id="totalClaimed">0</strong>
+
+                <span>Claimed Items</span>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                <i class="fa-solid fa-clock"></i>
+            </div>
+
+            <div class="stat-info">
+
+                <strong id="pendingClaims">0</strong>
+
+                <span>Pending Claims</span>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                <i class="fa-solid fa-check"></i>
+            </div>
+
+            <div class="stat-info">
+
+                <strong id="approvedClaims">0</strong>
+
+                <span>Approved Claims</span>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+
+            <div class="stat-info">
+
+                <strong id="rejectedClaims">0</strong>
+
+                <span>Rejected Claims</span>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                <i class="fa-solid fa-list-check"></i>
+            </div>
+
+            <div class="stat-info">
+
+                <strong id="totalClaims">0</strong>
+
+                <span>Total Claims</span>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- =====================================================
+         REGISTERED USERS
+    ===================================================== -->
+
+    <section class="section">
+
+        <div class="section-header">
+
+            <div class="section-title">
+
+                <i class="fa-solid fa-users"></i>
+
+                Registered Users
+
+            </div>
+
+
+            <button
+                class="btn refresh-btn"
+                onclick="loadDashboard()"
+            >
+
+                <i class="fa-solid fa-rotate"></i>
+
+                Refresh
+
+            </button>
+
+        </div>
+
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="userSearch"
+                placeholder="Search users by name or email..."
+                oninput="filterUsers()"
+            >
+
+        </div>
+
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+
+                        <th>Name</th>
+
+                        <th>Email</th>
+
+                        <th>Role</th>
+
+                        <th>Registered</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="usersTable">
+
+                    <tr>
+
+                        <td colspan="5">
+
+                            <div class="loading">
+
+                                <i class="fa-solid fa-spinner fa-spin"></i>
+
+                                <br>
+
+                                Loading users...
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         CLAIM VERIFICATION
+    ===================================================== -->
+
+    <section class="section">
+
+        <div class="section-header">
+
+            <div class="section-title">
+
+                <i class="fa-solid fa-file-circle-check"></i>
+
+                Claim Verification
+
+            </div>
+
+
+            <button
+                class="btn refresh-btn"
+                onclick="loadDashboard()"
+            >
+
+                <i class="fa-solid fa-rotate"></i>
+
+                Refresh
+
+            </button>
+
+        </div>
+
+
+        <div
+            id="claimsContainer"
+            class="claims-container"
+        >
+
+            <div class="loading">
+
+                <i class="fa-solid fa-spinner fa-spin"></i>
+
+                <br>
+
+                Loading claims...
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         RECENT ITEMS
+    ===================================================== -->
+
+    <section class="section">
+
+        <div class="section-header">
+
+            <div class="section-title">
+
+                <i class="fa-solid fa-boxes-stacked"></i>
+
+                Recent Lost & Found Items
+
+            </div>
+
+
+            <button
+                class="btn refresh-btn"
+                onclick="loadDashboard()"
+            >
+
+                <i class="fa-solid fa-rotate"></i>
+
+                Refresh
+
+            </button>
+
+        </div>
+
+
+        <div
+            id="itemsContainer"
+            class="items-grid"
+        >
+
+            <div class="loading">
+
+                <i class="fa-solid fa-spinner fa-spin"></i>
+
+                <br>
+
+                Loading items...
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+<script>
+
+/* ============================================================
+   GLOBAL DATA
+============================================================ */
+
+let allUsers = [];
+
+let allClaims = [];
+
+let allItems = [];
+
+
+/* ============================================================
+   HELPER - GET FIRST AVAILABLE VALUE
+============================================================ */
+
+function getValue(object, keys, defaultValue = 0) {
+
+    if (!object) {
+        return defaultValue;
+    }
+
+    for (const key of keys) {
+
+        if (
+            object[key] !== undefined &&
+            object[key] !== null
+        ) {
+
+            return object[key];
+
+        }
+
+    }
+
+    return defaultValue;
+
+}
+
+
+/* ============================================================
+   LOAD DASHBOARD
+============================================================ */
+
+async function loadDashboard() {
+
+    const usersTable =
+        document.getElementById("usersTable");
+
+    const claimsContainer =
+        document.getElementById("claimsContainer");
+
+    const itemsContainer =
+        document.getElementById("itemsContainer");
+
+
+    try {
+
+        /*
+         * LOAD MAIN DASHBOARD
+         */
+
+        const dashboardResponse =
+            await fetch("/api/admin/dashboard");
+
+
+        const dashboardData =
+            await dashboardResponse.json();
+
+
+        if (
+            !dashboardResponse.ok ||
+            !dashboardData.success
+        ) {
+
+            throw new Error(
+                dashboardData.message ||
+                "Unable to load dashboard."
+            );
+
+        }
+
+
+        /*
+         * LOAD CLAIMS
+         */
+
+        const claimsResponse =
+            await fetch("/api/admin/claims");
+
+
+        const claimsData =
+            await claimsResponse.json();
+
+
+        if (
+            !claimsResponse.ok ||
+            !claimsData.success
+        ) {
+
+            throw new Error(
+                claimsData.message ||
+                "Unable to load claims."
+            );
+
+        }
+
+
+        /* ====================================================
+           STATISTICS
+        ==================================================== */
+
+        /*
+         * Your backend may return statistics
+         * under either "stats" or "statistics".
+         */
+
+        const stats =
+            dashboardData.stats ||
+            dashboardData.statistics ||
+            {};
+
+
+        /*
+         * Claims statistics may be returned as:
+         *
+         * claimsData.statistics
+         * claimsData.counts
+         */
+
+        const claimStats =
+            claimsData.statistics ||
+            claimsData.counts ||
+            {};
+
+
+        /*
+         * TOTAL USERS
+         */
+
+        document.getElementById(
+            "totalUsers"
+        ).textContent =
+            getValue(
+                stats,
+                [
+                    "total_users",
+                    "user_count",
+                    "users_count"
+                ]
+            );
+
+
+        /*
+         * STUDENTS
+         */
+
+        document.getElementById(
+            "totalStudents"
+        ).textContent =
+            getValue(
+                stats,
+                [
+                    "student_count",
+                    "total_students",
+                    "total_student"
+                ]
+            );
+
+
+        /*
+         * LOST ITEMS
+         */
+
+        document.getElementById(
+            "totalLost"
+        ).textContent =
+            getValue(
+                stats,
+                [
+                    "lost_count",
+                    "lost_items",
+                    "total_lost"
+                ]
+            );
+
+
+        /*
+         * FOUND ITEMS
+         */
+
+        document.getElementById(
+            "totalFound"
+        ).textContent =
+            getValue(
+                stats,
+                [
+                    "found_count",
+                    "found_items",
+                    "total_found"
+                ]
+            );
+
+
+        /*
+         * CLAIMED ITEMS
+         */
+
+        document.getElementById(
+            "totalClaimed"
+        ).textContent =
+            getValue(
+                stats,
+                [
+                    "claimed_count",
+                    "claimed_items",
+                    "total_claimed"
+                ]
+            );
+
+
+        /*
+         * PENDING CLAIMS
+         */
+
+        document.getElementById(
+            "pendingClaims"
+        ).textContent =
+            getValue(
+                claimStats,
+                [
+                    "pending_claims",
+                    "pending",
+                    "pending_count"
+                ]
+            );
+
+
+        /*
+         * APPROVED CLAIMS
+         */
+
+        document.getElementById(
+            "approvedClaims"
+        ).textContent =
+            getValue(
+                claimStats,
+                [
+                    "approved_claims",
+                    "approved",
+                    "approved_count"
+                ]
+            );
+
+
+        /*
+         * REJECTED CLAIMS
+         */
+
+        document.getElementById(
+            "rejectedClaims"
+        ).textContent =
+            getValue(
+                claimStats,
+                [
+                    "rejected_claims",
+                    "rejected",
+                    "rejected_count"
+                ]
+            );
+
+
+        /*
+         * TOTAL CLAIMS
+         */
+
+        document.getElementById(
+            "totalClaims"
+        ).textContent =
+            getValue(
+                claimStats,
+                [
+                    "total_claims",
+                    "total",
+                    "claim_count"
+                ]
+            );
+
+
+        /* ====================================================
+           USERS
+        ==================================================== */
+
+        allUsers =
+            dashboardData.users ||
+            dashboardData.recent_users ||
+            [];
+
+
+        renderUsers();
+
+
+        /* ====================================================
+           ITEMS
+        ==================================================== */
+
+        allItems =
+            dashboardData.recent_items ||
+            dashboardData.items ||
+            [];
+
+
+        renderItems();
+
+
+        /* ====================================================
+           CLAIMS
+        ==================================================== */
+
+        allClaims =
+            claimsData.claims ||
+            [];
+
+
+        renderClaims();
+
+    }
+
+
+    catch (error) {
+
+        console.error(
+            "Admin dashboard error:",
+            error
+        );
+
+
+        usersTable.innerHTML = `
+
+            <tr>
+
+                <td colspan="5">
+
+                    <div class="error-message">
+
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+
+                        <br><br>
+
+                        Unable to load registered users.
+
+                        <br><br>
+
+                        ${escapeHtml(
+                            error.message
+                        )}
+
+                    </div>
+
+                </td>
+
+            </tr>
+
+        `;
+
+
+        claimsContainer.innerHTML = `
+
+            <div class="error-message">
+
+                <i class="fa-solid fa-triangle-exclamation"></i>
+
+                <br><br>
+
+                Unable to load claims.
+
+                <br><br>
+
+                ${escapeHtml(
+                    error.message
+                )}
+
+            </div>
+
+        `;
+
+
+        itemsContainer.innerHTML = `
+
+            <div class="error-message">
+
+                <i class="fa-solid fa-triangle-exclamation"></i>
+
+                <br><br>
+
+                Unable to load recent items.
+
+                <br><br>
+
+                ${escapeHtml(
+                    error.message
+                )}
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* ============================================================
+   RENDER USERS
+============================================================ */
+
+function renderUsers() {
+
+    const table =
+        document.getElementById("usersTable");
+
+
+    if (!allUsers.length) {
+
+        table.innerHTML = `
+
+            <tr>
+
+                <td colspan="5">
+
+                    <div class="empty-state">
+
+                        <i class="fa-solid fa-users"></i>
+
+                        <h3>
+                            No users found
+                        </h3>
+
+                        <p>
+                            No registered users are available.
+                        </p>
+
+                    </div>
+
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+    table.innerHTML =
+        allUsers.map(
+            user => `
+
+                <tr>
+
+                    <td>
+                        ${escapeHtml(user.id ?? "-")}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(user.name || "-")}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(user.email || "-")}
+                    </td>
+
+                    <td>
+
+                        <span
+                            class="role-badge ${
+                                String(user.role || "")
+                                .toLowerCase() === "admin"
+                                ? "admin-badge"
+                                : "student-badge"
+                            }"
+                        >
+
+                            ${
+                                String(user.role || "")
+                                .toLowerCase() === "admin"
+                                ? "Admin"
+                                : "Student"
+                            }
+
+                        </span>
+
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            user.created_at || "-"
+                        )}
+                    </td>
+
+                </tr>
+
+            `
+        ).join("");
+
+}
+
+
+/* ============================================================
+   FILTER USERS
+============================================================ */
+
+function filterUsers() {
+
+    const search =
+        document
+            .getElementById("userSearch")
+            .value
+            .toLowerCase()
+            .trim();
+
+
+    if (!search) {
+
+        renderUsers();
+
+        return;
+
+    }
+
+
+    const filtered =
+        allUsers.filter(
+            user => {
+
+                const name =
+                    String(
+                        user.name || ""
+                    ).toLowerCase();
+
+
+                const email =
+                    String(
+                        user.email || ""
+                    ).toLowerCase();
+
+
+                return (
+                    name.includes(search) ||
+                    email.includes(search)
+                );
+
+            }
+        );
+
+
+    const table =
+        document.getElementById(
+            "usersTable"
+        );
+
+
+    if (!filtered.length) {
+
+        table.innerHTML = `
+
+            <tr>
+
+                <td colspan="5">
+
+                    <div class="empty-state">
+
+                        <i class="fa-solid fa-user-slash"></i>
+
+                        <h3>
+                            No matching users
+                        </h3>
+
+                        <p>
+                            Try another name or email.
+                        </p>
+
+                    </div>
+
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+    table.innerHTML =
+        filtered.map(
+            user => `
+
+                <tr>
+
+                    <td>
+                        ${escapeHtml(user.id ?? "-")}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(user.name || "-")}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(user.email || "-")}
+                    </td>
+
+                    <td>
+
+                        <span
+                            class="role-badge ${
+                                String(user.role || "")
+                                .toLowerCase() === "admin"
+                                ? "admin-badge"
+                                : "student-badge"
+                            }"
+                        >
+
+                            ${
+                                String(user.role || "")
+                                .toLowerCase() === "admin"
+                                ? "Admin"
+                                : "Student"
+                            }
+
+                        </span>
+
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            user.created_at || "-"
+                        )}
+                    </td>
+
+                </tr>
+
+            `
+        ).join("");
+
+}
+
+
+/* ============================================================
+   RENDER CLAIMS
+============================================================ */
+
+function renderClaims() {
+
+    const container =
+        document.getElementById(
+            "claimsContainer"
+        );
+
+
+    if (!allClaims.length) {
+
+        container.innerHTML = `
+
+            <div class="empty-state">
+
+                <i class="fa-solid fa-file-circle-check"></i>
+
+                <h3>
+                    No claims available
+                </h3>
+
+                <p>
+                    There are currently no ownership claims.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        allClaims.map(
+            claim => {
+
+                const status =
+                    String(
+                        claim.claim_status ||
+                        claim.status ||
+                        "Pending"
+                    );
+
+
+                const statusLower =
+                    status.toLowerCase();
+
+
+                let statusClass =
+                    "status-pending";
+
+
+                if (
+                    statusLower === "approved"
+                ) {
+
+                    statusClass =
+                        "status-approved";
+
+                }
+
+
+                if (
+                    statusLower === "rejected"
+                ) {
+
+                    statusClass =
+                        "status-rejected";
+
+                }
+
+
+                const image =
+                    claim.image
+                    ? getItemImageUrl(
+                        claim.image,
+                        claim.item_status
+                    )
+                    : "";
+
+
+                return `
+
+                    <div class="claim-card">
+
+                        <div class="claim-top">
+
+                            <div>
+
+                                <div class="claim-item-name">
+
+                                    ${escapeHtml(
+                                        claim.item_name ||
+                                        "Unknown Item"
+                                    )}
+
+                                </div>
+
+
+                                <div class="claim-meta">
+
+                                    <span class="meta">
+
+                                        <i class="fa-solid fa-hashtag"></i>
+
+                                        Claim ${escapeHtml(
+                                            claim.claim_id ?? "-"
+                                        )}
+
+                                    </span>
+
+
+                                    <span class="meta">
+
+                                        <i class="fa-solid fa-tag"></i>
+
+                                        ${escapeHtml(
+                                            claim.category || "-"
+                                        )}
+
+                                    </span>
+
+
+                                    <span class="meta">
+
+                                        <i class="fa-solid fa-location-dot"></i>
+
+                                        ${escapeHtml(
+                                            claim.location || "-"
+                                        )}
+
+                                    </span>
+
+
+                                    <span class="meta">
+
+                                        <i class="fa-solid fa-box"></i>
+
+                                        ${escapeHtml(
+                                            claim.item_status || "-"
+                                        )}
+
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <span
+                                class="status ${statusClass}"
+                            >
+
+                                ${escapeHtml(status)}
+
+                            </span>
+
+                        </div>
+
+
+                        <div class="claim-body">
+
+
+                            ${
+                                image
+
+                                ?
+
+                                `
+                                <img
+                                    src="${image}"
+                                    class="claim-image"
+                                    alt="Claimed item"
+                                    onerror="this.style.display='none'"
+                                >
+                                `
+
+                                :
+
+                                `
+                                <div class="claim-image-placeholder">
+
+                                    <i class="fa-solid fa-image"></i>
+
+                                    <span>
+                                        No image
+                                    </span>
+
+                                </div>
+                                `
+
+                            }
+
+
+                            <div class="claim-info">
+
+
+                                <div class="info-box">
+
+                                    <span class="info-label">
+                                        Claimant Name
+                                    </span>
+
+                                    <div class="info-value">
+
+                                        ${escapeHtml(
+                                            claim.claimant_name || "-"
+                                        )}
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="info-box">
+
+                                    <span class="info-label">
+                                        Claimant Email
+                                    </span>
+
+                                    <div class="info-value">
+
+                                        ${escapeHtml(
+                                            claim.claimant_email || "-"
+                                        )}
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="info-box">
+
+                                    <span class="info-label">
+                                        Claimant ID
+                                    </span>
+
+                                    <div class="info-value">
+
+                                        ${escapeHtml(
+                                            claim.claimant_id ?? "-"
+                                        )}
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="info-box">
+
+                                    <span class="info-label">
+                                        Item Reporter ID
+                                    </span>
+
+                                    <div class="info-value">
+
+                                        ${escapeHtml(
+                                            claim.reported_by ?? "-"
+                                        )}
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="info-box full">
+
+                                    <span class="info-label">
+                                        Reason
+                                    </span>
+
+                                    <div class="info-value">
+
+                                        ${escapeHtml(
+                                            claim.reason || "-"
+                                        )}
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="info-box full">
+
+                                    <span class="info-label">
+                                        Proof / Ownership Details
+                                    </span>
+
+                                    <div class="info-value">
+
+                                        ${escapeHtml(
+                                            claim.proof || "-"
+                                        )}
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="info-box">
+
+                                    <span class="info-label">
+                                        Submitted
+                                    </span>
+
+                                    <div class="info-value">
+
+                                        ${escapeHtml(
+                                            claim.claim_created_at ||
+                                            claim.created_at ||
+                                            "-"
+                                        )}
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="info-box">
+
+                                    <span class="info-label">
+                                        Item Status
+                                    </span>
+
+                                    <div class="info-value">
+
+                                        ${escapeHtml(
+                                            claim.item_status || "-"
+                                        )}
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+
+                        ${
+                            statusLower === "pending"
+
+                            ?
+
+                            `
+                            <div class="claim-actions">
+
+                                <button
+                                    class="btn approve-btn"
+                                    onclick="approveClaim(${Number(
+                                        claim.claim_id
+                                    )})"
+                                >
+
+                                    <i class="fa-solid fa-check"></i>
+
+                                    Approve Claim
+
+                                </button>
+
+
+                                <button
+                                    class="btn reject-btn"
+                                    onclick="rejectClaim(${Number(
+                                        claim.claim_id
+                                    )})"
+                                >
+
+                                    <i class="fa-solid fa-xmark"></i>
+
+                                    Reject Claim
+
+                                </button>
+
+                            </div>
+                            `
+
+                            :
+
+                            ""
+
+                        }
+
+                    </div>
+
+                `;
+
+            }
+        ).join("");
+
+}
+
+
+/* ============================================================
+   RENDER ITEMS
+============================================================ */
+
+function renderItems() {
+
+    const container =
+        document.getElementById(
+            "itemsContainer"
+        );
+
+
+    if (!allItems.length) {
+
+        container.innerHTML = `
+
+            <div class="empty-state">
+
+                <i class="fa-solid fa-box-open"></i>
+
+                <h3>
+                    No items available
+                </h3>
+
+                <p>
+                    No lost or found items have been reported.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        allItems.map(
+            item => {
+
+                const status =
+                    String(
+                        item.status || ""
+                    );
+
+
+                const statusLower =
+                    status.toLowerCase();
+
+
+                let statusClass =
+                    "lost-status";
+
+
+                if (
+                    statusLower === "found"
+                ) {
+
+                    statusClass =
+                        "found-status";
+
+                }
+
+
+                if (
+                    statusLower === "claimed"
+                ) {
+
+                    statusClass =
+                        "claimed-status";
+
+                }
+
+
+                const image =
+                    item.image
+                    ? getItemImageUrl(
+                        item.image,
+                        item.status
+                    )
+                    : "";
+
+
+                return `
+
+                    <div class="item-card">
+
+
+                        ${
+                            image
+
+                            ?
+
+                            `
+                            <img
+                                src="${image}"
+                                class="item-card-image"
+                                alt="Item"
+                                onerror="this.style.display='none'"
+                            >
+                            `
+
+                            :
+
+                            `
+                            <div
+                                class="item-card-image"
+                                style="
+                                    display:flex;
+                                    align-items:center;
+                                    justify-content:center;
+                                    color:#94a3b8;
+                                    font-size:32px;
+                                "
+                            >
+
+                                <i class="fa-solid fa-image"></i>
+
+                            </div>
+                            `
+
+                        }
+
+
+                        <div class="item-card-content">
+
+
+                            <div class="item-card-title">
+
+                                ${escapeHtml(
+                                    item.item_name ||
+                                    "Unknown Item"
+                                )}
+
+                            </div>
+
+
+                            <div class="item-card-meta">
+
+                                <span class="meta">
+
+                                    ${escapeHtml(
+                                        item.category || "-"
+                                    )}
+
+                                </span>
+
+
+                                <span class="meta">
+
+                                    ${escapeHtml(
+                                        item.location || "-"
+                                    )}
+
+                                </span>
+
+                            </div>
+
+
+                            <span
+                                class="item-status ${statusClass}"
+                            >
+
+                                ${escapeHtml(
+                                    status || "-"
+                                )}
+
+                            </span>
+
+
+                            <div class="item-date">
+
+                                <i class="fa-regular fa-clock"></i>
+
+                                ${escapeHtml(
+                                    item.created_at || "-"
+                                )}
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            }
+        ).join("");
+
+}
+
+
+/* ============================================================
+   APPROVE CLAIM
+============================================================ */
+
+async function approveClaim(claimId) {
+
+    const confirmed =
+        confirm(
+            "Are you sure you want to approve this claim?"
+        );
+
+
+    if (!confirmed) {
+
+        return;
+
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+                `/api/admin/claim/${claimId}/approve`,
+                {
+                    method: "POST"
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (
+            !response.ok ||
+            !data.success
+        ) {
+
+            throw new Error(
+                data.message ||
+                "Unable to approve claim."
+            );
+
+        }
+
+
+        alert(
+            "Claim approved successfully."
+        );
+
+
+        await loadDashboard();
+
+    }
+
+
+    catch (error) {
+
+        console.error(
+            "Approve claim error:",
+            error
+        );
+
+
+        alert(
+            error.message
+        );
+
+    }
+
+}
+
+
+/* ============================================================
+   REJECT CLAIM
+============================================================ */
+
+async function rejectClaim(claimId) {
+
+    const confirmed =
+        confirm(
+            "Are you sure you want to reject this claim?"
+        );
+
+
+    if (!confirmed) {
+
+        return;
+
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+                `/api/admin/claim/${claimId}/reject`,
+                {
+                    method: "POST"
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (
+            !response.ok ||
+            !data.success
+        ) {
+
+            throw new Error(
+                data.message ||
+                "Unable to reject claim."
+            );
+
+        }
+
+
+        alert(
+            "Claim rejected successfully."
+        );
+
+
+        await loadDashboard();
+
+    }
+
+
+    catch (error) {
+
+        console.error(
+            "Reject claim error:",
+            error
+        );
+
+
+        alert(
+            error.message
+        );
+
+    }
+
+}
+
+
+/* ============================================================
+   IMAGE URL
+============================================================ */
+
+function getItemImageUrl(image, status) {
+
+    if (!image) {
+
+        return "";
+
+    }
+
+
+    image =
+        String(image);
+
+
+    /*
+     * If backend already gives a complete URL,
+     * use it directly.
+     */
+
+    if (
+        image.startsWith("http://") ||
+        image.startsWith("https://") ||
+        image.startsWith("/")
+    ) {
+
+        return image;
+
+    }
+
+
+    /*
+     * The backend stores lost and found images
+     * in separate folders.
+     *
+     * For Found / Claimed items use found folder.
+     * Otherwise use lost folder.
+     */
+
+    const currentStatus =
+        String(
+            status || ""
+        ).toLowerCase();
+
+
+    if (
+        currentStatus === "found" ||
+        currentStatus === "claimed"
+    ) {
+
+        return `/uploads/found/${encodeURIComponent(image)}`;
+
+    }
+
+
+    return `/uploads/lost/${encodeURIComponent(image)}`;
+
+}
+
+
+/* ============================================================
+   ESCAPE HTML
+============================================================ */
+
+function escapeHtml(value) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+
+        return "";
+
+    }
+
+
+    return String(value)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* ============================================================
+   START DASHBOARD
+============================================================ */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        loadDashboard();
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

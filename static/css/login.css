@@ -1,0 +1,485 @@
+/* ================================
+   CAMPUSFIND LOGIN PAGE
+   ================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    background: linear-gradient(135deg, #2b59ff, #7b2ff7);
+}
+
+
+/* ================================
+   MAIN LOGIN CONTAINER
+   ================================ */
+
+.login-container {
+    width: 100%;
+    max-width: 1050px;
+    min-height: 620px;
+
+    display: flex;
+
+    background: #ffffff;
+    border-radius: 25px;
+    overflow: hidden;
+
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+}
+
+
+/* ================================
+   LEFT SECTION
+   ================================ */
+
+.left-section {
+    width: 50%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    padding: 45px;
+
+    color: white;
+
+    background: linear-gradient(135deg, #2b59ff, #7b2ff7);
+}
+
+
+/* CampusFind logo */
+
+.logo {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 25px;
+
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.logo i {
+    font-size: 25px;
+}
+
+
+/* Welcome heading */
+
+.left-section h1 {
+    font-size: 42px;
+    line-height: 1.15;
+
+    margin-bottom: 15px;
+}
+
+
+/* Description */
+
+.left-section p {
+    font-size: 16px;
+    line-height: 1.7;
+
+    max-width: 430px;
+
+    margin-bottom: 25px;
+}
+
+
+/* Hero image */
+
+.left-section img {
+    display: block;
+
+    width: 100%;
+    max-width: 430px;
+
+    height: 230px;
+
+    object-fit: cover;
+
+    margin: 10px auto 0;
+
+    border-radius: 18px;
+
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.20);
+}
+
+
+/* ================================
+   RIGHT SECTION
+   ================================ */
+
+.right-section {
+    width: 50%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    padding: 45px;
+
+    background: #ffffff;
+}
+
+
+/* ================================
+   LANGUAGE SELECTOR
+   ================================ */
+
+.language-box {
+    width: 100%;
+
+    display: flex;
+    justify-content: flex-end;
+
+    margin-bottom: 20px;
+}
+
+.language-box i {
+    color: #2b59ff;
+    margin-right: 8px;
+}
+
+.language-box select {
+    padding: 8px 15px;
+
+    border: 1px solid #dddddd;
+    border-radius: 20px;
+
+    background: white;
+
+    color: #333;
+
+    cursor: pointer;
+
+    outline: none;
+}
+
+
+/* ================================
+   LOGIN FORM
+   ================================ */
+
+.form-box {
+    width: 100%;
+    max-width: 400px;
+}
+
+
+.form-box h2 {
+    text-align: center;
+
+    color: #222;
+
+    font-size: 30px;
+
+    margin-bottom: 10px;
+}
+
+
+/* Input container */
+
+.input-box {
+    position: relative;
+
+    margin-bottom: 18px;
+}
+
+
+/* Input icons */
+
+.input-box i {
+    position: absolute;
+
+    left: 15px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #777;
+
+    font-size: 15px;
+}
+
+
+/* Input fields */
+
+.input-box input {
+    width: 100%;
+
+    padding: 14px 15px 14px 45px;
+
+    border: 1px solid #e1e1e1;
+
+    border-radius: 10px;
+
+    background: #f7f8fc;
+
+    color: #333;
+
+    font-size: 15px;
+
+    outline: none;
+
+    transition: 0.3s;
+}
+
+
+/* Input focus */
+
+.input-box input:focus {
+    border-color: #2b59ff;
+
+    background: #ffffff;
+
+    box-shadow: 0 0 0 3px rgba(43, 89, 255, 0.10);
+}
+
+
+/* ================================
+   LOGIN BUTTON
+   ================================ */
+
+.login-btn {
+    width: 100%;
+
+    padding: 14px 20px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: linear-gradient(135deg, #2b59ff, #7b2ff7);
+
+    color: white;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+
+.login-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 8px 20px rgba(43, 89, 255, 0.30);
+}
+
+
+/* ================================
+   REGISTER LINK
+   ================================ */
+
+.register-link {
+    margin-top: 20px;
+
+    text-align: center;
+
+    color: #666;
+
+    font-size: 14px;
+}
+
+
+.register-link a {
+    color: #2b59ff;
+
+    text-decoration: none;
+
+    font-weight: 600;
+}
+
+
+.register-link a:hover {
+    text-decoration: underline;
+}
+
+
+/* ================================
+   BACK TO HOME
+   ================================ */
+
+.back-home {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin-top: 20px;
+
+    color: #666;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    transition: 0.3s;
+}
+
+
+.back-home:hover {
+    color: #2b59ff;
+}
+
+
+/* ================================
+   RESPONSIVE DESIGN
+   ================================ */
+
+@media (max-width: 850px) {
+
+    body {
+        padding: 20px;
+    }
+
+    .login-container {
+        max-width: 600px;
+
+        flex-direction: column;
+    }
+
+    .left-section {
+        width: 100%;
+
+        padding: 35px;
+
+        text-align: center;
+
+        align-items: center;
+    }
+
+    .left-section h1 {
+        font-size: 32px;
+    }
+
+    .left-section p {
+        max-width: 500px;
+    }
+
+    .left-section img {
+        max-width: 400px;
+
+        height: 200px;
+    }
+
+    .right-section {
+        width: 100%;
+
+        padding: 35px;
+    }
+
+    .language-box {
+        justify-content: center;
+    }
+}
+
+
+/* ================================
+   SMALL MOBILE SCREEN
+   ================================ */
+
+@media (max-width: 500px) {
+
+    body {
+        padding: 10px;
+    }
+
+    .login-container {
+        border-radius: 18px;
+    }
+
+    .left-section {
+        padding: 25px 20px;
+    }
+
+    .left-section h1 {
+        font-size: 28px;
+    }
+
+    .left-section p {
+        font-size: 14px;
+    }
+
+    .left-section img {
+        height: 160px;
+    }
+
+    .right-section {
+        padding: 25px 20px;
+    }
+
+    .form-box h2 {
+        font-size: 25px;
+    }
+}
+/* ================= FLASH MESSAGE ================= */
+
+.flash-container {
+    position: fixed;
+    top: 25px;
+    right: 25px;
+    z-index: 9999;
+}
+
+.flash-message {
+    padding: 14px 22px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.flash-message.success {
+    background: #28a745;
+    color: white;
+}
+
+.flash-message.error {
+    background: #dc3545;
+    color: white;
+}
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding-right: 50px;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: #777;
+    font-size: 18px;
+    padding: 5px;
+}
+
+.password-toggle:hover {
+    color: #4f46e5;
+}

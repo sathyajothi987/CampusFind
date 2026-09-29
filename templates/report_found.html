@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>CampusFind - Report Found Item</title>
+
+    <!-- Main CSS -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+
+        /* ==============================
+           REPORT PAGE
+        ============================== */
+
+        .report-page {
+
+            min-height: calc(100vh - 90px);
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 50px 20px;
+
+        }
+
+
+        .report-card {
+
+            width: 100%;
+
+            max-width: 650px;
+
+            background: white;
+
+            color: #333;
+
+            padding: 40px;
+
+            border-radius: 25px;
+
+            box-shadow:
+                0 20px 50px rgba(0, 0, 0, 0.20);
+
+        }
+
+
+        .report-header {
+
+            text-align: center;
+
+            margin-bottom: 30px;
+
+        }
+
+
+        .report-header .report-icon {
+
+            width: 70px;
+
+            height: 70px;
+
+            margin: 0 auto 15px;
+
+            border-radius: 50%;
+
+            background: #ede9fe;
+
+            color: #7c3aed;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            font-size: 30px;
+
+        }
+
+
+        .report-header h1 {
+
+            color: #2563eb;
+
+            font-size: 32px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .report-header p {
+
+            color: #666;
+
+            font-size: 15px;
+
+            line-height: 1.6;
+
+        }
+
+
+        /* ==============================
+           FORM
+        ============================== */
+
+        .form-group {
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .form-group label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-weight: 600;
+
+            color: #333;
+
+        }
+
+
+        .input-wrapper {
+
+            position: relative;
+
+        }
+
+
+        .input-wrapper i {
+
+            position: absolute;
+
+            left: 15px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: #7c3aed;
+
+        }
+
+
+        .form-group input,
+
+        .form-group select,
+
+        .form-group textarea {
+
+            width: 100%;
+
+            padding: 13px 15px;
+
+            border: 1px solid #ddd;
+
+            border-radius: 12px;
+
+            font-size: 15px;
+
+            outline: none;
+
+            transition: 0.3s;
+
+            background: #fafafa;
+
+        }
+
+
+        .input-wrapper input {
+
+            padding-left: 45px;
+
+        }
+
+
+        .form-group input:focus,
+
+        .form-group select:focus,
+
+        .form-group textarea:focus {
+
+            border-color: #7c3aed;
+
+            box-shadow:
+                0 0 0 3px rgba(124, 58, 237, 0.10);
+
+            background: white;
+
+        }
+
+
+        .form-group textarea {
+
+            resize: vertical;
+
+            min-height: 100px;
+
+        }
+
+
+        /* ==============================
+           FILE UPLOAD
+        ============================== */
+
+        .file-box {
+
+            border: 2px dashed #c4b5fd;
+
+            background: #faf9ff;
+
+            border-radius: 15px;
+
+            padding: 25px;
+
+            text-align: center;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+
+        }
+
+
+        .file-box:hover {
+
+            border-color: #7c3aed;
+
+            background: #f5f3ff;
+
+        }
+
+
+        .file-box i {
+
+            font-size: 30px;
+
+            color: #7c3aed;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .file-box p {
+
+            margin-bottom: 8px;
+
+            color: #555;
+
+            font-weight: 600;
+
+        }
+
+
+        .file-box small {
+
+            color: #888;
+
+        }
+
+
+        .file-box input {
+
+            margin-top: 15px;
+
+            border: none;
+
+            background: transparent;
+
+        }
+
+
+        /* ==============================
+           SUBMIT BUTTON
+        ============================== */
+
+        .submit-report-btn {
+
+            width: 100%;
+
+            padding: 15px;
+
+            border: none;
+
+            border-radius: 30px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #7c3aed
+                );
+
+            color: white;
+
+            font-size: 17px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+
+            margin-top: 10px;
+
+        }
+
+
+        .submit-report-btn:hover {
+
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 12px 25px rgba(37, 99, 235, 0.25);
+
+        }
+
+
+        /* ==============================
+           BACK HOME
+        ============================== */
+
+        .back-home {
+
+            display: block;
+
+            text-align: center;
+
+            margin-top: 20px;
+
+            color: #2563eb;
+
+            text-decoration: none;
+
+            font-weight: 600;
+
+        }
+
+
+        .back-home:hover {
+
+            text-decoration: underline;
+
+        }
+
+
+        /* ==============================
+           REQUIRED TEXT
+        ============================== */
+
+        .required {
+
+            color: #dc2626;
+
+        }
+
+
+        /* ==============================
+           MOBILE
+        ============================== */
+
+        @media (max-width: 600px) {
+
+            .report-card {
+
+                padding: 25px 20px;
+
+            }
+
+
+            .report-header h1 {
+
+                font-size: 27px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<header class="navbar">
+
+    <div class="logo">
+
+        <i class="fa-solid fa-location-dot"></i>
+
+        <span id="logo-text">
+            CampusFind
+        </span>
+
+    </div>
+
+
+    <div class="language-selector">
+
+        <i class="fa-solid fa-globe"></i>
+
+        <select id="language"
+                onchange="changeFoundLanguage()">
+
+            <option value="en">
+                English
+            </option>
+
+            <option value="ta">
+                தமிழ்
+            </option>
+
+            <option value="hi">
+                हिन्दी
+            </option>
+
+        </select>
+
+    </div>
+
+</header>
+
+
+<!-- ================= REPORT PAGE ================= -->
+
+<main class="report-page">
+
+    <div class="report-card">
+
+
+        <!-- HEADER -->
+
+        <div class="report-header">
+
+            <div class="report-icon">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+            </div>
+
+
+            <h1 id="found-title">
+                Report Found Item
+            </h1>
+
+
+            <p id="found-description">
+
+                Help someone recover their lost item by
+                reporting what you found.
+
+            </p>
+
+        </div>
+
+
+        <!-- ================= FORM ================= -->
+
+        <form
+            method="POST"
+            action="{{ url_for('report_found') }}"
+            enctype="multipart/form-data">
+
+
+            <!-- ITEM NAME -->
+
+            <div class="form-group">
+
+                <label for="item-name"
+                       id="item-name-label">
+
+                    Item Name
+                    <span class="required">*</span>
+
+                </label>
+
+
+                <div class="input-wrapper">
+
+                    <i class="fa-solid fa-box"></i>
+
+                    <input
+                        type="text"
+                        id="item-name"
+                        name="item_name"
+                        placeholder="Enter item name"
+                        required>
+
+                </div>
+
+            </div>
+
+
+            <!-- CATEGORY -->
+
+            <div class="form-group">
+
+                <label for="category"
+                       id="category-label">
+
+                    Category
+                    <span class="required">*</span>
+
+                </label>
+
+
+                <select
+                    id="category"
+                    name="category"
+                    required>
+
+                    <option value="">
+                        Select Category
+                    </option>
+
+                    <option value="Electronics">
+                        Electronics
+                    </option>
+
+                    <option value="Books">
+                        Books
+                    </option>
+
+                    <option value="Bags">
+                        Bags
+                    </option>
+
+                    <option value="Clothing">
+                        Clothing
+                    </option>
+
+                    <option value="Documents">
+                        Documents
+                    </option>
+
+                    <option value="Others">
+                        Others
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- LOCATION -->
+
+            <div class="form-group">
+
+                <label for="location"
+                       id="location-label">
+
+                    Found Location
+                    <span class="required">*</span>
+
+                </label>
+
+
+                <select
+                    id="location"
+                    name="location"
+                    required>
+
+                    <option value="">
+                        Select Location
+                    </option>
+
+                    <option value="Library">
+                        Library
+                    </option>
+
+                    <option value="CSE Block">
+                        CSE Block
+                    </option>
+
+                    <option value="ECE Block">
+                        ECE Block
+                    </option>
+
+                    <option value="Canteen">
+                        Canteen
+                    </option>
+
+                    <option value="Auditorium">
+                        Auditorium
+                    </option>
+
+                    <option value="Bus Stand">
+                        Bus Stand
+                    </option>
+
+                    <option value="Hostel">
+                        Hostel
+                    </option>
+
+                    <option value="Other">
+                        Other
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- DESCRIPTION -->
+
+            <div class="form-group">
+
+                <label for="description"
+                       id="description-label">
+
+                    Description
+
+                </label>
+
+
+                <textarea
+                    id="description"
+                    name="description"
+                    placeholder="Describe the found item..."></textarea>
+
+            </div>
+
+
+            <!-- IMAGE -->
+
+            <div class="form-group">
+
+                <label id="image-label">
+
+                    Item Image
+                    <span class="required">*</span>
+
+                </label>
+
+
+                <div class="file-box">
+
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+
+                    <p id="image-text">
+                        Upload an image of the found item
+                    </p>
+
+                    <small id="image-required-text">
+                        Image is required for found items
+                    </small>
+
+
+                    <input
+                        type="file"
+                        id="image"
+                        name="image"
+                        accept="image/*"
+                        required>
+
+                </div>
+
+            </div>
+
+
+            <!-- SUBMIT -->
+
+            <button
+                type="submit"
+                class="submit-report-btn">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                <span id="submit-text">
+                    Submit Found Report
+                </span>
+
+            </button>
+
+        </form>
+
+
+        <!-- BACK HOME -->
+
+        <a
+            href="{{ url_for('home') }}"
+            class="back-home">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+            <span id="back-home-text">
+                Back to Home
+            </span>
+
+        </a>
+
+    </div>
+
+</main>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script src="{{ url_for('static', filename='js/language.js') }}"></script>
+
+<script>
+
+const foundTranslations = {
+
+    en: {
+
+        logo: "CampusFind",
+
+        title: "Report Found Item",
+
+        description:
+            "Help someone recover their lost item by reporting what you found.",
+
+        itemName: "Item Name",
+
+        category: "Category",
+
+        location: "Found Location",
+
+        descriptionLabel: "Description",
+
+        image: "Item Image",
+
+        imageText:
+            "Upload an image of the found item",
+
+        imageRequired:
+            "Image is required for found items",
+
+        submit:
+            "Submit Found Report",
+
+        backHome:
+            "Back to Home"
+
+    },
+
+
+    ta: {
+
+        logo: "CampusFind",
+
+        title: "கண்டெடுத்த பொருளை பதிவு செய்யுங்கள்",
+
+        description:
+            "நீங்கள் கண்டெடுத்த பொருளை பதிவு செய்து அதன் உரிமையாளர் அதை மீண்டும் பெற உதவுங்கள்.",
+
+        itemName: "பொருளின் பெயர்",
+
+        category: "வகை",
+
+        location: "கண்டெடுத்த இடம்",
+
+        descriptionLabel: "விளக்கம்",
+
+        image: "பொருளின் படம்",
+
+        imageText:
+            "கண்டெடுத்த பொருளின் படத்தை பதிவேற்றவும்",
+
+        imageRequired:
+            "கண்டெடுத்த பொருளுக்கு படம் கட்டாயம்",
+
+        submit:
+            "கண்டெடுத்த பொருளை பதிவு செய்யவும்",
+
+        backHome:
+            "முகப்புக்குத் திரும்பு"
+
+    },
+
+
+    hi: {
+
+        logo: "CampusFind",
+
+        title: "मिली हुई वस्तु की रिपोर्ट करें",
+
+        description:
+            "आपको मिली वस्तु की रिपोर्ट करके उसके मालिक को वापस पाने में मदद करें।",
+
+        itemName: "वस्तु का नाम",
+
+        category: "श्रेणी",
+
+        location: "मिली हुई जगह",
+
+        descriptionLabel: "विवरण",
+
+        image: "वस्तु की तस्वीर",
+
+        imageText:
+            "मिली हुई वस्तु की तस्वीर अपलोड करें",
+
+        imageRequired:
+            "मिली हुई वस्तु के लिए तस्वीर अनिवार्य है",
+
+        submit:
+            "मिली हुई वस्तु की रिपोर्ट जमा करें",
+
+        backHome:
+            "होम पर वापस जाएँ"
+
+    }
+
+};
+
+
+function changeFoundLanguage() {
+
+    const language =
+        document.getElementById("language").value;
+
+    const t =
+        foundTranslations[language];
+
+
+    saveCampusFindLanguage(language);
+
+
+    document.getElementById("logo-text").textContent =
+        t.logo;
+
+    document.getElementById("found-title").textContent =
+        t.title;
+
+    document.getElementById("found-description").textContent =
+        t.description;
+
+    document.getElementById("item-name-label").childNodes[0].textContent =
+        t.itemName + " ";
+
+    document.getElementById("category-label").childNodes[0].textContent =
+        t.category + " ";
+
+    document.getElementById("location-label").childNodes[0].textContent =
+        t.location + " ";
+
+    document.getElementById("description-label").textContent =
+        t.descriptionLabel;
+
+    document.getElementById("image-label").childNodes[0].textContent =
+        t.image + " ";
+
+    document.getElementById("image-text").textContent =
+        t.imageText;
+
+    document.getElementById("image-required-text").textContent =
+        t.imageRequired;
+
+    document.getElementById("submit-text").textContent =
+        t.submit;
+
+    document.getElementById("back-home-text").textContent =
+        t.backHome;
+
+    document.getElementById("item-name").placeholder =
+        t.itemName;
+
+    document.getElementById("description").placeholder =
+        t.descriptionLabel;
+
+    document.documentElement.lang =
+        language;
+
+}
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        const savedLanguage =
+            getCampusFindLanguage();
+
+        const languageSelect =
+            document.getElementById("language");
+
+        if (languageSelect) {
+
+            languageSelect.value =
+                savedLanguage;
+
+            changeFoundLanguage();
+
+        }
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>
